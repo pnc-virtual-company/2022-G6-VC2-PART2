@@ -20,9 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // User
-Route::get('/user',[UserController::class,'index']);
-Route::post('/register',[UserController::class,'register']);
+Route::apiResource('/user',UserController::class);
+
 
 // Alumni
-Route::get('/alumni',[AlumniController::class,'index']);
-Route::post('/addAlumni',[AlumniController::class,'store']);
+Route::apiResource('/alumni',AlumniController::class);
