@@ -4,7 +4,7 @@ use App\Models\Alumni;
 use Illuminate\Http\Request;
 class AlumniController extends Controller
 {
-    //================== show all alumni ======================
+    //================== show all alumnis ======================
     public function index()
     {
         return Alumni::with('user')->get();
@@ -30,9 +30,9 @@ class AlumniController extends Controller
         return Alumni::with('user')->findOrFail($id);
     }
    //================== Alumni update ======================
-    public function update(Request $request, Alumni $alumni)
+    public function update(Request $request, $alumni)
     {
-       Alumni::find($alumni);
+        $alumni= Alumni::find($alumni);
         $alumni -> user_id = $request->user_id;
         $alumni ->phone = $request ->phone;
         $alumni ->profile = $request ->profile;
