@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('alumnis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('gender');
             $table->integer('phone');
             $table->string('profile');
-            $table->string('generation');
+            $table->string('batch');
             $table->string('major');
             $table->string('address');
             $table->string('dateOfBirth');

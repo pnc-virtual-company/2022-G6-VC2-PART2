@@ -14,14 +14,23 @@ class AlumniController extends Controller
     {
         $alumni = new Alumni();
         $alumni -> user_id = $request->user_id;
+        $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
-        $alumni ->profile = $request ->profile;
-        $alumni ->generation = $request ->generation;
+        $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni -> save();
-
+        $alumni ->profile = $request ->profile;
+        //======= upload profile image ==========
+        $path = public_path('images/alumni');
+        if ( ! file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('profile');
+        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+        $alumni->profile = $fileName;
+        $alumni->save();
+        $file->move($path, $fileName);
         return response()->json(['sms'=>$alumni]);
     }
    //================== show one alumni ======================
@@ -34,14 +43,23 @@ class AlumniController extends Controller
     {
         $alumni= Alumni::find($alumni);
         $alumni -> user_id = $request->user_id;
+        $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
         $alumni ->profile = $request ->profile;
-        $alumni ->generation = $request ->generation;
+        $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni -> save();
 
+        $path = public_path('images/alumni');
+        if ( ! file_exists($path) ) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('profile');
+        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+        $alumni->profile = $fileName;
+        $alumni->save();
+        $file->move($path, $fileName);
         return response()->json(['sms'=>$alumni]);
     }
     //================== delete alumni ======================
