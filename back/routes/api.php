@@ -25,3 +25,4 @@ Route::apiResource('/user',UserController::class);
 
 // Alumni
 Route::apiResource('/alumni',AlumniController::class);
+

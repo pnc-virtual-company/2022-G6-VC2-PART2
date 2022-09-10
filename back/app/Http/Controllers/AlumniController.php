@@ -1,28 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Alumni;
 use Illuminate\Http\Request;
-
 class AlumniController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //================== show all alumni ======================
     public function index()
     {
         return Alumni::with('user')->get();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   //================== add new alumni ======================
     public function store(Request $request)
     {
         $alumni = new Alumni();
@@ -37,36 +24,27 @@ class AlumniController extends Controller
 
         return response()->json(['sms'=>$alumni]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Alumni  $alumni
-     * @return \Illuminate\Http\Response
-     */
+   //================== show one alumni ======================
     public function show($id)
     {
         return Alumni::with('user')->findOrFail($id);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Alumni  $alumni
-     * @return \Illuminate\Http\Response
-     */
+   //================== Alumni update ======================
     public function update(Request $request, Alumni $alumni)
     {
-        //
-    }
+       Alumni::find($alumni);
+        $alumni -> user_id = $request->user_id;
+        $alumni ->phone = $request ->phone;
+        $alumni ->profile = $request ->profile;
+        $alumni ->generation = $request ->generation;
+        $alumni ->major = $request ->major;
+        $alumni -> address = $request ->address;
+        $alumni ->dateOfBirth = $request ->dateOfBirth;
+        $alumni -> save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Alumni  $alumni
-     * @return \Illuminate\Http\Response
-     */
+        return response()->json(['sms'=>$alumni]);
+    }
+    //================== delete alumni ======================
     public function destroy(Alumni $alumni)
     {
         //
