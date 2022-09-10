@@ -17,6 +17,11 @@ class Alumni extends Model
         'address',
         'dateOfBirth'
     ];
+    protected $hidden = [
+
+        'created_at',
+        'updated_at'
+    ];
 
     public function User()
     {
