@@ -44,9 +44,9 @@ class AlumniController extends Controller
      * @param  \App\Models\Alumni  $alumni
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumni $alumni)
+    public function show($id)
     {
-        //
+        return Alumni::with('user')->findOrFail($id);
     }
 
     /**
