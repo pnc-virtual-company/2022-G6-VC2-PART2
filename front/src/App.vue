@@ -1,8 +1,17 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+   <nav>
+        <div class="left flex justify-between space-y-3 m-[20px]">
+          <div class="logo w-[10%]">
+            <img src="@/assets/pnc.jpg" alt="" srcset="">
+          </div>
+          <div class="flexs justify-between space-y-10 space-x-20">
+          <router-link class=" hover:bg-white border-teal-500 text-sm border-2 py-1 px-3 rounded" to="/">PROFILE</router-link> 
+          <router-link to="/emploment">EMPLOMENT</router-link>
+          <router-link to="/event">EVENT</router-link>
+          <router-link to="/signout" class="logout">LOGOUT</router-link>
+        </div>  
+        </div>
+      </nav>
   <router-view/>
 </template>
 
@@ -25,6 +34,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: green;
 }
 </style>
