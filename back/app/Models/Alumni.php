@@ -10,12 +10,14 @@ class Alumni extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'gender',
         'phone',
         'profile',
-        'generation',
+        'batch',
         'major',
         'address',
-        'dateOfBirth'
+        'dateOfBirth',
+        'placeOfBirth'
     ];
     protected $hidden = [
 

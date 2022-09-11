@@ -14,14 +14,14 @@ class AlumniController extends Controller
     {
         $alumni = new Alumni();
         $alumni -> user_id = $request->user_id;
+        $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
-        $alumni ->profile = $request ->profile;
-        $alumni ->generation = $request ->generation;
+        $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni -> save();
-
+        $alumni ->placeOfBirth = $request ->placeOfBirth;
+        $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }
    //================== show one alumni ======================
@@ -34,19 +34,33 @@ class AlumniController extends Controller
     {
         $alumni= Alumni::find($alumni);
         $alumni -> user_id = $request->user_id;
+        $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
-        $alumni ->profile = $request ->profile;
-        $alumni ->generation = $request ->generation;
+        $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni -> save();
-
+        $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }
     //================== delete alumni ======================
     public function destroy(Alumni $alumni)
     {
         //
+    }
+    //================== upload profile ======================
+    public function uploadProfile(Request $request, $id){
+        $path = public_path('profile');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('profile');
+
+        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+        $file->move($path, $fileName);
+        $alumni = Alumni::findOrFail($id);
+        $alumni->profile = asset('profile/' . $fileName);
+        $alumni->save();
+        return response()->json(['sms' => $alumni]);
     }
 }
