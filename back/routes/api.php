@@ -23,5 +23,5 @@ Route::apiResource('/user',UserController::class);
 Route::apiResource('/alumni',AlumniController::class);
 
 //================== upload profile api ======================
-Route::put('/upload/{id}',[AlumniController::class, 'uploadProfile']);
+Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 

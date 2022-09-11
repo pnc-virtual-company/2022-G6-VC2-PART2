@@ -58,7 +58,7 @@ class AlumniController extends Controller
         $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
         $file->move($path, $fileName);
         $alumni = Alumni::findOrFail($id);
-        $alumni->profile = asset('images/' . $fileName);
+        $alumni->profile = asset('profile/' . $fileName);
         $alumni->save();
         return response()->json(['sms' => $alumni]);
     }
