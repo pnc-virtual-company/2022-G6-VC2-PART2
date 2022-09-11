@@ -1,57 +1,57 @@
 <template>
-  <div class="w-[75%] m-auto shadow-2xl" >
+  <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200" >
     <HelloWorld />
     <div class="text-end w-[97%] ">
-        <fa :icon="['fas', 'user-pen']" class="text-[2rem] text-sky-500 m-2" />
-      </div>
+        <fa :icon="['fas', 'user-pen']" class="text-[2rem] text-sky-500 m-2 shadow-lg shadow-indigo-500/40 p-[5px] cursor-pointer" />
+    </div>
     <div class="home flex justify-center border-green-300 w-[90%]">
       
-      <div class="image w-[24%] h-[45vh]">
+      <div class="image w-[24%] h-[45vh] text-center">
         <img
-          class="w-[70%] h-[60%] m-auto mb-[20px]"
+          class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
           src="../assets/manager.jpg"
           alt=""
         />
-        <strong>HENG HEAK</strong>
+        <strong class="text-[2rem]">HENG HEAK</strong>
       </div>
       <div class="detail flex justify-between mt-5 text-start w-[70%]">
         <div>
-          <div class="major p-[0.5rem] ">
+          <div class="major p-[0.5rem] text-[1.2rem]">
             <p><strong>Gender:</strong> Male</p>
           </div>
-          <div class="generation p-[0.5rem] ">
+          <div class="generation p-[0.5rem] text-[1.2rem]">
             <p><strong>Major: </strong> WEB-2022B</p>
           </div>
-          <div class="position p-[0.5rem] ">
+          <div class="position p-[0.5rem] text-[1.2rem]">
             <p> <strong>Address: </strong>  Bory sorla, Tek Tla, Phnom Penh</p>
           </div>
         </div>
         <div>
-          <div class="company p-[0.5rem] ">
+          <div class="company p-[0.5rem] text-[1.2rem]">
             <p> <strong>Bacth: </strong> 2022</p>
           </div>
-          <div class="place p-[0.5rem] ">
+          <div class="place p-[0.5rem] text-[1.2rem]">
             <p><strong>Place of birth: </strong> BMC</p>
           </div>
-          <div class="date p-[0.5rem] ">
+          <div class="date p-[0.5rem] text-[1.2rem]">
             <p> <strong>Date of birth: </strong> 11/5/1999</p>
           </div>
         </div>
       </div>
     </div>
     <div
-      class="socail flex justify-evenly items-center ml-[0%] bg-blue-100 w-[100%] h-[10vh]">
-      <div class="phone ">
-        <p> <fa icon="phone" class="text-sky-500" /> 0887872301</p>
+      class="socail flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh]">
+      <div>
+        <p> <fa icon="phone" class="text-sky-500 text-2xl" /> 0887872301</p>
       </div>
-      <div class="email">
-        <p> <fa :icon="['fas', 'envelope']" class="text-sky-500" /> heakheng06@gmail.com</p>
+      <div>
+        <p> <fa :icon="['fas', 'envelope']" class="text-sky-500 text-2xl" /> heakheng06@gmail.com</p>
       </div>
-      <div class="linkedline ">
-        <p> <fa :icon="['fab', 'linkedin']" class="text-sky-500" /> hengheak@gmail.com</p>
+      <div>
+        <p> <fa :icon="['fab', 'linkedin']" class="text-sky-500 text-2xl" /> hengheak@gmail.com</p>
       </div>
-      <div class="telegram">
-        <p> <fa :icon="['fab', 'telegram']" class="text-sky-500" /> heak heng</p>
+      <div>
+        <p> <fa :icon="['fab', 'telegram']" class="text-sky-500 text-2xl" /> heak heng</p>
       </div>
     </div>
   </div>
@@ -68,3 +68,5 @@ export default {
   },
 };
 </script>
+
+
