@@ -32,7 +32,7 @@
             <p><strong>Bacth: </strong>{{ alumniData.batch }}</p>
           </div>
           <div class="place p-[0.5rem]">
-            <p><strong>Place of birth: </strong> BMC</p>
+            <p><strong>Place of birth: </strong> {{alumniData.address}}</p>
           </div>
           <div class="date p-[0.5rem]">
             <p><strong>Date of birth: </strong>{{ alumniData.dateOfBirth }}</p>
