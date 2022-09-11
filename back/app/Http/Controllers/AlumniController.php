@@ -20,6 +20,7 @@ class AlumniController extends Controller
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
+        $alumni ->placeOfBirth = $request ->placeOfBirth;
         $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }
