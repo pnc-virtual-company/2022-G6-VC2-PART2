@@ -16,7 +16,8 @@ class Alumni extends Model
         'batch',
         'major',
         'address',
-        'dateOfBirth'
+        'dateOfBirth',
+        'placeOfBirth'
     ];
     protected $hidden = [
 
