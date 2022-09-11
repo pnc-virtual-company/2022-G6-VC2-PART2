@@ -49,10 +49,17 @@ class AlumniController extends Controller
     }
     //================== upload profile ======================
     public function uploadProfile(Request $request, $id){
-        $profile = Alumni::find($id);
-        $profile->profile = $request->file('profile')->hashName();
-        $request->file('profile')->store('public/images');
-        $profile->save();
-        return response()->json(['sms'=> $profile]);
+        $path = public_path('profile');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        $file = $request->file('profile');
+
+        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
+        $file->move($path, $fileName);
+        $alumni = Alumni::findOrFail($id);
+        $alumni->profile = asset('images/' . $fileName);
+        $alumni->save();
+        return response()->json(['sms' => $alumni]);
     }
 }
