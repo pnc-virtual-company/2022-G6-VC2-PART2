@@ -20,17 +20,7 @@ class AlumniController extends Controller
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni ->profile = $request ->profile;
-        //======= upload profile image ==========
-        $path = public_path('images/alumni');
-        if ( ! file_exists($path) ) {
-            mkdir($path, 0777, true);
-        }
-        $file = $request->file('profile');
-        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
-        $alumni->profile = $fileName;
         $alumni->save();
-        $file->move($path, $fileName);
         return response()->json(['sms'=>$alumni]);
     }
    //================== show one alumni ======================
@@ -45,26 +35,24 @@ class AlumniController extends Controller
         $alumni -> user_id = $request->user_id;
         $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
-        $alumni ->profile = $request ->profile;
         $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
-
-        $path = public_path('images/alumni');
-        if ( ! file_exists($path) ) {
-            mkdir($path, 0777, true);
-        }
-        $file = $request->file('profile');
-        $fileName = uniqid() . '_' . trim($file->getClientOriginalName());
-        $alumni->profile = $fileName;
         $alumni->save();
-        $file->move($path, $fileName);
         return response()->json(['sms'=>$alumni]);
     }
     //================== delete alumni ======================
     public function destroy(Alumni $alumni)
     {
         //
+    }
+    //================== upload profile ======================
+    public function uploadProfile(Request $request, $id){
+        $profile = Alumni::find($id);
+        $profile->profile = $request->file('profile')->hashName();
+        $request->file('profile')->store('public/images');
+        $profile->save();
+        return response()->json(['sms'=> $profile]);
     }
 }
