@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf]" >
+    <div class="w-[65%] m-auto shadow-2xl mt-[9%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf]" >
     <div class="text-end w-[97%] ">
       <fa 
         :icon="['fas', 'user-pen']" 
@@ -50,19 +50,19 @@
       </div>
     </div>
     <div
-      class="socail flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh]">
+      class="flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh]">
       <div>
-        <p> <fa icon="phone" class="text-sky-500 text-2xl" /> 0887872301</p>
+        <p> <fa icon="phone" class="text-sky-500 text-2xl mr-[5px]" />{{alumniData.phone}}</p>
       </div>
       <div>
-        <p> <fa :icon="['fas', 'envelope']" class="text-sky-500 text-2xl" /> heakheng06@gmail.com</p>
+        <p> <fa :icon="['fas', 'envelope']" class="text-sky-500 text-2xl mr-[5px]" />{{alumniInfo.email}}</p>
       </div>
-      <div>
+      <!-- <div>
         <p> <fa :icon="['fab', 'linkedin']" class="text-sky-500 text-2xl" /> hengheak@gmail.com</p>
       </div>
       <div>
         <p> <fa :icon="['fab', 'telegram']" class="text-sky-500 text-2xl" /> heak heng</p>
-      </div>
+      </div> -->
     </div>
   </div>
   <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>

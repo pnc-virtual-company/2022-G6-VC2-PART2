@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="w-full flex justify-between items-center shadow-md bg-white">
+    <nav class="w-full flex justify-between items-center shadow-md bg-white fixed top-0">
            <div class="w-[13%] ml-[20px]">
              <img src="@/assets/logo.jpg" alt="" srcset="">
            </div>
