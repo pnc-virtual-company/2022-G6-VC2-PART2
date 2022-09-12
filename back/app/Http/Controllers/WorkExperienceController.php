@@ -41,7 +41,7 @@ class WorkExperienceController extends Controller
      * @param  \App\Models\WorkExperience  $workExperience
      * @return \Illuminate\Http\Response
      */
-    public function show(WorkExperience $workExperience)
+    public function show($id)
     {
         //
     }
@@ -53,10 +53,20 @@ class WorkExperienceController extends Controller
      * @param  \App\Models\WorkExperience  $workExperience
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WorkExperience $workExperience)
+    public function updateAlumniWork(Request $request, $id)
     {
         //
+        $workExperience= WorkExperience::findOrFail($id);
+        $workExperience -> alumni_id = $request->alumni_id;
+        $workExperience ->company = $request ->company;
+        $workExperience ->position = $request ->position;
+        $workExperience ->position = $request ->position;
+        $workExperience ->start_year = $request ->start_year;
+        $workExperience ->end_year = $request ->end_year;
+        $workExperience->save();
+        return response()->json(['sms'=> 'AlumniWork Update Successfully!'], 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -64,8 +74,8 @@ class WorkExperienceController extends Controller
      * @param  \App\Models\WorkExperience  $workExperience
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkExperience $workExperience)
+    public function destroyAlumniWork($id)
     {
-        //
+       
     }
 }
