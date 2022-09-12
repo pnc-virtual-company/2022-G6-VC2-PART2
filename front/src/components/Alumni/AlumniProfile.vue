@@ -1,7 +1,11 @@
 <template>
   <div class="w-[70%] m-auto shadow-2xl">
-    <div class="text-end w-[97%]">
-      <fa :icon="['fas', 'user-pen']" class="text-[2rem] text-sky-500 m-2" />
+    <div class="text-end">
+      <fa 
+        :icon="['fas', 'user-pen']" 
+        class="text-[1.5rem] cursor-pointer text-sky-500 m-2" 
+        @click="isShow"
+      />
     </div>
     <div class="flex justify-center border-green-300 w-[90%]">
       <div class="images w-[24%]">
@@ -11,8 +15,8 @@
           alt=""
         />
         <strong>
-          {{ alumniData.user.firstName }}
-          {{ alumniData.user.lastName }}
+          <!-- {{ alumniData.user.firstName }}
+          {{ alumniData.user.lastName }} -->
         </strong>
       </div>
       <div class="detail flex justify-between text-start w-[70%]">
@@ -66,7 +70,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 export default {
   components: {},
@@ -75,6 +78,7 @@ export default {
       alumniData: {},
     };
   },
+  // emits: ['edit'],
   methods: {
     getData() {
       axios.get("http://127.0.0.1:8000/api/alumni/1").then((res) => {
@@ -82,8 +86,11 @@ export default {
         console.log(this.alumniData);
       });
     },
+    isShow() {
+      this.$emit('edit', true);
+    }
   },
-  created() {
+  mounted() {
     this.getData();
   },
 };
