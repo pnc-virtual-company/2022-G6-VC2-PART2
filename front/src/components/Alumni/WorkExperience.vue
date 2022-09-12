@@ -10,12 +10,12 @@
     <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
         <div class="flex w-[83%] ml-[2%]">
             <div>
-                <p class="text-[1.3rem]"><strong>Position : </strong>{{alumniExperience.position}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>Company : </strong>{{alumniExperience.company}}</p>
+                <!-- <p class="text-[1.3rem]"><strong>Position : </strong>{{alumniExperience.work_experience.position}}</p>
+                <p class="mt-[20px] text-[1.3rem]"><strong>Company : </strong>{{alumniExperience.work_experience.company}}</p> -->
             </div>
             <div class="ml-[20%]">
-                <p class="text-[1.3rem]"><strong>Start work : </strong>{{alumniExperience.start_year}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>End work : </strong>{{alumniExperience.end_year}}</p>
+                <!-- <p class="text-[1.3rem]"><strong>Start work : </strong>{{alumniExperience.work_experience.start_year}}</p>
+                <p class="mt-[20px] text-[1.3rem]"><strong>End work : </strong>{{alumniExperience.work_experience.end_year}}</p> -->
             </div>
         </div>
         <div class="w-[15%] flex justify-end">
@@ -29,11 +29,20 @@
 </template>
 
 <script>
-
+import axios from 'axios';
+const URL = "http://127.0.0.1:8000/api/alumni/1"
 export default {
-  props:{
-    alumniExperience:Object,
-},
+ data(){
+    return{
+        alumniExperience:{}
+    }
+ },
+mounted(){
+    axios.get(URL).then((res)=>{
+        this.alumniExperience = res.data;
+        console.log(this.alumniExperience)
+    })
+}
 }
 </script>
 

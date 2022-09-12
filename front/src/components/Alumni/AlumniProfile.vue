@@ -1,6 +1,5 @@
 <template>
-<div>
-    <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200" >
+  <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200" >
     <div class="text-end w-[97%] ">
       <fa 
         :icon="['fas', 'user-pen']" 
@@ -66,11 +65,9 @@
     </div>
   </div>
   <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
-    <WorkExperienceVue
-      :alumniExperience = "alumniData.work_experience"
-    />
-</div>
-
+  <WorkExperienceVue
+    
+  />
 </template>
 
 <script>
@@ -90,7 +87,6 @@ export default {
     getData() {
       axios.get("http://127.0.0.1:8000/api/alumni/1").then((res) => {
         this.alumniData = res.data;
-        console.log(this.alumniData);
       });
     },
     isShow() {
