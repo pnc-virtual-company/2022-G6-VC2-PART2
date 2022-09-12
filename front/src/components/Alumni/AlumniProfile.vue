@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="w-[60%] m-auto shadow-2xl mt-[4%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf]" >
-      <div class="text-end w-[99%] ">
+    <div class=" w-[75%] m-auto shadow-2xl mt-[4%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf] rounded-t-lg" >
+      <div class="text-end w-[99%]">
         <fa 
         :icon="['fas', 'user-pen']" 
         class="text-[2rem] text-sky-500 m-2 shadow-lg shadow-indigo-500/40 p-[5px] cursor-pointer"
@@ -25,7 +25,7 @@
             </label>
           </div>
           <input type="file" @change="onFileSelected" hidden id="imageFile">
-          <strong class="text-[1rem]">{{alumniInfo.firstName + ' '+alumniInfo.lastName}}</strong>
+          <strong class="text-[1.3rem]">{{alumniInfo.firstName + ' '+alumniInfo.lastName}}</strong>
         </div>
         <div class="detail flex justify-between mt-5 text-start w-[70%]">
           <div>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div
-        class="socail flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh]">
+        class="socail flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh] rounded-b-lg">
         <div>
           <p> <fa icon="phone" class="text-sky-500 text-2xl" /> {{alumniData.phone}}</p>
         </div>
@@ -102,13 +102,13 @@ export default {
       AlumniProfile.append('profile', profile)
       AlumniProfile.append('_method', 'PUT');
         console.log(AlumniProfile);
-        axios.post(this.url+'profile/2', AlumniProfile).then((response)=>{
+        axios.post(this.url+'profile/1', AlumniProfile).then((response)=>{
           console.log(response);
           this.getData();
         });
     },
     getData() {
-      axios.get(this.url+"alumni/2").then((res) => {
+      axios.get(this.url+"alumni/1").then((res) => {
         this.alumniData = res.data;
         this.alumniInfo=res.data.user
         this.alumniExperience=res.data.work_experience
