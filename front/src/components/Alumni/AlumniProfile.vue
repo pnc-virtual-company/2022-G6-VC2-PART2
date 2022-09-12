@@ -70,7 +70,7 @@
     </div>
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
     <WorkExperienceVue
-      :workExperience = "alumniExperience"
+      :workExperiences = "alumniExperience"
       @edit="showExperiences"
     />
   </div>
@@ -90,7 +90,7 @@ export default {
       previewImage:null,  
       profile:"" ,
       alumniInfo:{},
-      alumniExperience:{},
+      alumniExperience:[],
     };
   },
   emits: ['showExperience'],

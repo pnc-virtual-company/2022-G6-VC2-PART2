@@ -7,7 +7,6 @@
     </section>
   </div>
 </template>
-
 <script>
 import AlumniProfile from "../components/Alumni/AlumniProfile.vue";
 import BaseForm from '../components/Alumni/EditAlumniProfileForm.vue';

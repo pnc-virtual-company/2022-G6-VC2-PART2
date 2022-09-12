@@ -22,7 +22,7 @@
         </svg>
       </div>
     </div>
-    <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
+    <div v-for:="workExperience in workExperiences" class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
       <div class="w-[83%] ml-[3%]">
         <div>
           <p class="text-[1.5rem]">
@@ -30,12 +30,12 @@
           </p>
           <div class="ml-[8%]">
             <p class="mt-[15px] text-[1.2rem]">
-              <strong>Company : </strong>{{ workExperience.company }}
+              <strong>Company  : </strong>{{ workExperience.company }}
             </p>
-            <p class="mt-[15px] text-[1.2rem]">
+            <p class="mt-[14px] text-[1.2rem]">
               <strong>Start work : </strong>{{ workExperience.start_year }}
             </p>
-            <p class="mt-[15px] text-[1.2rem]">
+            <p class="mt-[14px] text-[1.2rem]">
               <strong>End work : </strong>{{ workExperience.end_year }}
             </p>
           </div>
@@ -92,7 +92,7 @@
 <script>
 export default {
   props: {
-    workExperience: Object,
+    workExperiences: [],
   },
   emits: ['edit'],
   data() {
@@ -108,4 +108,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style ></style>
