@@ -16,7 +16,7 @@
         <img
           v-if="alumniData.gender=='Female'"
           class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
-          src="../../assets/girlUser.png"
+          src="../../assets/girlUser.jpg"
           alt=""
         />
         <strong class="text-[2rem]">{{alumniData.user.firstName + ' '+alumniData.user.lastName}}</strong>
