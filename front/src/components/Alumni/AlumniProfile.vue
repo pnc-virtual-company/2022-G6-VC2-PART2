@@ -1,7 +1,12 @@
 <template>
-  <div class="w-[75%] m-auto shadow-2xl mt-[4%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf]" >
-    <div class="text-end w-[99%] ">
-        <fa :icon="['fas', 'user-pen']" class="text-[2rem] text-sky-500 m-2 shadow-lg shadow-indigo-500/40 p-[5px] cursor-pointer" />
+<div>
+    <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200" >
+    <div class="text-end w-[97%] ">
+      <fa 
+        :icon="['fas', 'user-pen']" 
+        class="text-[2rem] text-sky-500 m-2 shadow-lg shadow-indigo-500/40 p-[5px] cursor-pointer"
+        @click="isShow"
+      />
     </div>
     <div class="home flex justify-center border-green-300 w-[90%]">
       <div class="image w-[24%] h-[45vh] text-center">
@@ -17,7 +22,7 @@
           src="../../assets/girlUser.jpg"
           alt=""
         />
-        <strong class="text-[2rem]">{{alumniData.user.firstName + ' '+alumniData.user.lastName}}</strong>
+        <!-- <strong class="text-[2rem]">{{alumniData.user.firstName + ' '+alumniData.user.lastName}}</strong> -->
       </div>
       <div class="detail flex justify-between mt-5 text-start w-[70%]">
         <div>
@@ -61,13 +66,14 @@
     </div>
   </div>
   <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
-  <WorkExperienceVue
-    :alumniExperience = "alumniData.work_experience"
-  />
+    <WorkExperienceVue
+      :alumniExperience = "alumniData.work_experience"
+    />
+</div>
+
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 import WorkExperienceVue from "@/components/Alumni/WorkExperience.vue";
 export default {
@@ -79,6 +85,7 @@ export default {
       alumniData:{},
     };
   },
+  // emits: ['edit'],
   methods: {
     getData() {
       axios.get("http://127.0.0.1:8000/api/alumni/1").then((res) => {
@@ -86,8 +93,11 @@ export default {
         console.log(this.alumniData);
       });
     },
+    isShow() {
+      this.$emit('edit', true);
+    }
   },
-  created() {
+  mounted() {
     this.getData();
   },
 };
