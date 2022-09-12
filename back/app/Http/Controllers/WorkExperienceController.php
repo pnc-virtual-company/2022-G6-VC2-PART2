@@ -43,7 +43,9 @@ class WorkExperienceController extends Controller
      */
     public function show($id)
     {
-        //
+
+
+
     }
 
     /**
@@ -76,6 +78,12 @@ class WorkExperienceController extends Controller
      */
     public function destroyAlumniWork($id)
     {
+        $iSDelete = WorkExperience::destroy($id);
+        if ($iSDelete === 1) {
+            return response()->json(['message' => 'AlumniWork deleted successfully'], 200);
+        } else {
+            return response()->json(['message' => 'AlumniWork cannot delete'], 404);
+        }
        
     }
 }
