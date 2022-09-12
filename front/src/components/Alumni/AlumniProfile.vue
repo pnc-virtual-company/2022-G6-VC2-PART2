@@ -90,6 +90,7 @@
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
     <WorkExperienceVue
       :workExperience = "alumniExperience"
+      @edit="showExperiences"
     />
   </div>
 </template>
@@ -99,7 +100,7 @@ import axios from "axios";
 import WorkExperienceVue from "@/components/Alumni/WorkExperience.vue";
 export default {
   components: {
-    WorkExperienceVue
+    WorkExperienceVue,
   },
   data() {
     return {
@@ -112,7 +113,7 @@ export default {
       alumniExperience:{},
     };
   },
-  // emits: ['edit'],
+  emits: ['showExperience'],
   methods: {
     async onFileSelected(event){
       this.uploadImage(event.target.files[0]);
@@ -137,10 +138,11 @@ export default {
     },
     isShow() {
       this.$emit('edit', true);
+    },
+    showExperiences(status) {
+      this.$emit('showExperience', status);
     }
   },
-  
- 
   created() {
     this.getData();
   },

@@ -25,17 +25,17 @@
     <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
       <div class="w-[83%] ml-[3%]">
         <div>
-          <p class="text-[1.3rem]">
+          <p class="text-[1.5rem]">
             <strong>Position : </strong>{{ workExperience.position }}
           </p>
           <div class="ml-[8%]">
-            <p class="mt-[15px] text-[1rem]">
+            <p class="mt-[15px] text-[1.2rem]">
               <strong>Company : </strong>{{ workExperience.company }}
             </p>
-            <p class="mt-[15px] text-[1rem]">
+            <p class="mt-[15px] text-[1.2rem]">
               <strong>Start work : </strong>{{ workExperience.start_year }}
             </p>
-            <p class="mt-[15px] text-[1rem]">
+            <p class="mt-[15px] text-[1.2rem]">
               <strong>End work : </strong>{{ workExperience.end_year }}
             </p>
           </div>
@@ -78,6 +78,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
+            @click="showForm"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -93,11 +94,17 @@ export default {
   props: {
     workExperience: Object,
   },
+  emits: ['edit'],
   data() {
     return {
       show: false,
     };
   },
+  methods: {
+    showForm() {
+      this.$emit('edit', true);
+    }
+  }
 };
 </script>
 
