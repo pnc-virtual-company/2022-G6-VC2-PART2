@@ -6,7 +6,7 @@
         <template v-slot:form>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="text" id="floating_first_name"  placeholder=" " required />
+                    <BaseInput type="text" id="floating_first_name"  placeholder=" " required v-model="firstName"/>
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> First name</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
@@ -69,9 +69,15 @@ export default {
         BaseLabel,
     },
     emits: ['hideForm'],
+    data(){
+        return{
+            firstName:'',
+        }
+    },
     methods: {
         hideForm() {
             this.$emit('hideForm', false);
+            console.log(this.firstName)
         }
     }
 }
