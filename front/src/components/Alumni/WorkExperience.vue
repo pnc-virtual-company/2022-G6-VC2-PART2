@@ -10,12 +10,12 @@
     <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
         <div class="flex w-[83%] ml-[2%]">
             <div>
-                <!-- <p class="text-[1.3rem]"><strong>Position : </strong>{{alumniExperience.position}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>Company : </strong>{{alumniExperience.company}}</p> -->
+                <p class="text-[1.3rem]"><strong>Position : </strong>{{alumniExperience.position}}</p>
+                <p class="mt-[20px] text-[1.3rem]"><strong>Company : </strong>{{alumniExperience.company}}</p>
             </div>
             <div class="ml-[20%]">
-                <!-- <p class="text-[1.3rem]"><strong>Start work : </strong>{{alumniExperience.start_year}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>End work : </strong>{{alumniExperience.end_year}}</p> -->
+                <p class="text-[1.3rem]"><strong>Start work : </strong>{{alumniExperience.start_year}}</p>
+                <p class="mt-[20px] text-[1.3rem]"><strong>End work : </strong>{{alumniExperience.end_year}}</p>
             </div>
         </div>
         <div class="w-[15%] flex justify-end">
