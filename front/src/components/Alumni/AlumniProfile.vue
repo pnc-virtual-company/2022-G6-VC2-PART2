@@ -1,6 +1,6 @@
 <template>
-<div>
-    <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200" >
+  <div>
+    <div class="w-[75%] m-auto shadow-2xl mt-[5%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf]" >
     <div class="text-end w-[97%] ">
       <fa 
         :icon="['fas', 'user-pen']" 
@@ -22,7 +22,7 @@
           src="../../assets/girlUser.jpg"
           alt=""
         />
-        <!-- <strong class="text-[2rem]">{{alumniData.user.firstName + ' '+alumniData.user.lastName}}</strong> -->
+        <strong class="text-[2rem]">{{alumniInfo.firstName + ' '+alumniInfo.lastName}}</strong>
       </div>
       <div class="detail flex justify-between mt-5 text-start w-[70%]">
         <div>
@@ -66,9 +66,7 @@
     </div>
   </div>
   <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
-    <WorkExperienceVue
-      :alumniExperience = "alumniData.work_experience"
-    />
+    <WorkExperienceVue :workExperience="alumniExperience"/>
 </div>
 
 </template>
@@ -83,6 +81,8 @@ export default {
   data() {
     return {
       alumniData:{},
+      alumniInfo:{},
+      alumniExperience:{},
     };
   },
   // emits: ['edit'],
@@ -90,14 +90,16 @@ export default {
     getData() {
       axios.get("http://127.0.0.1:8000/api/alumni/1").then((res) => {
         this.alumniData = res.data;
-        console.log(this.alumniData);
+        this.alumniInfo=res.data.user
+        this.alumniExperience=res.data.work_experience
+        console.log(this.alumniExperience)
       });
     },
     isShow() {
       this.$emit('edit', true);
     }
   },
-  mounted() {
+  created() {
     this.getData();
   },
 };
