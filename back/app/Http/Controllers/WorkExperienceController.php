@@ -67,5 +67,6 @@ class WorkExperienceController extends Controller
     public function destroy(WorkExperience $workExperience)
     {
         //
+        $workExperience.delete();
     }
 }
