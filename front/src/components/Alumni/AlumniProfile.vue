@@ -7,18 +7,34 @@
     <div class="home flex justify-center border-green-300 w-[90%]">
       
       <div class="image w-[24%] h-[45vh] text-center">
+        <img v-if="previewImage != null" :src="previewImage"  class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4" alt=""/>
         <img
-          v-if="alumniData.gender=='Male'"
-          class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
-          src="../../assets/boyUser.jpg"
-          alt=""
+        v-if="previewImage == null"
+        class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
+        src="../../assets/boyUser.jpg"
+        alt="" 
         />
         <img
-          v-if="alumniData.gender=='Female'"
+          v-if="alumniData.gender=='Female' && alumniData.profile == null && previewImage == null"
           class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
           src="../../assets/girlUser.png"
           alt=""
         />
+        <img
+          v-if="alumniData.gender=='Male' && alumniData.profile == null && previewImage == null"
+          class="w-[70%] h-[60%] m-auto mb-[20px] shadow-2xl border-cyan-400 border-4"
+          src="../../assets/boyUser.jpg"
+          alt=""
+        />
+        <div class="bg-[#fcfcfc60] w-[11%] flex justify-center absolute z-1 ml-[35px] mt-[-50px] p-[3px] text-white text-bold">
+          <label for="imageFile">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+            </svg>
+          </label>
+        </div>
+        <input type="file" @change="uploadImage" hidden id="imageFile">
         <strong class="text-[2rem]">{{alumniData.user.firstName + ' '+alumniData.user.lastName}}</strong>
       </div>
       <div class="detail flex justify-between mt-5 text-start w-[70%]">
@@ -72,16 +88,30 @@ export default {
   data() {
     return {
       alumniData: {},
+      previewImage:null,  
+      profile:""     
     };
   },
   methods: {
+    uploadImage(e){
+      this.profile=e.target.files[0]
+      this.previewImage = URL.createObjectURL(this.profile);
+      let newAlumni = new FormData();
+      newAlumni.append("profile", this.profile);
+        axios.put("profile/1" , newAlumni).then(() => {
+          console.log(newAlumni);
+        })
+    },
     getData() {
       axios.get("http://127.0.0.1:8000/api/alumni/1").then((res) => {
         this.alumniData = res.data;
         console.log(this.alumniData);
       });
     },
+    
   },
+  
+ 
   created() {
     this.getData();
   },
