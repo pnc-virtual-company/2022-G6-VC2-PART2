@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('major');
             $table->string('address');
             $table->string('dateOfBirth');
+            $table->string('placeOfBirth');
             $table->timestamps();
         });
     }
