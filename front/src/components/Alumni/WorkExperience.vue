@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="workExperience != null"
     class="w-[75%] m-auto shadow-2xl border-[1px] border-slate-200 p-[30px] cursor-pointer bg-[#ffffffaf] mb-[20px] rounded-md"
   >
     <div class="flex justify-end">
@@ -22,7 +22,7 @@
         </svg>
       </div>
     </div>
-    <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
+    <div v-for:="workExperience in workExperiences" class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
       <div class="w-[83%] ml-[3%]">
         <div>
           <p class="text-[1.3rem]">
@@ -67,7 +67,7 @@
             stroke="currentColor"
             class="w-5 h-5"
           >
-            <fa icon="trash-alt" class="text-red-500" />
+            <fa @click="deleteAlumni(workExperience.id)" icon="trash-alt" class="text-red-500" />
           </svg>
         </li>
         <li class="p-3 rounded-full ml-3 shadow-lg">
@@ -89,15 +89,25 @@
 </template>
 
 <script>
+  import axios from 'axios'
 export default {
   props: {
-    workExperience: Object,
+    workExperiences: [],
   },
   data() {
     return {
       show: false,
+      // deleteAlumni:''
     };
   },
+  methods:{
+    deleteAlumni(alumniId){
+    axios.delete("http://localhost:8000/api/deleteAlumniWork/" + alumniId)
+    .then(response=>{
+      console.log(response);
+    })
+  }
+  }
 };
 </script>
 

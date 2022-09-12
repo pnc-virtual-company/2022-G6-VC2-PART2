@@ -70,7 +70,7 @@
     </div>
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
     <WorkExperienceVue
-      :workExperience = "alumniExperience"
+      :workExperiences="alumniExperiences"
     />
   </div>
 </template>
@@ -89,7 +89,7 @@ export default {
       previewImage:null,  
       profile:"" ,
       alumniInfo:{},
-      alumniExperience:{},
+      alumniExperiences:[],
     };
   },
   // emits: ['edit'],
@@ -102,17 +102,17 @@ export default {
       AlumniProfile.append('profile', profile)
       AlumniProfile.append('_method', 'PUT');
         console.log(AlumniProfile);
-        axios.post(this.url+'profile/1', AlumniProfile).then((response)=>{
+        axios.post(this.url+'profile/2', AlumniProfile).then((response)=>{
           console.log(response);
           this.getData();
         });
     },
     getData() {
-      axios.get(this.url+"alumni/1").then((res) => {
+      axios.get(this.url+"alumni/2").then((res) => {
         this.alumniData = res.data;
         this.alumniInfo=res.data.user
-        this.alumniExperience=res.data.work_experience
-        console.log(this.alumniExperience)
+        this.alumniExperiences=res.data.work_experience
+        console.log(this.alumniExperiences)
       });
     },
     isShow() {
