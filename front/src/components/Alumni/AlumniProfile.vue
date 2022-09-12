@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class=" w-[75%] m-auto shadow-2xl mt-[4%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf] rounded-t-lg" >
+    <div class=" w-[75%] m-auto shadow-2xl mt-[4%] bg-[rgba(245, 245, 245, 0.67)] border-[1px] border-slate-200 bg-[#ffffffaf] rounded-md" >
       <div class="text-end w-[99%]">
         <fa 
         :icon="['fas', 'user-pen']" 
