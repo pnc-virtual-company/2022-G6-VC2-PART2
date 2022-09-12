@@ -29,7 +29,8 @@ class WorkExperienceController extends Controller
         $work -> alumni_id = $request -> alumni_id;
         $work -> company = $request -> company;
         $work -> position = $request -> position;
-        $work -> year = $request -> year;
+        $work -> start_year = $request -> start_year;
+        $work -> end_year = $request -> end_year;
         $work->save();
         return response()->json(['sms'=>'Created succefully!']);
     }
