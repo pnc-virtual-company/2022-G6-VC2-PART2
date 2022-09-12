@@ -8,18 +8,18 @@
         </div>
     </div>
     <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
-        <div class="flex w-[83%] ml-[2%]">
+        <div class=" w-[83%] ml-[3%]">
             <div>
-                <!-- <p class="text-[1.3rem]"><strong>Position : </strong>{{alumniExperience.work_experience.position}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>Company : </strong>{{alumniExperience.work_experience.company}}</p> -->
-            </div>
-            <div class="ml-[20%]">
-                <!-- <p class="text-[1.3rem]"><strong>Start work : </strong>{{alumniExperience.work_experience.start_year}}</p>
-                <p class="mt-[20px] text-[1.3rem]"><strong>End work : </strong>{{alumniExperience.work_experience.end_year}}</p> -->
+                <p class="text-[1.3rem]"><strong>Position : </strong>{{workExperience.position}}</p>
+                <div class="ml-[8%]">
+                    <p class="mt-[15px] text-[1rem]"><strong>Company : </strong>{{workExperience.company}}</p>
+                    <p class=" mt-[15px] text-[1rem]"><strong>Start work : </strong>{{workExperience.start_year}}</p>
+                    <p class="mt-[15px] text-[1rem]"><strong>End work : </strong>{{workExperience.end_year}}</p>
+                </div>
             </div>
         </div>
         <div class="w-[15%] flex justify-end">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-gray-500">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
         </div>
@@ -29,20 +29,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-const URL = "http://127.0.0.1:8000/api/alumni/1"
 export default {
- data(){
-    return{
-        alumniExperience:{}
-    }
- },
-mounted(){
-    axios.get(URL).then((res)=>{
-        this.alumniExperience = res.data;
-        console.log(this.alumniExperience)
-    })
-}
+    props: {
+        workExperience:Object,
+    },  
 }
 </script>
 
