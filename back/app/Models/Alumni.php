@@ -30,4 +30,8 @@ class Alumni extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function WorkExperience()
+    {
+        return $this -> hasOne(WorkExperience::class);
+    }
 }
