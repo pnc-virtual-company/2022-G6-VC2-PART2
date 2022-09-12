@@ -55,7 +55,6 @@
         </template>
     </BaseForm>
 </template>
-
 <script>
 import BaseForm from '../widget/BaseForm.vue'
 import BaseInput from '../widget/BaseInput.vue'
@@ -76,7 +75,5 @@ export default {
     }
 }
 </script>
-
 <style>
-
 </style>
