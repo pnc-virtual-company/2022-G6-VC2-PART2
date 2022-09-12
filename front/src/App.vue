@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[url('@/assets/background.png')] w-full h-screen bg-no-repeat bg-center bg-cover">
+  <div>
     <nav class="w-full flex justify-between items-center shadow-md bg-white">
            <div class="w-[13%] ml-[20px]">
              <img src="@/assets/logo.jpg" alt="" srcset="">
