@@ -10,7 +10,7 @@
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm @hideForm="hideForm" v-if="isShow" />
-      <ExperienceForm :experience="experience" v-if="showExperience" type="edit" @hideForm="hideForm" @edit="editExperience"/>
+      <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm" @edit="editExperience"/>
     </section>
   </div>
 </template>
@@ -34,7 +34,8 @@ export default {
       profile:"" ,
       alumniData: {},
       alumniInfo: {}, 
-      alumniExperiences: []
+      alumniExperiences: [],
+      type: "",
     }
   },
 
@@ -46,9 +47,10 @@ export default {
       this.isShow = status;
       this.showExperience = status;
     },
-    showExperiences(status, experience) {
+    showExperiences(status, type, experience) {
       this.showExperience = status;
       this.experience = experience;
+      this.type = type;
       console.log('hello world');
       console.log(experience);
     },
