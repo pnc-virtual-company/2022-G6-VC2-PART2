@@ -6,7 +6,9 @@
       <div
         class="bg-[#34B3F1] w-[50px] h-[50px] flex justify-center items-center shadow-indigo-500/40 rounded-full"
       >
+      <!--================== option content create form ============= -->
         <svg
+          @click="showForm('create')"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -56,6 +58,7 @@
             <fa icon="trash-alt" class="text-red-500" />
           </svg>
         </li>
+      <!--==================== Edit alumni experience ================= -->
         <li class="p-3 rounded-full ml-3 shadow-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm(workExperience)" 
+            @click="showForm('edit', workExperiences)"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -76,12 +79,12 @@
 </template>
 
 <script>
-
+import Swal from 'sweetalert2'
 export default {
   props: {
     workExperiences: [],
   },
-  emits: ['edit','deleteExperience'],
+  emits: ['show','deleteExperience'],
   data() {
     return {
       show: false,
@@ -89,15 +92,25 @@ export default {
   },
 
   methods:{
-    showForm(experience) {
-      this.$emit('edit', true, experience);
+  //===================== show  form functions =================
+    showForm(type, experience) {
+      this.$emit('show', true, type, experience);
     },
+  //===================== delete experience one by one ===========
     deleteExperience(id) {
-      this.$emit('deleteExperience', id);
-    },
-    showAlert() {
-      // Use sweetalert2
-      this.$swal('Do you want to delete!!!');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit('deleteExperience', id);
+        }
+      })
     },
   },
   }

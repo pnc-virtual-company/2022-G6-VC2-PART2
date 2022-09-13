@@ -32,7 +32,12 @@ class UserController extends Controller
    //================== update user ======================
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->email = $request->email;
+        $user->save();
+        return response()->json(['sms'=>$user]);
     }
     //================== delete user ======================
     public function destroy($id)

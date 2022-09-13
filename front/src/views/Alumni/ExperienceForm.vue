@@ -6,26 +6,26 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <BaseInput type="text" id="floating_address"  placeholder=" " required @inputData="myPosition"/>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <BaseInput type="text" id="floating_address"  placeholder=" " required v-model="company"/>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_first_name"  placeholder=" " required v-model="start"/>
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_last_name" placeholder=" " v-model="end"/>
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                 </div>
             </div>
             <div class="p-2 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto" @click="editExperience">
-                    <span v-if="type=='create'">Add</span>
+                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
+                    <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
                     <span v-else-if="type=='edit'">Edit</span>
                 </BaseButton>
                 <BaseButton @click="hideForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
@@ -36,13 +36,11 @@
 
 <script>
 import BaseForm from '../../components/widget/BaseForm.vue'
-import BaseInput from '../../components/widget/BaseInput.vue'
 import BaseButton from '../../components/widget/BaseButton.vue'
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue'
 export default {
     components: {
         BaseForm,
-        BaseInput,
         BaseButton,
         BaseLabel,
     },
@@ -54,8 +52,8 @@ export default {
         return {
             position:'',
             company:'',
-            start:'',
-            end:'',
+            start_work:'',
+            end_work:'',
         }
     },
 
@@ -64,7 +62,10 @@ export default {
         hideForm() {
             this.$emit('hideForm', false);
         },
-        showDataInForm() {
+        newAlumniExperience(){
+            this.$emit('addAlumniExperience',this.position,this.company,this.start_work,this.end_work);
+        },
+            showDataInForm() {
             this.company = this.experience.company;
             this.position = this.experience.position;
             this.start = this.experience.start_year;
