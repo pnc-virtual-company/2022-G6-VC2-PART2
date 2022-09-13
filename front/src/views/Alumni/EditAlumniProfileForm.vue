@@ -56,10 +56,10 @@
     </BaseForm>
 </template>
 <script>
-import BaseForm from '../widget/BaseForm.vue'
-import BaseInput from '../widget/BaseInput.vue'
-import BaseButton from '../widget/BaseButton.vue'
-import BaseLabel from '../widget/BaseSpanLabel.vue'
+import BaseForm from '../../components/widget/BaseForm.vue'
+import BaseInput from '../../components/widget/BaseInput.vue'
+import BaseButton from '../../components/widget/BaseButton.vue'
+import BaseLabel from '../../components/widget/BaseSpanLabel.vue'
 export default {
     components: {
         BaseForm,

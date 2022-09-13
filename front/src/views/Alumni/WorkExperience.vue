@@ -42,22 +42,7 @@
         </div>
       </div>
       <div class="w-[15%] flex justify-end">
-        <svg
-          @click="show = !show"
-          class="w-6 h-6 mt-5"
-          aria-hidden="true"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <fa icon="ellipsis-h" class="text-dark-500" />
-        </svg>
-        <!-- Dropdown menu -->
-        <ul
-          v-if="show"
-          class="absolute float-right pa-5 flex text-left mr-10"
-          aria-labelledby="dropdownMenuButton1e"
-        >
+        <ul class="absolute float-right pa-5 flex text-left mr-10">
         <li class="p-3 rounded-full shadow-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +63,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm"
+            @click="showForm(workExperience)"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -90,6 +75,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     workExperiences: [],
@@ -101,8 +87,8 @@ export default {
     };
   },
   methods: {
-    showForm() {
-      this.$emit('edit', true);
+    showForm(experience) {
+      this.$emit('edit', true, experience);
     }
   }
 };

@@ -70,7 +70,7 @@
     </div>
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
     <WorkExperienceVue
-      :workExperiences = "alumniExperience"
+      :workExperiences = "alumniExperiences"
       @edit="showExperiences"
     />
   </div>
@@ -78,19 +78,20 @@
 
 <script>
 import axios from "axios";
-import WorkExperienceVue from "@/components/Alumni/WorkExperience.vue";
+import WorkExperienceVue from "./WorkExperience.vue";
 export default {
   components: {
     WorkExperienceVue,
   },
+  props: {
+    alumniInfo: Object,
+    alumniExperiences: Array,      
+    alumniData: Object,
+  },
   data() {
     return {
       url: "http://127.0.0.1:8000/api/",
-      alumniData: {},
       previewImage:null,  
-      profile:"" ,
-      alumniInfo:{},
-      alumniExperience:[],
     };
   },
   emits: ['showExperience'],
@@ -108,23 +109,12 @@ export default {
           this.getData();
         });
     },
-    getData() {
-      axios.get(this.url+"alumni/1").then((res) => {
-        this.alumniData = res.data;
-        this.alumniInfo=res.data.user
-        this.alumniExperience=res.data.work_experience
-        console.log(this.alumniExperience)
-      });
-    },
     isShow() {
       this.$emit('edit', true);
     },
-    showExperiences(status) {
-      this.$emit('showExperience', status);
+    showExperiences(status, id) {
+      this.$emit('showExperience', status, id);
     }
-  },
-  created() {
-    this.getData();
   },
 };
 </script>
