@@ -6,20 +6,20 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <BaseInput type="text" id="floating_address"  placeholder=" " required @inputData="myPosition"/>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <BaseInput type="text" id="floating_address"  placeholder=" " required v-model="company"/>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_first_name"  placeholder=" " required v-model="start_work"/>
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_last_name" placeholder=" " v-model="end_work"/>
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                 </div>
             </div>
@@ -36,13 +36,11 @@
 
 <script>
 import BaseForm from '../../components/widget/BaseForm.vue'
-import BaseInput from '../../components/widget/BaseInput.vue'
 import BaseButton from '../../components/widget/BaseButton.vue'
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue'
 export default {
     components: {
         BaseForm,
-        BaseInput,
         BaseButton,
         BaseLabel,
     },
