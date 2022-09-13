@@ -51,7 +51,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="deleteExperience(workExperience.id)" 
+             @click="deleteExperience(workExperience.id)" 
           >
             <fa icon="trash-alt" class="text-red-500" />
           </svg>
@@ -64,7 +64,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm(workExperience)"
+            @click="showForm(workExperience)" 
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -94,9 +94,13 @@ export default {
     },
     deleteExperience(id) {
       this.$emit('deleteExperience', id);
-    }
+    },
+    showAlert() {
+      // Use sweetalert2
+      this.$swal('Do you want to delete!!!');
+    },
+  },
   }
-}
 </script>
 
 <style ></style>

@@ -68,7 +68,7 @@ export default {
       })
     },
     getData() {
-      axios.get(this.url+"alumni/1").then((res) => {
+      axios.get(this.url+"alumni/2").then((res) => {
         this.alumniData = res.data;
         this.alumniInfo=res.data.user
         this.alumniExperiences=res.data.work_experience

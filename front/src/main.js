@@ -5,15 +5,15 @@ import './assets/tailwind.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
 import {fab} from '@fortawesome/free-brands-svg-icons'
+
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-// import {axios} from 'axios'
-// export default axios.create({
-//     baseURL: process.env.VUE_APP_API_URL,
-//     headers: {
-//       "Content-type": "application/json"
-//     }
-//   });
+import VueSweetalert2 from 'vue-sweetalert2';
+
+
+
 library.add(fas, fab);
+const app = createApp(App)
+app.use(VueSweetalert2);
 
 
 createApp(App).use(router)
