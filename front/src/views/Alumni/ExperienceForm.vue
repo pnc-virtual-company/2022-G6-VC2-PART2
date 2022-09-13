@@ -26,7 +26,7 @@
             <div class="p-2 text-center">
                 <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
                     <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
-                    <span v-else-if="type=='edit'">Edit</span>
+                    <span v-else-if="type=='edit'" @click="editExperience">Edit</span>
                 </BaseButton>
                 <BaseButton @click="hideForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
@@ -53,21 +53,19 @@ export default {
             position:'',
             company:'',
             start_year:'',
-            end_year:'',
+            end_year:''
         }
     },
-
     emits: ['hideForm', 'edit'],
     methods: {
         hideForm() {
             this.$emit('hideForm', false);
         },
-        //=================== show form  =================
         showDataInForm() {
-            this.company = this.experience.company;
             this.position = this.experience.position;
-            this.start = this.experience.start_year;
-            this.end = this.experience.end_year;
+            this.company = this.experience.company;
+            this.start_year = this.experience.start_year;
+            this.end_year = this.experience.end_year;
             console.log('hideForm');
             console.log(this.company);
         },
@@ -77,17 +75,24 @@ export default {
         },
         //=================== edit experience emit =================
         editExperience(){
-            let experience = {id: this.experience.id, alumni_id: this.experience.aumni_id, company: this.company, start_year: this.start_year, end_year: this.end_year}
+            let experience =
+            {
+                id: this.experience.id, 
+                alumni_id: this.experience.alumni_id,
+                position: this.position,
+                company: this.company,
+                start_year: this.start_year,
+                end_year: this.end_year
+            }
             this.$emit('edit', experience);
             this.hideForm();
         },
-        myPosition(value) {
-            this.position = value;
-        }
     },
-    // update(){
-    //     this.showDataInForm();
-    // }
+    created(){
+        if (this.type   == 'edit'){
+            this.showDataInForm();
+        }
+    }
 }
 </script>
 <style>
