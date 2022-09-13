@@ -53,7 +53,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="deleteExperience(workExperience.id)" 
+             @click="deleteExperience(workExperience.id)" 
           >
             <fa icon="trash-alt" class="text-red-500" />
           </svg>
@@ -67,7 +67,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm('edit', workExperiences)"
+            @click="showForm('edit', workExperience)"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-
+import Swal from 'sweetalert2'
 export default {
   props: {
     workExperiences: [],
@@ -98,10 +98,22 @@ export default {
     },
   //===================== delete experience one by one ===========
     deleteExperience(id) {
-      this.$emit('deleteExperience', id);
-    }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit('deleteExperience', id);
+        }
+      })
+    },
+  },
   }
-}
 </script>
 
 <style ></style>
