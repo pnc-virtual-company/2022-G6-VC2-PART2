@@ -16,6 +16,7 @@ class AlumniController extends Controller
         $alumni -> user_id = $request->user_id;
         $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
+        $alumni ->telegram = $request ->telegram;
         $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
@@ -35,6 +36,7 @@ class AlumniController extends Controller
         $alumni= Alumni::find($id);
         $alumni ->phone = $request ->phone;
         $alumni ->batch = $request ->batch;
+        $alumni ->telegram = $request ->telegram;
         $alumni ->major = $request ->major;       
         $alumni -> address = $request ->address;
         $alumni->save();

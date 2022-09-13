@@ -101,13 +101,16 @@
       },
       //=================== update   alumni general information ===================
       updateDataAlumni(userId,alumniId,user,alumni){
-      axios.put(this.url+"user/"+userId,user).then(()=>{
-        this.getData();
-      })
-      axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
-        this.getData();
-      })
-      this.isShow = false;
+        console.log(alumni)
+        axios.put(this.url+"user/"+userId,user).then(()=>{
+          this.getData();
+        }).catch((err)=>{
+          console.log(err)
+        })
+        axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
+          this.getData();
+        })
+        this.isShow = false;
     }
     },
     created() {
