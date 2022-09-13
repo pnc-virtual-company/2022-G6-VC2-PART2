@@ -1,5 +1,5 @@
 <template>
-  <div v-if="workExperience != null"
+  <div
     class="w-[75%] m-auto shadow-2xl border-[1px] border-slate-200 p-[30px] cursor-pointer bg-[#ffffffaf] mb-[20px] rounded-md"
   >
     <div class="flex justify-end">
@@ -25,17 +25,17 @@
     <div v-for:="workExperience in workExperiences" class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
       <div class="w-[83%] ml-[3%]">
         <div>
-          <p class="text-[1.3rem]">
+          <p class="text-[1.5rem]">
             <strong>Position : </strong>{{ workExperience.position }}
           </p>
           <div class="ml-[8%]">
-            <p class="mt-[15px] text-[1rem]">
-              <strong>Company : </strong>{{ workExperience.company }}
+            <p class="mt-[15px] text-[1.2rem]">
+              <strong>Company  : </strong>{{ workExperience.company }}
             </p>
-            <p class="mt-[15px] text-[1rem]">
+            <p class="mt-[14px] text-[1.2rem]">
               <strong>Start work : </strong>{{ workExperience.start_year }}
             </p>
-            <p class="mt-[15px] text-[1rem]">
+            <p class="mt-[14px] text-[1.2rem]">
               <strong>End work : </strong>{{ workExperience.end_year }}
             </p>
           </div>
@@ -66,8 +66,9 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
+            @click="deleteAlumni(workExperience.id)" 
           >
-            <fa @click="deleteAlumni(workExperience.id)" icon="trash-alt" class="text-red-500" />
+            <fa icon="trash-alt" class="text-red-500" />
           </svg>
         </li>
         <li class="p-3 rounded-full ml-3 shadow-lg">
@@ -78,6 +79,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
+            @click="showForm"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -89,26 +91,26 @@
 </template>
 
 <script>
-  import axios from 'axios'
 export default {
   props: {
     workExperiences: [],
   },
+  emits: ['edit','delete-aluminai'],
   data() {
     return {
       show: false,
-      // deleteAlumni:''
     };
   },
+
   methods:{
-    deleteAlumni(alumniId){
-    axios.delete("http://localhost:8000/api/deleteAlumniWork/" + alumniId)
-    .then(response=>{
-      console.log(response);
-    })
+    showForm() {
+      this.$emit('edit', true);
+    },
+    deleteAlumni(id) {
+      this.$emit('delete-aluminai', id);
+    }
   }
-  }
-};
+}
 </script>
 
-<style></style>
+<style ></style>

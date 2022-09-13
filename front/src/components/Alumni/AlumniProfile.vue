@@ -69,8 +69,10 @@
       </div>
     </div>
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
-    <WorkExperienceVue
-      :workExperiences="alumniExperiences"
+    <WorkExperienceVue 
+      :workExperiences = "alumniExperiences"
+      @edit="showExperiences"
+      @delete-aluminai="deleteAlumni"
     />
   </div>
 </template>
@@ -79,8 +81,10 @@
 import axios from "axios";
 import WorkExperienceVue from "@/components/Alumni/WorkExperience.vue";
 export default {
+  props: {
+  },
   components: {
-    WorkExperienceVue
+    WorkExperienceVue,
   },
   data() {
     return {
@@ -90,9 +94,10 @@ export default {
       profile:"" ,
       alumniInfo:{},
       alumniExperiences:[],
+
     };
   },
-  // emits: ['edit'],
+  emits: ['showExperience'],
   methods: {
     async onFileSelected(event){
       this.uploadImage(event.target.files[0]);
@@ -117,9 +122,22 @@ export default {
     },
     isShow() {
       this.$emit('edit', true);
-    }
+    },
+    showExperiences(status) {
+      this.$emit('showExperience', status);
+    },
+    deleteAlumni(alumniId){
+      axios.delete("http://localhost:8000/api/deleteAlumniWork/" + alumniId)
+      .then(response=>{
+        for (let i = 0; i < this.alumniExperiences.length; i++) {
+          if (this.alumniExperiences[i].id == alumniId) {
+            this.alumniExperiences.splice(i, 1);
+          }
+        }
+        console.log(response);
+      })
   },
-  
+  },
  
   created() {
     this.getData();

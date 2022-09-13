@@ -1,23 +1,26 @@
 <template>
   <div>
-    <AlumniProfile @edit="showForm"/>
-    <section v-if="isShow" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
-      <BaseForm @hideForm="hideForm"></BaseForm>
+    <AlumniProfile @edit="showForm" @showExperience="showExperiences"/>
+    <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
+      <BaseForm @hideForm="hideForm" v-if="isShow" />
+      <ExperienceForm v-if="showExperience" type="edit" @hideForm="hideForm"/>
     </section>
   </div>
 </template>
-
 <script>
 import AlumniProfile from "../components/Alumni/AlumniProfile.vue";
 import BaseForm from '../components/Alumni/EditAlumniProfileForm.vue';
+import ExperienceForm from '../components/Alumni/ExperienceForm.vue'
 export default {
   components:{
     AlumniProfile,
     BaseForm,
+    ExperienceForm,
   },
   data() {
     return {
       isShow: false,
+      showExperience: false
     }
   },
   methods:{
@@ -26,6 +29,12 @@ export default {
     },
     hideForm(status) {
       this.isShow = status;
+      this.showExperience = status;
+    },
+    showExperiences() {
+      this.showExperience = true;
+      console.log('hello world');
+      console.log(this.showExperience);
     }
   }
 
