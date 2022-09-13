@@ -9,7 +9,13 @@
       :alumniInfo="alumniInfo"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
-      <EditAlumniProfileForm @hideForm="hideForm" v-if="isShow" />
+      <EditAlumniProfileForm 
+      @hideForm="hideForm" 
+      v-if="isShow" 
+      :alumniData="alumniData"
+      :alumniInfo="alumniInfo"
+      @updateAlumni='updateDataAlumni'
+      />
       <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm" @edit="editExperience"/>
     </section>
   </div>
@@ -77,6 +83,15 @@ export default {
         console.log(this.alumniExperiences)
       });
     },
+    updateDataAlumni(userId,alumniId,user,alumni){
+      axios.put(this.url+"user/"+userId,user).then(()=>{
+        this.getData();
+      })
+      axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
+        this.getData();
+      })
+      this.isShow = false;
+    }
   },
   created() {
     this.getData();

@@ -105,7 +105,7 @@ export default {
       AlumniProfile.append('profile', profile)
       AlumniProfile.append('_method', 'PUT');
         console.log(AlumniProfile);
-        axios.post(this.url+'profile/2', AlumniProfile).then((response)=>{
+        axios.post(this.url+'profile/1', AlumniProfile).then((response)=>{
           console.log(response);
           this.getData();
         });
