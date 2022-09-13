@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('address');
             $table->string('dateOfBirth');
             $table->string('placeOfBirth');
+            $table->string('linkIn')->nullable();
+            $table->string('telegram')->nullable();
             $table->timestamps();
         });
     }
