@@ -15,17 +15,17 @@
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_first_name"  placeholder=" " required v-model="start"/>
+                    <BaseInput type="date" id="floating_first_name"  placeholder=" " required v-model="start_work"/>
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <BaseInput type="date" id="floating_last_name" placeholder=" " v-model="end"/>
+                    <BaseInput type="date" id="floating_last_name" placeholder=" " v-model="end_work"/>
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                 </div>
             </div>
             <div class="p-2 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto" @click="editExperience">
-                    <span v-if="type=='create'">Add</span>
+                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
+                    <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
                     <span v-else-if="type=='edit'">Edit</span>
                 </BaseButton>
                 <BaseButton @click="hideForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
@@ -54,8 +54,8 @@ export default {
         return {
             position:'',
             company:'',
-            start:'',
-            end:'',
+            start_work:'',
+            end_work:'',
         }
     },
 
@@ -64,7 +64,10 @@ export default {
         hideForm() {
             this.$emit('hideForm', false);
         },
-        showDataInForm() {
+        newAlumniExperience(){
+            this.$emit('addAlumniExperience',this.position,this.company,this.start_work,this.end_work);
+        },
+            showDataInForm() {
             this.company = this.experience.company;
             this.position = this.experience.position;
             this.start = this.experience.start_year;

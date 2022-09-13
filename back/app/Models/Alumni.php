@@ -17,7 +17,7 @@ class Alumni extends Model
         'major',
         'address',
         'dateOfBirth',
-        'placeOfBirth'
+        'placeOfBirth',
     ];
     protected $hidden = [
 
