@@ -3,6 +3,7 @@
     <AlumniProfile 
       @edit="showForm" 
       @showExperience="showExperiences" 
+      @deleteExperience="deleteExperience"
       :alumniData="alumniData"
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
@@ -58,6 +59,13 @@ export default {
       })
       console.log('hi i am edit experience------------------------');
       console.log(data);
+    },
+    deleteExperience(id) {
+      axios.delete(this.url+'alumniWork/'+id)
+      .then((response) => {
+        console.log(response.data);
+        this.getData();
+      })
     },
     getData() {
       axios.get(this.url+"alumni/1").then((res) => {

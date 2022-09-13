@@ -51,6 +51,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
+            @click="deleteExperience(workExperience.id)" 
           >
             <fa icon="trash-alt" class="text-red-500" />
           </svg>
@@ -80,18 +81,22 @@ export default {
   props: {
     workExperiences: [],
   },
-  emits: ['edit'],
+  emits: ['edit','deleteExperience'],
   data() {
     return {
       show: false,
     };
   },
-  methods: {
+
+  methods:{
     showForm(experience) {
       this.$emit('edit', true, experience);
+    },
+    deleteExperience(id) {
+      this.$emit('deleteExperience', id);
     }
   }
-};
+}
 </script>
 
 <style ></style>
