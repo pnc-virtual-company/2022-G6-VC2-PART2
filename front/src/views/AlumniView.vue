@@ -3,7 +3,7 @@
     <AlumniProfile @edit="showForm" @showExperience="showExperiences"/>
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <BaseForm @hideForm="hideForm" v-if="isShow" />
-      <ExperienceForm v-if="showExperience" type="edit" @hideForm="hideForm"/>
+      <ExperienceForm v-if="showExperience" :type="type" @hideForm="hideForm" @addAlumniExperience="newAlumniExperience"/>
     </section>
   </div>
 </template>
@@ -21,7 +21,9 @@ export default {
   data() {
     return {
       isShow: false,
-      showExperience: false
+      showExperience: false,
+      type: "",
+      alumniExperience:[]
     }
   },
   methods:{
@@ -32,10 +34,15 @@ export default {
       this.isShow = status;
       this.showExperience = status;
     },
-    showExperiences() {
-      this.showExperience = true;
-      console.log('hello world');
-      console.log(this.showExperience);
+    //
+    showExperiences(status, type) {
+      this.showExperience = status;
+      this.type = type;
+    },
+    //=================== add new alumni experience =================
+    newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
+      this.alumniExperience.push({position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work});
+      console.log(this.alumniExperience);
     }
   }
 

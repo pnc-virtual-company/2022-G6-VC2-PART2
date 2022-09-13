@@ -71,7 +71,7 @@
     <h1 class=" font-bold text-center m-[20px] underline text-[1.5rem] text-[#0062ff]">WORK EXPERIENCE</h1>
     <WorkExperienceVue
       :workExperience = "alumniExperience"
-      @edit="showExperiences"
+      @show="showExperiences"
     />
   </div>
 </template>
@@ -119,8 +119,8 @@ export default {
     isShow() {
       this.$emit('edit', true);
     },
-    showExperiences(status) {
-      this.$emit('showExperience', status);
+    showExperiences(status, type) {
+      this.$emit('showExperience', status, type);
     }
   },
   created() {

@@ -6,7 +6,9 @@
       <div
         class="bg-[#34B3F1] w-[50px] h-[50px] flex justify-center items-center shadow-indigo-500/40 rounded-full"
       >
+      <!--================== option content create form ============= -->
         <svg
+          @click="showForm('create')"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -22,6 +24,7 @@
         </svg>
       </div>
     </div>
+  <!--================== display alumni experience ============= -->
     <div class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
       <div class="w-[83%] ml-[3%]">
         <div>
@@ -42,6 +45,7 @@
         </div>
       </div>
       <div class="w-[15%] flex justify-end">
+      <!--================== option content delete and edit ============= -->
         <svg
           @click="show = !show"
           class="w-6 h-6 mt-5"
@@ -52,12 +56,13 @@
         >
           <fa icon="ellipsis-h" class="text-dark-500" />
         </svg>
-        <!-- Dropdown menu -->
+        <!--=================== Dropdown menu========================= -->
         <ul
           v-if="show"
           class="absolute float-right pa-5 flex text-left mr-10"
           aria-labelledby="dropdownMenuButton1e"
         >
+      <!--==================== delete alumni experience ================= -->
         <li class="p-3 rounded-full shadow-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +75,7 @@
             <fa icon="trash-alt" class="text-red-500" />
           </svg>
         </li>
+      <!--==================== Edit alumni experience ================= -->
         <li class="p-3 rounded-full ml-3 shadow-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +84,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm"
+            @click="showForm('edit')"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>
@@ -94,16 +100,17 @@ export default {
   props: {
     workExperience: Object,
   },
-  emits: ['edit'],
+  emits: ['show'],
   data() {
     return {
       show: false,
     };
   },
   methods: {
-    showForm() {
-      this.$emit('edit', true);
-    }
+  //===================== show edit form functions =================
+    showForm(type) {
+      this.$emit('show', true, type);
+    },
   }
 };
 </script>
