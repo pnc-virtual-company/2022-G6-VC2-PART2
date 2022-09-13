@@ -34,7 +34,6 @@ export default {
       profile:"" ,
       alumniData: {},
       alumniInfo: {}, 
-      alumniExperiences: [],
       type: "",
     }
   },
@@ -52,9 +51,14 @@ export default {
       this.experience = experience;
       this.type = type;
     },
+    //=================== add new experience =================
     newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
-      this.alumniExperience.push({position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work});
-      console.log(this.alumniExperience);
+      let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:1};
+      console.log(alumniExperience);
+      axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience).then(()=>{
+        this.getData();
+        this.hideForm();
+      })
     },
     editExperience(data) {
       axios.put(this.url+'alumniWork/'+data.id, data)

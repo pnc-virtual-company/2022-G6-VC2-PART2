@@ -6,20 +6,20 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position">
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company">
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year">
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                 </div>
             </div>
@@ -52,8 +52,8 @@ export default {
         return {
             position:'',
             company:'',
-            start_work:'',
-            end_work:'',
+            start_year:'',
+            end_year:'',
         }
     },
 
@@ -73,7 +73,7 @@ export default {
         },
         //=================== add new experience emit =================
         newAlumniExperience(){
-            this.$emit('addAlumniExperience',this.position,this.company,this.start_work,this.end_work);
+            this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year);
         },
         //=================== edit experience emit =================
         editExperience(){
