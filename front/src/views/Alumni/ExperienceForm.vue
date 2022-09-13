@@ -64,10 +64,8 @@ export default {
         hideForm() {
             this.$emit('hideForm', false);
         },
-        newAlumniExperience(){
-            this.$emit('addAlumniExperience',this.position,this.company,this.start_work,this.end_work);
-        },
-            showDataInForm() {
+        //=================== show form  =================
+        showDataInForm() {
             this.company = this.experience.company;
             this.position = this.experience.position;
             this.start = this.experience.start_year;
@@ -75,6 +73,11 @@ export default {
             console.log('hideForm');
             console.log(this.company);
         },
+        //=================== add new experience emit =================
+        newAlumniExperience(){
+            this.$emit('addAlumniExperience',this.position,this.company,this.start_work,this.end_work);
+        },
+        //=================== edit experience emit =================
         editExperience(){
             let experience = {id: this.experience.id, alumni_id: this.experience.aumni_id, company: this.company, start_year: this.start_year, end_year: this.end_year}
             this.$emit('edit', experience);

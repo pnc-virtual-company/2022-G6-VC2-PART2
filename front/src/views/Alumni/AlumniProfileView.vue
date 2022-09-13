@@ -10,7 +10,7 @@
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm @hideForm="hideForm" v-if="isShow" />
-      <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm" @edit="editExperience"/>
+      <ExperienceForm v-if="showExperience" :type="type" @hideForm="hideForm" @addAlumniExperience="newAlumniExperience"/>
     </section>
   </div>
 </template>
@@ -51,8 +51,10 @@ export default {
       this.showExperience = status;
       this.experience = experience;
       this.type = type;
-      console.log('hello world');
-      console.log(experience);
+    },
+    newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
+      this.alumniExperience.push({position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work});
+      console.log(this.alumniExperience);
     },
     editExperience(data) {
       axios.put(this.url+'alumniWork/'+data.id, data)
