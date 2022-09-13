@@ -16,7 +16,13 @@
       :alumniInfo="alumniInfo"
       @updateAlumni='updateDataAlumni'
       />
-      <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm" @edit="editExperience"/>
+      <ExperienceForm 
+        :experience="experience" 
+        v-if="showExperience" :type="type" 
+        @hideForm="hideForm" 
+        @edit="editExperience"
+        @addAlumniExperience="newAlumniExperience"
+      />
     </section>
   </div>
 </template>
@@ -61,7 +67,9 @@
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
         let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:1};
         console.log(alumniExperience);
-        axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience).then(()=>{
+        axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
+        .then((response) => {
+          console.log(response.data);
           this.getData();
           this.hideForm();
         })
@@ -106,8 +114,4 @@
       this.getData();
     },
   }
-  </script>
-
-<style>
-
-</style>
+</script>
