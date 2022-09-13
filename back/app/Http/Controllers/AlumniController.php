@@ -37,7 +37,7 @@ class AlumniController extends Controller
         $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
         $alumni ->batch = $request ->batch;
-        $alumni ->major = $request ->major;
+        $alumni ->major = $request ->major;       
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
         $alumni->save();
