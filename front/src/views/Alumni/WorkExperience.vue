@@ -67,7 +67,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-5 h-5"
-            @click="showForm('edit', workExperiences)"
+            @click="showForm('edit', workExperience)"
           >
             <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
           </svg>

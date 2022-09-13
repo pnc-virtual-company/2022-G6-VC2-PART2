@@ -58,9 +58,8 @@ export default {
       axios.put(this.url+'alumniWork/'+data.id, data)
       .then((response) => {
         console.log(response.data);
+        this.getData();
       })
-      console.log('hi i am edit experience------------------------');
-      console.log(data);
     },
     deleteExperience(id) {
       axios.delete(this.url+'alumniWork/'+id)
