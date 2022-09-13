@@ -6,7 +6,6 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <BaseInput type="text" id="floating_address"  placeholder=" " required @inputData="myPosition"/>
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
             </div>
             <div class="relative z-0 mb-6 w-full group">
