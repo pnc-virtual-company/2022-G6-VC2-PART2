@@ -22,8 +22,9 @@
                 </div>
                 <div class="w-[50%] box-border mt-[-0.7rem] mr-[-5rem]">
                     <h3 class="text-xl font-medium mb-3 mt-7">Current Work </h3>
-                    <p class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />Front end developer</p>
-                    <p class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />Surcemax Asia</p>
+                    <p v-if="alumniExperiences.length !=0" class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].position}}</p>
+                    <p v-if="alumniExperiences.length !=0" class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].company}}</p>
+                    <p v-else class="text-[1rem] text-[#0062ff]">Don't have work experience yet !</p>
                 </div>
             </div>
         </div>
@@ -47,7 +48,7 @@ export default {
   },
   props: {
     alumniInfo: Object,
-    alumniExperiences: [],      
+    alumniExperiences: Array,      
     alumniData: Object,
   },
   data() {

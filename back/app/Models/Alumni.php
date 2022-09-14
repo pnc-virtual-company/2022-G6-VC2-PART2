@@ -18,6 +18,7 @@ class Alumni extends Model
         'address',
         'dateOfBirth',
         'placeOfBirth',
+        'telegram'
     ];
     protected $hidden = [
 
