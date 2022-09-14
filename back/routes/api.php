@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +32,8 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 //===================skilll alumni api =================
 Route::apiResource('/alumniSkill',SkillController::class);
-
+// ==================company profile=====================
+Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
 
 
 
