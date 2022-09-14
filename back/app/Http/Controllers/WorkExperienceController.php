@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Controllers\UplaodImageController;
+
 use App\Models\WorkExperience;
 use Illuminate\Http\Request;
 class WorkExperienceController extends Controller
@@ -50,5 +52,13 @@ class WorkExperienceController extends Controller
         } else {
             return response()->json(['message' => 'AlumniWork cannot delete'], 404);
         }
+    }
+
+    //================== upload profile ======================
+    public function uploadCompanyProfile(Request $request, $id){
+        $workExperience = WorkExperience::findOrFail($id);
+        $workExperience -> profile = (new UplaodImageController)->uploadProfile($request);
+        $workExperience->save();
+        return response()->json(['sms' => $workExperience]);
     }
 }
