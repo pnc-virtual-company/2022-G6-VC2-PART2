@@ -30,6 +30,9 @@
         </div>
     </div>
   </div>
+  <AlumniSkil 
+  :skills="alumniSkill"
+  />
   <div class="py-5">
     <WorkExperience 
       :workExperiences="alumniExperiences"
@@ -42,14 +45,18 @@
 <script>
 import axios from "axios";
 import WorkExperience from "./WorkExperience.vue";
+import AlumniSkil from "./AlumniSkill.vue";
 export default {
   components: {
     WorkExperience,
+    AlumniSkil,
   },
+  //================= porps data from WorkExperience =================
   props: {
     alumniInfo: Object,
     alumniExperiences: Array,      
     alumniData: Object,
+    alumniSkill:Array,
   },
   data() {
     return {
@@ -62,6 +69,7 @@ export default {
     async onFileSelected(event){
       this.uploadImage(event.target.files[0]);
     },
+    //===================== upload alumni profile ===================
     uploadImage(profile){
       const AlumniProfile = new FormData();
       AlumniProfile.append('profile', profile)
@@ -73,9 +81,11 @@ export default {
     isShow() {
       this.$emit('edit', true);
     },
+    //===================== show alumni experience emit =================
     showExperiences(status, type, experience) {
       this.$emit('showExperience', status, type, experience);
     },
+    //===================== delete alumni experience emit =================
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },

@@ -7,6 +7,7 @@
       :alumniData="alumniData"
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
+      :alumniSkill="alumniSkill"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm 
@@ -47,6 +48,7 @@
         profile:"" ,
         alumniData: {},
         alumniInfo: {}, 
+        alumniSkill:{},
         type: "",
       }
     },
@@ -91,13 +93,14 @@
           this.getData();
         })
       },
-      //=================== get  alumni experience ===================
+      //=================== get alumni experience ===================
       getData() {
         axios.get(this.url+"alumni/1").then((res) => {
           this.alumniData = res.data;
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
-          console.log(this.alumniExperiences)
+          this.alumniSkill=res.data.skill
+          console.log(this.alumniSkill)
         });
       },
       //=================== update   alumni general information ===================
