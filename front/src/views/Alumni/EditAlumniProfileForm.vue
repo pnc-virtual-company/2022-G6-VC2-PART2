@@ -44,14 +44,25 @@
                     <BaseLabel for="floating_generation_name"><fa icon="users" class="text-sky-500" /> Generation</BaseLabel>
                 </div>
             </div>
-            <div class="relative z-0 mb-6 w-full group">
-                <input 
-                    v-model="address"
-                    type="text" 
-                    placeholder=" " 
-                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
-                >
-                <BaseLabel for="floating_address"><fa icon="home" class="text-sky-500" /> Address</BaseLabel>
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 mb-6 w-full group">
+                    <input 
+                        v-model="address"
+                        type="text" 
+                        placeholder=" " 
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+                    >
+                    <BaseLabel for="floating_address"><fa icon="home" class="text-sky-500" /> Address</BaseLabel>
+                </div>
+                <div class="relative z-0 mb-6 w-full group">
+                    <input 
+                        v-model="telegram"
+                        type="text" 
+                        placeholder=" " 
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
+                    >
+                    <BaseLabel for="floating_address"><fa icon="paper-plane" class="text-sky-500" /> Telegram</BaseLabel>
+                </div>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 mb-6 w-full group">
@@ -106,6 +117,7 @@ export default {
             address:this.alumniData.address,
             userId:this.alumniInfo.id,
             alumniId:this.alumniData.id,
+            telegram:this.alumniData.telegram,
         }
     },
     methods: {
@@ -114,7 +126,7 @@ export default {
         },
         updateData(){
             let userData ={firstName:this.firstName,lastName:this.lastName,email:this.email}
-            let alumniData ={major:this.major,batch:this.batch,phone:this.phone,address:this.address}
+            let alumniData ={major:this.major,batch:this.batch,phone:this.phone,address:this.address,telegram:this.telegram}
             this.$emit('updateAlumni',this.userId,this.alumniId,userData,alumniData);
         }
     }
