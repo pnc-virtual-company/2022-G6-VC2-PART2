@@ -3,11 +3,8 @@
     <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://images.template.net/wp-content/uploads/2014/11/Natural-Facebook-Cover-Photo.jpg" alt="">
     <div class="w-full m-auto text-center px-5 py-5 mt-[-20vh]">
         <div>
-            <div class="rounded-full w-[25vh] h-[25vh] border-4 border-[#34B3F1]">
-                <img
-                    class="w-full rounded-full w-[25vh] h-[25vh] "
-                    :src="alumniData.profile"
-                />    
+            <div class="rounded-full w-[25vh] h-[25vh]">
+                <img class="w-full rounded-full w-[25vh] h-[25vh] border-2 border-[#000]" :src="alumniData.profile"/>    
                 <input type="file" @change="onFileSelected" hidden id="imageFile">
                 <label for="imageFile">
                   <fa icon="camera" class="bg-[#fff] cursor-pointer absolute  text-xl p-2 rounded-full mt-[-2rem] ml-[2rem]"/>
