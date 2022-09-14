@@ -26,6 +26,11 @@
         @addAlumniExperience="newAlumniExperience"
       />
     </section>
+    <div class="py-5">
+    <StudyBackground
+      :studyBackgrounds='studyBackgrounds'
+    />
+  </div>
   </div>
 </template>
 <script>
@@ -33,11 +38,13 @@
   import AlumniProfile from "../Alumni/AlumniProfile.vue";
   import EditAlumniProfileForm from '../Alumni/EditAlumniProfileForm.vue';
   import ExperienceForm from '../Alumni/ExperienceForm.vue'
+  import StudyBackground from "./StudyBackgroundView.vue"
   export default {
     components:{
       AlumniProfile,
       EditAlumniProfileForm,
       ExperienceForm,
+      StudyBackground,
     },
     data() {
       return {
@@ -50,6 +57,7 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        studyBackgrounds:[],
       }
     },
   
@@ -100,7 +108,7 @@
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
           this.alumniSkill=res.data.skill
-          console.log(this.alumniSkill)
+          this.studyBackgrounds=res.data.study_background
         });
       },
       //=================== update   alumni general information ===================
@@ -115,7 +123,7 @@
           this.getData();
         })
         this.isShow = false;
-    }
+      },
     },
     created() {
       this.getData();
