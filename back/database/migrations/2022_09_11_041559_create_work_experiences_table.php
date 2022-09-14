@@ -18,9 +18,10 @@ return new class extends Migration
             $table->foreignId('alumni_id')->constrained()->onDelete('cascade');
             $table->string('company');
             $table->string('position');
+            $table->string('profile')->nullable();
             $table->string('start_year');
             $table->string('end_year');
-            $table->string('company_link');
+            $table->string('company_link')->nullable();
             $table->timestamps();
         });
     }

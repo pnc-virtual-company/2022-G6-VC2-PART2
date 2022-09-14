@@ -87,6 +87,7 @@ export default {
             this.company = this.experience.company;
             this.start_year = this.experience.start_year;
             this.end_year = this.experience.end_year;
+            this.company_link= this.experience.company_link;
             console.log('hideForm');
             console.log(this.company);
         },

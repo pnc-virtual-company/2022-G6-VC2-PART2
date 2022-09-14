@@ -8,6 +8,7 @@
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
       :alumniSkill="alumniSkill"
+      @showSkillForm="toShowSkillForm"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm 
@@ -26,7 +27,10 @@
         @addAlumniExperience="newAlumniExperience"
       />
     </section>
-    <div class="py-5">
+    <section v-if="showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <SkillForm @hidFormSkill="formHiden" @addSkill="newSkill"/>
+  </section>
+  <div class="py-5">
     <StudyBackground
       :studyBackgrounds='studyBackgrounds'
     />
@@ -37,13 +41,15 @@
   import axios from "axios"
   import AlumniProfile from "../Alumni/AlumniProfile.vue";
   import EditAlumniProfileForm from '../Alumni/EditAlumniProfileForm.vue';
-  import ExperienceForm from '../Alumni/ExperienceForm.vue'
+  import ExperienceForm from '../Alumni/ExperienceForm.vue';
+  import SkillForm from "./SkillForm.vue"
   import StudyBackground from "./StudyBackgroundView.vue"
   export default {
     components:{
       AlumniProfile,
       EditAlumniProfileForm,
       ExperienceForm,
+      SkillForm,
       StudyBackground,
     },
     data() {
@@ -57,6 +63,7 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        showSkillForm:false,
         studyBackgrounds:[],
       }
     },
@@ -123,8 +130,25 @@
           this.getData();
         })
         this.isShow = false;
-      },
     },
+    //=================== hide skill form =================
+    formHiden(value){
+        this.showSkillForm=value;
+    },
+    //=================== show skill form =================
+    toShowSkillForm(value){
+        this.showSkillForm=value;
+    },
+    //=================== add new skill =================
+    newSkill(newSkill){
+        let alumniSkills = {title:newSkill, alumni_id:1};
+        axios.post('http://127.0.0.1:8000/api/alumniSkill',alumniSkills)
+        .then(()=>{
+          this.formHiden(false);
+          this.getData();
+        })
+    }
+  },
     created() {
       this.getData();
     },
