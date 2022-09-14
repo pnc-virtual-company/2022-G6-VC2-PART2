@@ -84,7 +84,7 @@ export default {
             console.log('hideForm');
             console.log(this.company);
         },
-        //=================== add new experience emit =================
+        //=================== add new experience emit  and validate create alumni experience=================
         newAlumniExperience(){
             if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
                 this.hideForm();
@@ -121,8 +121,28 @@ export default {
                 end_year: this.end_year,
                 company_link: this.company_link,
             }
-            this.$emit('edit', experience);
-            this.hideForm();
+            //////validate edit alumni experience/////
+            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
+                this.hideForm();
+                this.$emit('edit',experience);
+            } 
+            else {
+                if(this.position == ''){
+                    this.isNoPostion = !this.isNoPostion;
+                }
+                if(this.company == ''){
+                    this.isNoCompany = !this.isNoCompany;
+                }
+                if(this.start_year == ''){
+                    this.isNoStartYear = !this.isNoStartYear;
+                }
+                if(this.end_year == ''){
+                    this.isNoEndYear = !this.isNoEndYear;
+                }
+                if(this.company_link == ''){
+                    this.isNoLinkCompany = !this.isNoLinkCompany;
+                }
+            }
         },
     },
     created(){
