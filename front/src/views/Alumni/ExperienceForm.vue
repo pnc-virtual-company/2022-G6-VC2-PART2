@@ -19,11 +19,11 @@
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year" :min="currentDate">
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year" :min="start_year">
+                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year">
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                 </div>
             </div>
@@ -110,13 +110,6 @@ export default {
             this.$emit('edit', experience);
             this.hideForm();
         },
-    },
-    mounted(){
-        /**
-         * disamble calender previouse date
-         */
-        this.currentDate=this.convertDate(new Date())
-        console.log(this.currentDate)
     },
     created(){
         if (this.type   == 'edit'){
