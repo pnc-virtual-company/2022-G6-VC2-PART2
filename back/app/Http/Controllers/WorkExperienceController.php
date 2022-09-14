@@ -34,7 +34,6 @@ class WorkExperienceController extends Controller
         $workExperience -> alumni_id = $request->alumni_id;
         $workExperience ->company = $request ->company;
         $workExperience ->position = $request ->position;
-        $workExperience ->position = $request ->position;
         $workExperience ->start_year = $request ->start_year;
         $workExperience ->end_year = $request ->end_year;
         $workExperience->save();
