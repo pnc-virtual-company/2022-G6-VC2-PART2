@@ -7,7 +7,7 @@ class AlumniController extends Controller
     //================== show all alumnis ======================
     public function index()
     {
-        return Alumni::with('user','WorkExperience','StudyBackground')->get();
+        return Alumni::with('user','WorkExperience', 'Skill','StudyBackground')->get();
     }
    //================== add new alumni ======================
     public function store(Request $request)
@@ -16,6 +16,7 @@ class AlumniController extends Controller
         $alumni -> user_id = $request->user_id;
         $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
+        $alumni ->telegram = $request ->telegram;
         $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
         $alumni -> address = $request ->address;
@@ -27,7 +28,7 @@ class AlumniController extends Controller
    //================== show one alumni ======================
     public function show($id)
     {
-        return Alumni::with('user','WorkExperience','StudyBackground')->findOrFail($id);
+        return Alumni::with('user','WorkExperience', 'Skill','StudyBackground')->findOrFail($id);
     }
    //================== Alumni update ======================
     public function update(Request $request, $id)
@@ -35,6 +36,7 @@ class AlumniController extends Controller
         $alumni= Alumni::find($id);
         $alumni ->phone = $request ->phone;
         $alumni ->batch = $request ->batch;
+        $alumni ->telegram = $request ->telegram;
         $alumni ->major = $request ->major;       
         $alumni -> address = $request ->address;
         $alumni->save();
