@@ -18,8 +18,6 @@ class Alumni extends Model
         'address',
         'dateOfBirth',
         'placeOfBirth',
-        'linkIn',
-        'telegram'
     ];
     protected $hidden = [
 
@@ -34,6 +32,6 @@ class Alumni extends Model
 
     public function WorkExperience()
     {
-        return $this -> hasOne(WorkExperience::class);
+        return $this -> hasMany(WorkExperience::class);
     }
 }

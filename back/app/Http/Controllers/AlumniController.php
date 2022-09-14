@@ -32,16 +32,13 @@ class AlumniController extends Controller
         return Alumni::with('user','WorkExperience')->findOrFail($id);
     }
    //================== Alumni update ======================
-    public function update(Request $request, $alumni)
+    public function update(Request $request, $id)
     {
-        $alumni= Alumni::find($alumni);
-        $alumni -> user_id = $request->user_id;
-        $alumni -> gender = $request->gender;
+        $alumni= Alumni::find($id);
         $alumni ->phone = $request ->phone;
         $alumni ->batch = $request ->batch;
-        $alumni ->major = $request ->major;
+        $alumni ->major = $request ->major;       
         $alumni -> address = $request ->address;
-        $alumni ->dateOfBirth = $request ->dateOfBirth;
         $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }

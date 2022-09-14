@@ -29,9 +29,6 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 //================== work experience api ===============
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 
-Route::put('/updateAlumniWork/{id}',[WorkExperienceController::class, 'updateAlumniWork']);
-
-Route::delete('/deleteAlumniWork/{id}',[WorkExperienceController::class,'destroyAlumniWork']);
 
 
 
