@@ -9,7 +9,7 @@
     </div>
     <div class="w-[100%] m-auto">
         <div class="w-[100%] flex flex-wrap">
-            <h3 class="bg-[#ddd] p-[5px] rounded-full m-[5px]" v-for="(skill,index) of skills" :key="index">{{skill.title}}</h3>
+            <h3 class="bg-[#ddd] p-[5px] rounded-full m-[5px] px-5 py-1 capitalize" v-for="(skill,index) of skills" :key="index">{{skill.title}}</h3>
         </div>
     </div>
   </div>
