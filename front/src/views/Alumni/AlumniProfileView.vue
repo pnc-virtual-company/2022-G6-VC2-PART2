@@ -76,7 +76,7 @@
           this.getData();
         })
       },
-      //=================== get  alumni experience ===================
+      //=================== get alumni experience ===================
       getData() {
         axios.get(this.url+"alumni/1").then((res) => {
           this.alumniData = res.data;

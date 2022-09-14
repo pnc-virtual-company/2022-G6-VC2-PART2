@@ -25,6 +25,7 @@
             </label>
           </div>
           <input type="file" @change="onFileSelected" hidden id="imageFile">
+        <!--===================== alumni profile info ====================-->
           <strong class="text-[1.3rem]">{{alumniInfo.firstName + ' '+alumniInfo.lastName}}</strong>
         </div>
         <div class="detail flex justify-between mt-5 text-start w-[70%]">
@@ -52,6 +53,7 @@
           </div>
         </div>
       </div>
+      <!--===================== alumni contact ====================-->
       <div
         class="socail flex justify-evenly items-center ml-[0%] bg-teal-200 w-[100%] h-[10vh] rounded-b-lg">
         <div>
@@ -84,6 +86,7 @@ export default {
   components: {
     WorkExperienceVue,
   },
+  //================= porps data from WorkExperience =================
   props: {
     alumniInfo: Object,
     alumniExperiences: [],      
@@ -100,6 +103,7 @@ export default {
     async onFileSelected(event){
       this.uploadImage(event.target.files[0]);
     },
+    //===================== upload alumni profile ===================
     uploadImage(profile){
       const AlumniProfile = new FormData();
       AlumniProfile.append('profile', profile)
@@ -113,9 +117,11 @@ export default {
     isShow() {
       this.$emit('edit', true);
     },
+    //===================== show alumni experience emit =================
     showExperiences(status, type, experience) {
       this.$emit('showExperience', status, type, experience);
     },
+    //===================== delete alumni experience emit =================
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },
