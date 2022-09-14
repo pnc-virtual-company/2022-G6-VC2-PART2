@@ -1,78 +1,28 @@
 <template>
-  <div
-    class="w-[75%] m-auto shadow-2xl border-[1px] border-slate-200 p-[30px] cursor-pointer bg-[#ffffffaf] mb-[20px] rounded-md"
-  >
-    <div class="flex justify-end">
-      <div
-        class="bg-[#34B3F1] w-[50px] h-[50px] flex justify-center items-center shadow-indigo-500/40 rounded-full"
-      >
+  <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl">
+    <h1 class="font-bold text-center text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
+    <div class="m-auto w-[100%] flex justify-end">
       <!--================== option content create form ============= -->
-        <svg
-          @click="showForm('create')"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-10 h-10 text-[#fff]"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 4.5v15m7.5-7.5h-15"
-          />
-        </svg>
-      </div>
+      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer" @click="showForm('create')"/>
     </div>
-    <div v-for:="workExperience in workExperiences" class="border-b-[2px] border-gray-400 p-[10px] flex justify-center">
-      <div class="w-[83%] ml-[3%]">
-        <div>
-          <p class="text-[1.5rem]">
-            <strong>Position : </strong>{{ workExperience.position }}
-          </p>
-          <div class="ml-[8%]">
-            <p class="mt-[15px] text-[1.2rem]">
-              <strong>Company  : </strong>{{ workExperience.company }}
-            </p>
-            <p class="mt-[14px] text-[1.2rem]">
-              <strong>Start work : </strong>{{ workExperience.start_year }}
-            </p>
-            <p class="mt-[14px] text-[1.2rem]">
-              <strong>End work : </strong>{{ workExperience.end_year }}
-            </p>
+    <div class="m-auto w-[100%]" v-for:="workExperience in workExperiences">
+      <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between">
+        <div class="flex items-center justify-start">
+          <img class="rounded-full w-[5rem] mr-3 border border-[#ddd]" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/81991fd67e25ba7dbdb6" alt="">
+          <div>
+            <p class="font-medium	text-lg">{{workExperience.company}}</p>
+            <p class="">{{workExperience.start_year}} - {{workExperience.end_year}}</p>
           </div>
         </div>
-      </div>
-      <div class="w-[15%] flex justify-end">
-        <ul class="absolute float-right pa-5 flex text-left mr-10">
-        <li class="p-3 rounded-full shadow-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
-             @click="deleteExperience(workExperience.id)" 
-          >
-            <fa icon="trash-alt" class="text-red-500" />
-          </svg>
-        </li>
-      <!--==================== Edit alumni experience ================= -->
-        <li class="p-3 rounded-full ml-3 shadow-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
-            @click="showForm('edit', workExperience)"
-          >
-            <fa icon="pen" class="text-[#34B3F1] text-dark-500 m-5" />
-          </svg>
-        </li>
-        </ul>
+        <div>
+          <p class="font-medium	text-lg">{{workExperience.position}}</p>
+          <p>4 years</p>
+        </div>
+        <div>
+            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" @click="deleteExperience(workExperience.id)"/>
+            <!--==================== Edit alumni experience ================= -->
+            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.4rem] p-3 rounded-full ml-3 shadow-lg bg-[#ddd]" @click="showForm('edit', workExperience)" />
+        </div>
       </div>
     </div>
   </div>
@@ -115,5 +65,3 @@ export default {
   },
   }
 </script>
-
-<style ></style>

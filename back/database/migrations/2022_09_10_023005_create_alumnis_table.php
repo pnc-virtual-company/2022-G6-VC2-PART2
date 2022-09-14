@@ -18,14 +18,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('gender');
             $table->string('phone');
+            $table->string('telegram');
             $table->string('profile')->nullable();
             $table->string('batch');
             $table->string('major');
             $table->string('address');
-            $table->string('dateOfBirth');
-            $table->string('placeOfBirth');
-            $table->string('linkIn')->nullable();
-            $table->string('telegram')->nullable();
+            $table->string('dateOfBirth')->nullable();
+            $table->string('placeOfBirth')->nullable();
             $table->timestamps();
         });
     }

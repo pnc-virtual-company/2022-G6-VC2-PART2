@@ -33,11 +33,10 @@
         </template>
     </BaseForm>
 </template>
-
 <script>
-import BaseForm from '../../components/widget/BaseForm.vue'
-import BaseButton from '../../components/widget/BaseButton.vue'
-import BaseLabel from '../../components/widget/BaseSpanLabel.vue'
+import BaseForm from '../../components/widget/BaseForm.vue';
+import BaseButton from '../../components/widget/BaseButton.vue';
+import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
 export default {
     components: {
         BaseForm,
@@ -56,7 +55,7 @@ export default {
             end_year:''
         }
     },
-    emits: ['hideForm', 'edit'],
+    emits: ['hideForm', 'edit', 'addAlumniExperience'],
     methods: {
         hideForm() {
             this.$emit('hideForm', false);
@@ -95,5 +94,3 @@ export default {
     }
 }
 </script>
-<style>
-</style>
