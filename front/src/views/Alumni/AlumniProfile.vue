@@ -5,7 +5,7 @@
         <div>
             <div class="rounded-full w-[25vh] h-[25vh] border-4 border-[#34B3F1]">
                 <img
-                    class="w-full rounded-full w-[25vh] h-[25vh] "
+                    class="w-full rounded-full h-[25vh] "
                     :src="alumniData.profile"
                 />    
                 <input type="file" @change="onFileSelected" hidden id="imageFile">
