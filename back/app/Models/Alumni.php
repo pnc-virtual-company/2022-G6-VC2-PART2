@@ -34,4 +34,9 @@ class Alumni extends Model
     {
         return $this -> hasMany(WorkExperience::class);
     }
+
+    public function StudyBackground()
+    {
+        return $this -> hasMany(StudyBackground::class);
+    }
 }

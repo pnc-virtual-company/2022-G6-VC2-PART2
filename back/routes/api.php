@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Http\Controllers\StudyBackgroundController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,5 +31,8 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 
 
+//================== work experience api ===============
+Route::apiResource('/studyBackground',StudyBackgroundController::class);
 
-
+//================== upload profile api ===============
+Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
