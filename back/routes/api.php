@@ -34,7 +34,7 @@ Route::apiResource('/alumniWork',WorkExperienceController::class);
 Route::apiResource('/alumniSkill',SkillController::class);
 
 
-//================== work experience api ===============
+//================== study background api ===============
 Route::apiResource('/studyBackground',StudyBackgroundController::class);
 
 //================== upload profile api ===============
