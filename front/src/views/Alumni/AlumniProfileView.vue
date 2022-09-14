@@ -76,7 +76,7 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/2'+data.id, data)
+        axios.put(this.url+'alumniWork/1'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
