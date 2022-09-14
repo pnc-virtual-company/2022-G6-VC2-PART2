@@ -4,7 +4,7 @@
     <div class="w-full m-auto text-center px-5 py-5 mt-[-20vh]">
         <div>
             <div class="rounded-full w-[25vh] h-[25vh]">
-                <img class="w-full rounded-full w-[25vh] h-[25vh] border-2 border-[#000]" :src="alumniData.profile"/>    
+                <img class="w-full rounded-full  h-[25vh] border-2 border-[#000]" :src="alumniData.profile"/>    
                 <input type="file" @change="onFileSelected" hidden id="imageFile">
                 <label for="imageFile">
                   <fa icon="camera" class="bg-[#fff] cursor-pointer absolute  text-xl p-2 rounded-full mt-[-2rem] ml-[2rem]"/>
