@@ -69,15 +69,6 @@ export default {
           window.location.reload();
         });
     },
-    getData() {
-        console.log()
-        // axios.get(this.url+"alumni/1").then((res) => {
-        //   this.alumniData = res.data;
-        //   this.alumniInfo=res.data.user
-        //   this.alumniExperiences=res.data.work_experience
-        //   console.log(this.alumniExperiences)
-        // });
-      },
     isShow() {
       this.$emit('edit', true);
     },
