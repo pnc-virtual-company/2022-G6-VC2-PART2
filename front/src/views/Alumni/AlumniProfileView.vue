@@ -65,7 +65,7 @@
       },
       //=================== add new experience ===================
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
-        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:2};
+        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1};
         console.log(alumniExperience);
         axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
         .then((response) => {
