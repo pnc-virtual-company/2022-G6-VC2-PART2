@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\StudyBackgroundController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,5 +34,8 @@ Route::apiResource('/alumniWork',WorkExperienceController::class);
 Route::apiResource('/alumniSkill',SkillController::class);
 
 
+//================== study background api ===============
+Route::apiResource('/studyBackground',StudyBackgroundController::class);
 
-
+//================== upload profile api ===============
+Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);

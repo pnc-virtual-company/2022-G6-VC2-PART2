@@ -38,4 +38,9 @@ class Alumni extends Model
     {
         return $this -> hasMany(Skill::class);
     }
+
+    public function StudyBackground()
+    {
+        return $this -> hasMany(StudyBackground::class);
+    }
 }
