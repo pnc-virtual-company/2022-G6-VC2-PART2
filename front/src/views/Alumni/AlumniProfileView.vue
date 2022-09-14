@@ -9,8 +9,20 @@
       :alumniInfo="alumniInfo"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
-      <EditAlumniProfileForm @hideForm="hideForm" v-if="isShow" />
-      <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm" @edit="editExperience" @addAlumniExperience="newAlumniExperience"/>
+      <EditAlumniProfileForm 
+      @hideForm="hideForm" 
+      v-if="isShow" 
+      :alumniData="alumniData"
+      :alumniInfo="alumniInfo"
+      @updateAlumni='updateDataAlumni'
+      />
+      <ExperienceForm 
+        :experience="experience" 
+        v-if="showExperience" :type="type" 
+        @hideForm="hideForm" 
+        @edit="editExperience"
+        @addAlumniExperience="newAlumniExperience"
+      />
     </section>
   </div>
 </template>
@@ -55,14 +67,16 @@
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
         let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:1};
         console.log(alumniExperience);
-        axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience).then(()=>{
+        axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
+        .then((response) => {
+          console.log(response.data);
           this.getData();
           this.hideForm();
         })
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/'+data.id, data)
+        axios.put(this.url+'alumniWork/2'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -85,13 +99,22 @@
           console.log(this.alumniExperiences)
         });
       },
+      //=================== update   alumni general information ===================
+      updateDataAlumni(userId,alumniId,user,alumni){
+        console.log(alumni)
+        axios.put(this.url+"user/"+userId,user).then(()=>{
+          this.getData();
+        }).catch((err)=>{
+          console.log(err)
+        })
+        axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
+          this.getData();
+        })
+        this.isShow = false;
+    }
     },
     created() {
       this.getData();
     },
   }
-  </script>
-
-<style>
-
-</style>
+</script>

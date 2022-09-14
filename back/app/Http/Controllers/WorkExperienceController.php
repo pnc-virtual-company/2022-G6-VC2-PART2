@@ -1,28 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\WorkExperience;
 use Illuminate\Http\Request;
-
 class WorkExperienceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //===================== show all alumni work experience =================
     public function index()
     {
         return WorkExperience::with('alumni')->get();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //===================== add alumni work experience =================
     public function store(Request $request)
     {
         $work = new WorkExperience();
@@ -34,27 +21,12 @@ class WorkExperienceController extends Controller
         $work->save();
         return response()->json(['sms'=>'Created succefully!']);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\WorkExperience  $workExperience
-     * @return \Illuminate\Http\Response
-     */
+   //===================== show one alumni work experience =================
     public function show($id)
     {
 
-
-
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\WorkExperience  $workExperience
-     * @return \Illuminate\Http\Response
-     */
+  //===================== update alumni work experience =================
     public function update(Request $request, $id)
     {
         //
@@ -68,14 +40,7 @@ class WorkExperienceController extends Controller
         $workExperience->save();
         return response()->json(['sms'=> 'AlumniWork Update Successfully!', 'data' => $workExperience], 200);
     }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WorkExperience  $workExperience
-     * @return \Illuminate\Http\Response
-     */
+    //===================== delete alumni work experience =================
     public function destroy($id)
     {
         $iSDelete = WorkExperience::destroy($id);
@@ -84,6 +49,5 @@ class WorkExperienceController extends Controller
         } else {
             return response()->json(['message' => 'AlumniWork cannot delete'], 404);
         }
-       
     }
 }

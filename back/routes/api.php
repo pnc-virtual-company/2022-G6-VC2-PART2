@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
+use App\Http\Controllers\SkillController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +29,8 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 
 //================== work experience api ===============
 Route::apiResource('/alumniWork',WorkExperienceController::class);
+//===================skilll alumni api =================
+Route::apiResource('/alumniSkill',SkillController::class);
 
 
 
