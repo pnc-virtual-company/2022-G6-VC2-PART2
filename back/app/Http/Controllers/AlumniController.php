@@ -22,6 +22,7 @@ class AlumniController extends Controller
         $alumni -> address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
         $alumni ->placeOfBirth = $request ->placeOfBirth;
+        $alumni ->telegram = $request ->telegram;
         $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }

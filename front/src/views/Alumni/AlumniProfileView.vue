@@ -7,6 +7,7 @@
       :alumniData="alumniData"
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
+      :alumniSkill="alumniSkill"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm 
@@ -18,7 +19,8 @@
       />
       <ExperienceForm 
         :experience="experience" 
-        v-if="showExperience" :type="type" 
+        v-if="showExperience" 
+        :type="type" 
         @hideForm="hideForm" 
         @edit="editExperience"
         @addAlumniExperience="newAlumniExperience"
@@ -46,6 +48,7 @@
         profile:"" ,
         alumniData: {},
         alumniInfo: {}, 
+        alumniSkill:{},
         type: "",
       }
     },
@@ -64,8 +67,8 @@
         this.type = type;
       },
       //=================== add new experience ===================
-      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
-        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:1};
+      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link) {
+        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link};
         console.log(alumniExperience);
         axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
         .then((response) => {
@@ -90,13 +93,14 @@
           this.getData();
         })
       },
-      //=================== get  alumni experience ===================
+      //=================== get alumni experience ===================
       getData() {
         axios.get(this.url+"alumni/1").then((res) => {
           this.alumniData = res.data;
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
-          console.log(this.alumniExperiences)
+          this.alumniSkill=res.data.skill
+          console.log(this.alumniSkill)
         });
       },
       //=================== update   alumni general information ===================

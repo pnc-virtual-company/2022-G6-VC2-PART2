@@ -5,12 +5,14 @@
       <!--================== option content create form ============= -->
       <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer" @click="showForm('create')"/>
     </div>
-    <div class="m-auto w-[100%]" v-for:="workExperience in workExperiences">
+    <div  v-if="workExperiences !==[]" class="m-auto w-[100%]" v-for:="workExperience in workExperiences.slice().reverse()">
       <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between">
         <div class="flex items-center justify-start">
           <img class="rounded-full w-[5rem] mr-3 border border-[#ddd]" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/81991fd67e25ba7dbdb6" alt="">
           <div>
-            <p class="font-medium	text-lg">{{workExperience.company}}</p>
+            <a :href="workExperience.company_link" target="_blank">
+              <p class="font-medium	text-lg">{{workExperience.company}}</p>
+            </a>
             <p class="">{{workExperience.start_year}} - {{workExperience.end_year}}</p>
           </div>
         </div>

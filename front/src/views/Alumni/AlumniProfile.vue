@@ -3,11 +3,8 @@
     <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://images.template.net/wp-content/uploads/2014/11/Natural-Facebook-Cover-Photo.jpg" alt="">
     <div class="w-full m-auto text-center px-5 py-5 mt-[-20vh]">
         <div>
-            <div class="rounded-full w-[25vh] h-[25vh] border-4 border-[#34B3F1]">
-                <img
-                    class="w-full rounded-full h-[25vh] "
-                    :src="alumniData.profile"
-                />    
+            <div class="rounded-full w-[25vh] h-[25vh]">
+                <img class="w-full rounded-full h-[25vh] border-2 border-[#000]" :src="alumniData.profile"/>    
                 <input type="file" @change="onFileSelected" hidden id="imageFile">
                 <label for="imageFile">
                   <fa icon="camera" class="bg-[#fff] cursor-pointer absolute  text-xl p-2 rounded-full mt-[-2rem] ml-[2rem]"/>
@@ -25,13 +22,17 @@
                 </div>
                 <div class="w-[50%] box-border mt-[-0.7rem] mr-[-5rem]">
                     <h3 class="text-xl font-medium mb-3 mt-7">Current Work </h3>
-                    <p class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />Front end developer</p>
-                    <p class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />Surcemax Asia</p>
+                    <p v-if="alumniExperiences.length !=0" class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].position}}</p>
+                    <p v-if="alumniExperiences.length !=0" class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].company}}</p>
+                    <p v-else class="text-[1rem] text-[#0062ff]">Don't have work experience yet !</p>
                 </div>
             </div>
         </div>
     </div>
   </div>
+  <AlumniSkil 
+  :skills="alumniSkill"
+  />
   <div class="py-5">
     <WorkExperience 
       :workExperiences="alumniExperiences"
@@ -44,14 +45,18 @@
 <script>
 import axios from "axios";
 import WorkExperience from "./WorkExperience.vue";
+import AlumniSkil from "./AlumniSkill.vue";
 export default {
   components: {
     WorkExperience,
+    AlumniSkil,
   },
+  //================= porps data from WorkExperience =================
   props: {
     alumniInfo: Object,
-    alumniExperiences: [],      
+    alumniExperiences: Array,      
     alumniData: Object,
+    alumniSkill:Array,
   },
   data() {
     return {
@@ -64,6 +69,7 @@ export default {
     async onFileSelected(event){
       this.uploadImage(event.target.files[0]);
     },
+    //===================== upload alumni profile ===================
     uploadImage(profile){
       const AlumniProfile = new FormData();
       AlumniProfile.append('profile', profile)
@@ -75,9 +81,11 @@ export default {
     isShow() {
       this.$emit('edit', true);
     },
+    //===================== show alumni experience emit =================
     showExperiences(status, type, experience) {
       this.$emit('showExperience', status, type, experience);
     },
+    //===================== delete alumni experience emit =================
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },
