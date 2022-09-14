@@ -8,12 +8,18 @@
     <div  v-if="workExperiences !==[]" class="m-auto w-[100%]" v-for:="workExperience in workExperiences.slice().reverse()">
       <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between">
         <div class="flex items-center justify-start">
-          <img class="rounded-full w-[5rem] mr-3 border border-[#ddd]" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/81991fd67e25ba7dbdb6" alt="">
-          <div>
+          <div class="rounded-full w-[5rem] h-[5rem]" >
+            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" :src="workExperience.profile" />    
+          </div>
+            <input type="file" @change="onFileSelected" hidden id="imageFile">
+            <label for="imageFile">
+              <fa icon="camera" class="bg-[#fff] cursor-pointer absolute p-1  text-sm rounded-full mt-[1rem] ml-[-1.5rem]"/>
+            </label>
+          <div class="ml-3">
             <a :href="workExperience.company_link" target="_blank">
               <p class="font-medium	text-lg">{{workExperience.company}}</p>
-            </a>
-            <p class="">{{workExperience.start_year}} - {{workExperience.end_year}}</p>
+            </a>            
+            <p >{{workExperience.start_year}} - {{workExperience.end_year}}</p>
           </div>
         </div>
         <div>

@@ -1,4 +1,6 @@
 <template>
+<div>
+
   <div class="bg-[#fff] m-auto w-[60%] shadow-xl rounded-md mt-6">
     <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://images.template.net/wp-content/uploads/2014/11/Natural-Facebook-Cover-Photo.jpg" alt="">
     <div class="w-full m-auto text-center px-5 py-5 mt-[-20vh]">
@@ -15,16 +17,15 @@
                 <div class="capitalize">
                     <h1 class="text-3xl font-medium mt-3 mb-3">{{alumniInfo.firstName}} {{alumniInfo.lastName}}</h1>
                     <p class="m-1 flex items-center"><img src="@/assets/pnc-logo.jpg" class="text-[#34B3F1] text-2xl mr-3 w-[1.8rem] "/>{{alumniData.batch}} {{alumniData.major}}</p>
-                    <p class="flex items-end"><img src="@/assets/location.png" class="text-[#34B3F1] text-2xl ml-2 mr-4 mt-3 w-[1.3rem] " alt="">{{alumniData.address}}</p>
-                    <p class="mt-5 ml-2"><fa icon="paper-plane" class="text-2xl capitalize mr-3" />{{alumniData.telegram}}</p>
-                    <p class="mt-5 ml-2"><fa icon="envelope" class="text-2xl capitalize mr-3" />{{alumniInfo.email}}</p>
-                    <p class="mt-5 ml-2"><fa icon="phone" class="text-2xl capitalize mr-3" />{{alumniData.phone}}</p>
+                    <p class="flex items-end"><img src="@/assets/location.png" class="text-[#34B3F1] text-base ml-2 mr-4 mt-3 w-[1.3rem] " alt="">{{alumniData.address}}</p>
+                    <p class="mt-5 ml-2 flex"><img src="@/assets/telegram.png" class="text-[#34B3F1] text-2xl mr-3 w-[1.6rem] "/>{{alumniData.telegram}}</p>
+                    <p class="mt-5 ml-2 flex lowercase"><img src="@/assets/mail.jpg" class="text-[#34B3F1] text-2xl mr-3 w-[1.8rem] "/>{{alumniInfo.email}}</p>
+                    <p class="mt-5 ml-2"><fa icon="phone" class="text-[#0062ff] text-lg capitalize mr-3" />{{alumniData.phone}}</p>
                 </div>
                 <div class="w-[50%] box-border mt-[-0.7rem] mr-[-5rem]">
-                    <h3 class="text-xl font-medium mb-3 mt-7">Current Work </h3>
-                    <p v-if="alumniExperiences.length !=0" class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].position}}</p>
-                    <p v-if="alumniExperiences.length !=0" class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />{{alumniExperiences[alumniExperiences.length - 1].company}}</p>
-                    <p v-else class="text-[1rem] text-[#0062ff]">Don't have work experience yet !</p>
+                    <h3 class="text-xl font-medium mb-3 mt-7 text-[#0062ff]">Current Work </h3>
+                    <p class="mt-4"><fa icon="user-cog" class="text-2xl capitalize mr-3" />Front end developer</p>
+                    <p class="mt-5"><fa icon="briefcase" class="text-2xl capitalize mr-3" />Surcemax Asia</p>
                 </div>
             </div>
         </div>
@@ -40,6 +41,7 @@
       @deleteExperience="deleteExperience"
     />
   </div>
+</div>
 </template>
 
 <script>
