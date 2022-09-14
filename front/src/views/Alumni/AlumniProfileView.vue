@@ -7,6 +7,7 @@
       :alumniData="alumniData"
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
+      :alumniSkill="alumniSkill"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm 
@@ -46,6 +47,7 @@
         profile:"" ,
         alumniData: {},
         alumniInfo: {}, 
+        alumniSkill:{},
         type: "",
       }
     },
@@ -65,7 +67,7 @@
       },
       //=================== add new experience ===================
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work) {
-        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id:1};
+        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1};
         console.log(alumniExperience);
         axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
         .then((response) => {
@@ -76,7 +78,7 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/1'+data.id, data)
+        axios.put(this.url+'alumniWork/'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -96,7 +98,8 @@
           this.alumniData = res.data;
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
-          console.log(this.alumniExperiences)
+          this.alumniSkill=res.data.skill
+          console.log(this.alumniSkill)
         });
       },
       //=================== update   alumni general information ===================
