@@ -92,9 +92,11 @@ export default {
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },
+    //========================== show create alumni skill form =================
     showSkillForm(value){
       this.$emit('showSkillForm', value);
-    }
+    },
+
   },
 };
 </script>

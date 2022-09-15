@@ -139,8 +139,8 @@
         .then(()=>{
           this.formHiden(false);
           this.getData();
-        })
-    }
+        });
+    },
   },
     created() {
       this.getData();
