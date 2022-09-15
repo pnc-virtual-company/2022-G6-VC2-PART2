@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\AuthenticationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +32,10 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 //===================skilll alumni api =================
 Route::apiResource('/alumniSkill',SkillController::class);
+// ==================Log In=============================
+Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+// ==================Log out============================
+Route::post('/logout',[UserController::class,'logout']);
 
 
 
