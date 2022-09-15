@@ -7,7 +7,7 @@
       @uploadImage="uploadImage"
       @showAlumniForm="showForm"
     />
-    <section v-if="showFormAlumni || showExperience || showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
+    <section v-if="showFormAlumni || showExperience || showSkillForm || showStudyBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <!-- form for alumni general profile -->
       <EditAlumniProfileForm 
         @hideForm="hideForm" 
@@ -28,6 +28,12 @@
       />
       <!-- form for skills alumni -->
       <SkillForm v-if="showSkillForm" @hidFormSkill="formHiden" @addSkill="newSkill"/>
+      <StudyBackgroundForm 
+        v-if="showStudyBackground" 
+        @showForm='showStudyBackgroundForm'
+        :alumni_key ="alumniData.id"
+        @createStudy='newStudyBackground'
+      />
     </section>
     <div class="py-5">
       <!-- skill card -->
@@ -37,17 +43,18 @@
         @toShowSkillForm="toShowSkillForm"
         @deleteAlumniSkill = "removeAlumniSkill"
       />
-      <!-- study background card -->
-      <StudyBackground
-        class=" mb-3"
-        :studyBackgrounds='studyBackgrounds'
-      />
       <!-- experience card -->
       <WorkExperience 
         :workExperiences="alumniExperiences"
         @show="showExperiences"
         @deleteExperience="deleteExperience"
         @uploadImage="uploadCompanyProfile"
+      />
+      <!-- study background card -->
+      <StudyBackground
+        class=" mt-3"
+        :studyBackgrounds='studyBackgrounds'
+        @showForm="showStudyBackgroundForm"
       />
     </div>
   </div>
@@ -61,6 +68,7 @@
   import StudyBackground from "./StudyBackgroundView.vue";
   import AlumniSkill from './AlumniSkill.vue';
   import WorkExperience from "./WorkExperience.vue";
+  import StudyBackgroundForm from './StudyBackgroundForm.vue'
   export default {
     components:{
       AlumniProfile,
@@ -68,6 +76,7 @@
       ExperienceForm,
       SkillForm,
       StudyBackground,
+      StudyBackgroundForm,
       AlumniSkill,
       WorkExperience
     },
@@ -76,6 +85,7 @@
         url: 'http://127.0.0.1:8000/api/',
         showFormAlumni: false,
         showExperience: false,
+        showStudyBackground: false,
         experience: {},      
         profile:"" ,
         alumniData: {},
@@ -99,6 +109,9 @@
         this.showExperience = status;
         this.experience = experience;
         this.type = type;
+      },
+      showStudyBackgroundForm(status) {
+        this.showStudyBackground = status;
       },
       //=================== add new experience ===================
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link) {
@@ -175,9 +188,16 @@
         axios.post(this.url+'companyProfile/'+id,CompanyProfile)
         .then(() => {
           this.getData();
-        });
-      },
-      //===================== upload profile for an alumni =============================
+        })
+    },
+    //=================== add new study background =================
+    newStudyBackground(study){
+      axios.post(this.url+"studyBackground",study).then(()=>{
+        this.showStudyBackgroundForm(false)
+        this.getData();
+      })
+    },
+      // upload profile for an alumni
       uploadImage(profile){
         const AlumniProfile = new FormData();
         AlumniProfile.append('profile', profile)
