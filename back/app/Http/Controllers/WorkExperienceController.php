@@ -32,7 +32,6 @@ class WorkExperienceController extends Controller
   //===================== update alumni work experience =================
     public function update(Request $request, $id)
     {
-        //
         $workExperience= WorkExperience::findOrFail($id);
         $workExperience -> alumni_id = $request->alumni_id;
         $workExperience ->company = $request ->company;
