@@ -33,6 +33,7 @@
   </div>
   <AlumniSkil 
   :skills="alumniSkill"
+  @toShowSkillForm="showSkillForm"
   />
   <div class="py-5">
     <WorkExperience 
@@ -98,8 +99,10 @@ export default {
       CompanyProfile.append('_method','PUT');
       axios.post(this.url+'companyProfile/'+id,CompanyProfile)
       .then(() => {
-
       });
+    },
+    showSkillForm(value){
+      this.$emit('showSkillForm', value);
     }
   },
 };
