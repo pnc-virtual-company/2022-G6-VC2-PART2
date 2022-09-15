@@ -42,11 +42,6 @@
         :skills="alumniSkill"
         @toShowSkillForm="toShowSkillForm"
       />
-      <!-- study background card -->
-      <StudyBackground
-        class=" mb-3"
-        :studyBackgrounds='studyBackgrounds'
-      />
       <!-- experience card -->
       <WorkExperience 
         :workExperiences="alumniExperiences"
@@ -54,7 +49,9 @@
         @deleteExperience="deleteExperience"
         @uploadImage="uploadCompanyProfile"
       />
+      <!-- study background card -->
       <StudyBackground
+        class=" mt-3"
         :studyBackgrounds='studyBackgrounds'
         @showForm="showStudyBackgroundForm"
       />
