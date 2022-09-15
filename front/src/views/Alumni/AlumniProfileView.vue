@@ -53,7 +53,7 @@
     />
     <div class="flex m-auto ml-[20%] w-[20%]">
       <button class="bg-sky-500">WorkExperience</button>
-      <button class="bg-sky-100 ml-[3%]">StudyBackground</button>
+      <button class="bg-sky-100 ml-[5%]">StudyBackground</button>
     </div>
     <div class="py-5">
       <!-- experience card -->

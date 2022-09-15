@@ -3,18 +3,14 @@
     <h1 class="font-bold text-center text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
     <div class="m-auto w-[100%] flex justify-end">
       <!--================== option content create form ============= -->
-      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer" @click="showForm('create')"/>
+      <fa icon="plus" class="text-[1.2rem]  text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showForm('create')"/>
     </div>
     <div  v-if="workExperiences !==[]" class="m-auto w-[100%]" v-for:="workExperience in workExperiences.slice().reverse()">
       <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between">
         <div class="flex items-center justify-start">
           <div class="rounded-full w-[5rem] h-[5rem]" >
-            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" :src="workExperience.profile" />    
+            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" src="@/assets/pnc-logo.jpg" />    
           </div>
-            <input type="file" @change="uplaodImage($event.target.files[0], workExperience.id)" hidden :id="'imageFile'+workExperience.id">
-            <label :for="'imageFile'+workExperience.id">
-              <fa icon="camera" class="bg-[#fff] cursor-pointer absolute p-1  text-sm rounded-full mt-[1rem] ml-[-1.5rem]"/>
-            </label>
           <div class="ml-3">
             <a :href="workExperience.company_link" target="_blank">
               <p class="font-medium	text-lg">{{workExperience.company}}</p>
@@ -28,9 +24,9 @@
           <p>{{workExperience.duration}}</p>
         </div>
         <div>
-            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" @click="deleteExperience(workExperience.id)"/>
+            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
             <!--==================== Edit alumni experience ================= -->
-            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.4rem] p-3 rounded-full ml-3 shadow-lg bg-[#ddd]" @click="showForm('edit', workExperience)" />
+            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="showForm('edit', workExperience)" />
         </div>
       </div>
     </div>
