@@ -83,7 +83,7 @@
     },
     data() {
       return {
-        url: 'http://127.0.0.1:8000/api/',
+        url: process.env.VUE_APP_API_URL,
         showFormAlumni: false,
         showExperience: false,
         showStudyBackground: false,
@@ -118,7 +118,7 @@
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link,duration) {
         let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link,duration:duration};
         console.log(alumniExperience);
-        axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
+        axios.post(this.url+'alumniWork',alumniExperience)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -175,7 +175,7 @@
       //=================== add new skill =================
       newSkill(newSkill){
           let alumniSkills = {title:newSkill, alumni_id:1};
-          axios.post('http://127.0.0.1:8000/api/alumniSkill',alumniSkills)
+          axios.post(this.url+'alumniSkill',alumniSkills)
           .then(()=>{
             this.formHiden(false);
             this.getData();
@@ -209,14 +209,14 @@
       },
     //=================== remove alumni skill ====================================
       removeAlumniSkill(id){
-        axios.delete('http://127.0.0.1:8000/api/alumniSkill/' + id)
+        axios.delete(this.url+'alumniSkill/' + id)
         .then(()=>{
           this.getData();
         })
       },
     //=============================== remove studyBackground  =======================
       removeStudyBackground(id){
-        axios.delete('http://127.0.0.1:8000/api/studyBackground/'+ id)
+        axios.delete(this.url+'studyBackground/'+ id)
         .then(()=>{
           this.getData();
         })
