@@ -70,7 +70,7 @@ export default {
             isNoLinkCompany:false,
             years:'',
             month:'',
-            day:'',
+            week:'',
             workduration:null,
         }
     },
@@ -101,9 +101,8 @@ export default {
                     this.workduration=this.month
                 }
                 else{
-                    this.day=duration
-                    this.workduration=this.day
-
+                    this.week=parseInt(duration/7)+'week'
+                    this.workduration=this.week
                 }
               
                 this.hideForm();
