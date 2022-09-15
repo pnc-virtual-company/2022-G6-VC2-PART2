@@ -2,22 +2,22 @@
   <div>
     <AlumniProfile 
       @edit="showForm" 
-      @showExperience="showExperiences" 
-      @deleteExperience="deleteExperience"
       :alumniData="alumniData"
-      :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
-      :alumniSkill="alumniSkill"
-      @showSkillForm="toShowSkillForm"
+      @uploadImage="uploadImage"
+      @showAlumniForm="showForm"
     />
-    <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
+    <section v-if="showFormAlumni || showExperience || showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
+      <!-- form for alumni general profile -->
       <EditAlumniProfileForm 
-      @hideForm="hideForm" 
-      v-if="isShow" 
-      :alumniData="alumniData"
-      :alumniInfo="alumniInfo"
-      @updateAlumni='updateDataAlumni'
+        @hideForm="hideForm" 
+        v-if="showFormAlumni" 
+        :alumniData="alumniData"
+        :alumniInfo="alumniInfo"
+        @showAlumniForm='updateDataAlumni'
+        @updateAlumni="updateDataAlumni"
       />
+      <!-- form for experience alumni profile -->
       <ExperienceForm 
         :experience="experience" 
         v-if="showExperience" 
@@ -26,30 +26,54 @@
         @edit="editExperience"
         @addAlumniExperience="newAlumniExperience"
       />
+      <!-- form for skills alumni -->
+      <SkillForm v-if="showSkillForm" @hidFormSkill="formHiden" @addSkill="newSkill"/>
     </section>
-    <section v-if="showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-    <SkillForm @hidFormSkill="formHiden" @addSkill="newSkill"/>
-  </section>
+    <div class="py-5">
+      <!-- skill card -->
+      <AlumniSkill 
+        class=" mb-3"
+        :skills="alumniSkill"
+        @toShowSkillForm="toShowSkillForm"
+      />
+      <!-- study background card -->
+      <StudyBackground
+        class=" mb-3"
+        :studyBackgrounds='studyBackgrounds'
+      />
+      <!-- experience card -->
+      <WorkExperience 
+        :workExperiences="alumniExperiences"
+        @show="showExperiences"
+        @deleteExperience="deleteExperience"
+        @uploadImage="uploadCompanyProfile"
+      />
+    </div>
   </div>
 </template>
 <script>
   import axios from "axios"
-  import AlumniProfile from "../Alumni/AlumniProfile.vue";
+  import AlumniProfile from "../Alumni/AlumniProfileCard.vue";
   import EditAlumniProfileForm from '../Alumni/EditAlumniProfileForm.vue';
   import ExperienceForm from '../Alumni/ExperienceForm.vue';
-  import SkillForm from "./SkillForm.vue"
+  import SkillForm from "./SkillForm.vue";
+  import StudyBackground from "./StudyBackgroundView.vue";
+  import AlumniSkill from './AlumniSkill.vue';
+  import WorkExperience from "./WorkExperience.vue";
   export default {
     components:{
       AlumniProfile,
       EditAlumniProfileForm,
       ExperienceForm,
       SkillForm,
-      
+      StudyBackground,
+      AlumniSkill,
+      WorkExperience
     },
     data() {
       return {
         url: 'http://127.0.0.1:8000/api/',
-        isShow: false,
+        showFormAlumni: false,
         showExperience: false,
         experience: {},      
         profile:"" ,
@@ -58,15 +82,16 @@
         alumniSkill:{},
         type: "",
         showSkillForm:false,
+        studyBackgrounds:[],
       }
     },
-  
+    emits: ['showExperience', 'deleteExperience'],
     methods:{
       showForm(status) {
-        this.isShow = status;
+        this.showFormAlumni = status;
       },
       hideForm(status) {
-        this.isShow = status;
+        this.showFormAlumni = status;
         this.showExperience = status;
       },
       showExperiences(status, type, experience) {
@@ -108,7 +133,7 @@
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
           this.alumniSkill=res.data.skill
-          console.log(this.alumniSkill)
+          this.studyBackgrounds=res.data.study_background
         });
       },
       //=================== update   alumni general information ===================
@@ -122,26 +147,45 @@
         axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
           this.getData();
         })
-        this.isShow = false;
-    },
-    //=================== hide skill form =================
-    formHiden(value){
-        this.showSkillForm=value;
-    },
-    //=================== show skill form =================
-    toShowSkillForm(value){
-        this.showSkillForm=value;
-    },
-    //=================== add new skill =================
-    newSkill(newSkill){
-        let alumniSkills = {title:newSkill, alumni_id:1};
-        axios.post('http://127.0.0.1:8000/api/alumniSkill',alumniSkills)
-        .then(()=>{
-          this.formHiden(false);
+        this.showFormAlumni = false;
+      },
+      //=================== hide skill form =================
+      formHiden(value){
+          this.showSkillForm = value;
+      },
+      //=================== show skill form =================
+      toShowSkillForm(value){
+          this.showSkillForm=value;
+      },
+      //=================== add new skill =================
+      newSkill(newSkill){
+          let alumniSkills = {title:newSkill, alumni_id:1};
+          axios.post('http://127.0.0.1:8000/api/alumniSkill',alumniSkills)
+          .then(()=>{
+            this.formHiden(false);
+            this.getData();
+          })
+      },
+      // upload profile for company
+      uploadCompanyProfile(profile, id){
+        const CompanyProfile =  new FormData();
+        CompanyProfile.append('profile',profile);
+        CompanyProfile.append('_method','PUT');
+        axios.post(this.url+'companyProfile/'+id,CompanyProfile)
+        .then(() => {
           this.getData();
-        })
-    }
-  },
+        });
+      },
+      // upload profile for an alumni
+      uploadImage(profile){
+        const AlumniProfile = new FormData();
+        AlumniProfile.append('profile', profile)
+        AlumniProfile.append('_method', 'PUT');
+          axios.post(this.url+'profile/1', AlumniProfile).then(()=>{
+            this.getData();
+          });
+      },
+    },
     created() {
       this.getData();
     },

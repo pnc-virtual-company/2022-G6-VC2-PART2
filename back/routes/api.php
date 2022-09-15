@@ -31,8 +31,10 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 
 //================== work experience api ===============
 Route::apiResource('/alumniWork',WorkExperienceController::class);
+
 //===================skilll alumni api =================
 Route::apiResource('/alumniSkill',SkillController::class);
+
 // ==================company profile=====================
 Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
 
