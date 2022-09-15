@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('start_year');
             $table->string('end_year');
             $table->string('company_link')->nullable();
+            $table->string('duration')->nullable();
             $table->timestamps();
         });
     }

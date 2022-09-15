@@ -20,11 +20,12 @@
               <p class="font-medium	text-lg">{{workExperience.company}}</p>
             </a>            
             <p >{{workExperience.start_year}} - {{workExperience.end_year}}</p>
+
           </div>
         </div>
         <div>
           <p class="font-medium	text-lg">{{workExperience.position}}</p>
-          <p>4 years</p>
+          <p>{{workExperience.duration}}</p>
         </div>
         <div>
             <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" @click="deleteExperience(workExperience.id)"/>
@@ -46,9 +47,9 @@ export default {
   data() {
     return {
       show: false,
+      durationWork:'',
     };
   },
-
   methods:{
   //===================== show  form functions =================
     showForm(type, experience) {

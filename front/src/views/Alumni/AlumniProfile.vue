@@ -33,6 +33,7 @@
   </div>
   <AlumniSkil 
   :skills="alumniSkill"
+  @toShowSkillForm="showSkillForm"
   />
   <div class="py-5">
     <WorkExperience 
@@ -91,6 +92,9 @@ export default {
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },
+    showSkillForm(value){
+      this.$emit('showSkillForm', value);
+    }
   },
 };
 </script>

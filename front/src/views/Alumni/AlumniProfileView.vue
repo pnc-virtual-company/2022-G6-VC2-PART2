@@ -8,6 +8,7 @@
       :alumniExperiences="alumniExperiences"
       :alumniInfo="alumniInfo"
       :alumniSkill="alumniSkill"
+      @showSkillForm="toShowSkillForm"
     />
     <section v-if="isShow || showExperience" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <EditAlumniProfileForm 
@@ -26,18 +27,24 @@
         @addAlumniExperience="newAlumniExperience"
       />
     </section>
+    <section v-if="showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <SkillForm @hidFormSkill="formHiden" @addSkill="newSkill"/>
+  </section>
   </div>
 </template>
 <script>
   import axios from "axios"
   import AlumniProfile from "../Alumni/AlumniProfile.vue";
   import EditAlumniProfileForm from '../Alumni/EditAlumniProfileForm.vue';
-  import ExperienceForm from '../Alumni/ExperienceForm.vue'
+  import ExperienceForm from '../Alumni/ExperienceForm.vue';
+  import SkillForm from "./SkillForm.vue"
   export default {
     components:{
       AlumniProfile,
       EditAlumniProfileForm,
       ExperienceForm,
+      SkillForm,
+      
     },
     data() {
       return {
@@ -50,6 +57,7 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        showSkillForm:false,
       }
     },
   
@@ -67,8 +75,8 @@
         this.type = type;
       },
       //=================== add new experience ===================
-      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link) {
-        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link};
+      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link,duration) {
+        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link,duration:duration};
         console.log(alumniExperience);
         axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
         .then((response) => {
@@ -79,7 +87,7 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/'+data.id, data)
+        axios.put(this.url+'alumniWork/1'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -115,8 +123,25 @@
           this.getData();
         })
         this.isShow = false;
-    }
     },
+    //=================== hide skill form =================
+    formHiden(value){
+        this.showSkillForm=value;
+    },
+    //=================== show skill form =================
+    toShowSkillForm(value){
+        this.showSkillForm=value;
+    },
+    //=================== add new skill =================
+    newSkill(newSkill){
+        let alumniSkills = {title:newSkill, alumni_id:1};
+        axios.post('http://127.0.0.1:8000/api/alumniSkill',alumniSkills)
+        .then(()=>{
+          this.formHiden(false);
+          this.getData();
+        })
+    }
+  },
     created() {
       this.getData();
     },

@@ -15,7 +15,8 @@ class WorkExperience extends Model
         'profile',
         'start_year',
         'end_year',
-        'company_link'
+        'company_link',
+        'duration',
     ];
     protected $hidden = [
         'created_at',

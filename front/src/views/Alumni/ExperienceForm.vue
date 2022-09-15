@@ -68,6 +68,10 @@ export default {
             isNoStartYear:false,
             isNoEndYear:false,
             isNoLinkCompany:false,
+            years:'',
+            month:'',
+            day:'',
+            workduration:null,
         }
     },
     emits: ['hideForm', 'edit', 'addAlumniExperience'],
@@ -80,15 +84,30 @@ export default {
             this.company = this.experience.company;
             this.start_year = this.experience.start_year;
             this.end_year = this.experience.end_year;
-            this.company_link = this.experience.company_link;
+            this.company_link= this.experience.company_link;
             console.log('hideForm');
             console.log(this.company);
         },
         //=================== add new experience emit  and validate create alumni experience=================
         newAlumniExperience(){
             if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
+                let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
+                if (duration>=365){
+                    this.years=parseInt(duration/365)+'years'
+                    this.workduration=this.years
+                }
+                else if (duration>=30){
+                    this.month=parseInt(duration/30)+'month'
+                    this.workduration=this.month
+                }
+                else{
+                    this.day=duration
+                    this.workduration=this.day
+
+                }
+              
                 this.hideForm();
-                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link);
+                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.workduration);
             } 
             else {
                 if(this.position == ''){
@@ -120,6 +139,7 @@ export default {
                 start_year: this.start_year,
                 end_year: this.end_year,
                 company_link: this.company_link,
+                workduration: this.workduration,
             }
             //////validate edit alumni experience/////
             if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
