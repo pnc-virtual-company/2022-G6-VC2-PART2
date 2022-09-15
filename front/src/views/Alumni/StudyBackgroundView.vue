@@ -3,7 +3,7 @@
     <h1 class="font-bold text-center text-[#0062ff] text-2xl">STUDY BACKGROUND</h1>
     <div class="m-auto w-[100%] flex justify-end">
       <!--================== option content create form ============= -->
-      <fa icon="plus" class="text-[1.2rem]  text-black bg-[#ddd] p-2 rounded-full cursor-pointer"
+      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer"
         @click="showStudyBackgroundForm"
       />
     </div>
@@ -23,9 +23,9 @@
           <p>4 years</p>
         </div>
         <div>
-            <fa icon="trash-alt" @click="deleteStudyBackground(studyBackground.id)" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" />
+            <fa icon="trash-alt" @click="deleteStudyBackground(studyBackground.id)" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" />
             <!--==================== Edit alumni experience ================= -->
-            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" />
+            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.4rem] p-3 rounded-full ml-3 shadow-lg bg-[#ddd]" />
         </div>
       </div>
     </div>
