@@ -55,6 +55,7 @@
         class=" mt-3"
         :studyBackgrounds='studyBackgrounds'
         @showForm="showStudyBackgroundForm"
+        @deleteStudyBackground = "removeStudyBackground"
       />
     </div>
   </div>
@@ -197,7 +198,7 @@
         this.getData();
       })
     },
-      // upload profile for an alumni
+    //=================== upload profile for an alumni ==========================
       uploadImage(profile){
         const AlumniProfile = new FormData();
         AlumniProfile.append('profile', profile)
@@ -206,8 +207,16 @@
             this.getData();
           });
       },
+    //=================== remove alumni skill ====================================
       removeAlumniSkill(id){
         axios.delete('http://127.0.0.1:8000/api/alumniSkill/' + id)
+        .then(()=>{
+          this.getData();
+        })
+      },
+    //=============================== remove studyBackground  =======================
+      removeStudyBackground(id){
+        axios.delete('http://127.0.0.1:8000/api/studyBackground/'+ id)
         .then(()=>{
           this.getData();
         })

@@ -23,7 +23,7 @@
           <p>4 years</p>
         </div>
         <div>
-            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" />
+            <fa icon="trash-alt" @click="deleteStudyBackground(studyBackground.id)" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" />
             <!--==================== Edit alumni experience ================= -->
             <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.4rem] p-3 rounded-full ml-3 shadow-lg bg-[#ddd]" />
         </div>
@@ -47,6 +47,10 @@ export default {
   methods:{
     showStudyBackgroundForm(){
       this.$emit('showForm', true)
+    },
+    //======================= delete study background =================
+    deleteStudyBackground(id){
+      this.$emit('deleteStudyBackground',id);
     }
   },
   }
