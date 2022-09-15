@@ -31,15 +31,6 @@ class StudyBackgroundController extends Controller
         $study -> major = $request -> major;
         $study -> start_year = $request -> start_year;
         $study -> end_year = $request -> end_year;
-        $path = public_path('school_logo');
-        if(!file_exists($path)) {
-            mkdir($path, 0777,true);
-        }
-        $file = $request->file('school_logo');
-        $fileName = uniqid().'_'.trim($file->getClientOriginalName());
-        $study->school_logo = $fileName;
-        $file-> move($path,$fileName);
-        $study->school_logo = asset('school_logo/' . $fileName);
         $study->save();
         return response()->json(['sms'=>'Created succefully!']);
     }
