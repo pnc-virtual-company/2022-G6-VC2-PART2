@@ -3,7 +3,9 @@
     <h1 class="font-bold text-center text-[#0062ff] text-2xl">STUDY BACKGROUND</h1>
     <div class="m-auto w-[100%] flex justify-end">
       <!--================== option content create form ============= -->
-      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer"/>
+      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer"
+        @click="showStudyBackgroundForm"
+      />
     </div>
     <div  class="m-auto w-[100%]" >
       <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between" v-for="studyBackground of studyBackgrounds" :key="studyBackground">
@@ -31,17 +33,21 @@
 </template>
 
 <script>
+
 export default {
   props: {
     studyBackgrounds:Array
   },
   data() {
     return {
-      
+
     };
   },
-
+  emits: ['showForm'],
   methods:{
+    showStudyBackgroundForm(){
+      this.$emit('showForm', true)
+    }
   },
   }
 </script>

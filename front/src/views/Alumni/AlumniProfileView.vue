@@ -27,12 +27,19 @@
         @addAlumniExperience="newAlumniExperience"
       />
     </section>
-    <section v-if="showSkillForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-    <SkillForm @hidFormSkill="formHiden" @addSkill="newSkill"/>
-  </section>
+    <section v-if="showSkillForm || showStudyBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+      <SkillForm v-if="showSkillForm" @hidFormSkill="formHiden" @addSkill="newSkill"/>
+      <StudyBackgroundForm 
+        v-if="showStudyBackground" 
+        @showForm='showStudyBackgroundForm'
+        :alumni_key ="alumniData.id"
+        @createStudy='newStudyBackground'
+      />
+    </section>
   <div class="py-5">
     <StudyBackground
       :studyBackgrounds='studyBackgrounds'
+      @showForm="showStudyBackgroundForm"
     />
   </div>
   </div>
@@ -44,6 +51,7 @@
   import ExperienceForm from '../Alumni/ExperienceForm.vue';
   import SkillForm from "./SkillForm.vue"
   import StudyBackground from "./StudyBackgroundView.vue"
+  import StudyBackgroundForm from "../Alumni/StudyBackgroundForm.vue"
   export default {
     components:{
       AlumniProfile,
@@ -51,12 +59,14 @@
       ExperienceForm,
       SkillForm,
       StudyBackground,
+      StudyBackgroundForm,
     },
     data() {
       return {
         url: 'http://127.0.0.1:8000/api/',
         isShow: false,
         showExperience: false,
+        showStudyBackground: false,
         experience: {},      
         profile:"" ,
         alumniData: {},
@@ -80,6 +90,9 @@
         this.showExperience = status;
         this.experience = experience;
         this.type = type;
+      },
+      showStudyBackgroundForm(status) {
+        this.showStudyBackground = status;
       },
       //=================== add new experience ===================
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link) {
@@ -147,6 +160,13 @@
           this.formHiden(false);
           this.getData();
         })
+    },
+    //=================== add new study background =================
+    newStudyBackground(study){
+      axios.post(this.url+"studyBackground",study).then(()=>{
+        this.showStudyBackgroundForm(false)
+        this.getData();
+      })
     }
   },
     created() {
