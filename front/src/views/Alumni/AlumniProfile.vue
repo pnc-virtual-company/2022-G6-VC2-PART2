@@ -39,6 +39,7 @@
       :workExperiences="alumniExperiences"
       @show="showExperiences"
       @deleteExperience="deleteExperience"
+      @uploadImage="uploadCompanyProfile"
     />
   </div>
 </div>
@@ -91,6 +92,15 @@ export default {
     deleteExperience(alumniId){
       this.$emit('deleteExperience', alumniId);
     },
+    uploadCompanyProfile(profile, id){
+      const CompanyProfile =  new FormData();
+      CompanyProfile.append('profile',profile);
+      CompanyProfile.append('_method','PUT');
+      axios.post(this.url+'companyProfile/'+id,CompanyProfile)
+      .then(() => {
+
+      });
+    }
   },
 };
 </script>

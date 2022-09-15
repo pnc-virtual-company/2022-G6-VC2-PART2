@@ -11,8 +11,8 @@
           <div class="rounded-full w-[5rem] h-[5rem]" >
             <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" :src="workExperience.profile" />    
           </div>
-            <input type="file" @change="onFileSelected" hidden id="imageFile">
-            <label for="imageFile">
+            <input type="file" @change="uplaodImage($event.target.files[0], workExperience.id)" hidden :id="'imageFile'+workExperience.id">
+            <label :for="'imageFile'+workExperience.id">
               <fa icon="camera" class="bg-[#fff] cursor-pointer absolute p-1  text-sm rounded-full mt-[1rem] ml-[-1.5rem]"/>
             </label>
           <div class="ml-3">
@@ -42,9 +42,10 @@ export default {
   props: {
     workExperiences: [],
   },
-  emits: ['show','deleteExperience'],
+  emits: ['show','deleteExperience', 'uploadImage'],
   data() {
     return {
+      url: "http://127.0.0.1:8000/api/",
       show: false,
     };
   },
@@ -70,6 +71,10 @@ export default {
         }
       })
     },
+    // ==============Uplaod Profile Company================
+    uplaodImage(profile, id) {
+      this.$emit('uploadImage', profile, id);
+    }
   },
-  }
+}
 </script>
