@@ -114,8 +114,8 @@
         this.showStudyBackground = status;
       },
       //=================== add new experience ===================
-      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link) {
-        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link};
+      newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link,duration) {
+        let alumniExperience={position:newPosition,company:newCompany,start_year:newStart_work,end_year:newEnd_work,alumni_id: 1,company_link:company_link,duration:duration};
         console.log(alumniExperience);
         axios.post('http://127.0.0.1:8000/api/alumniWork',alumniExperience)
         .then((response) => {
@@ -126,7 +126,7 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/'+data.id, data)
+        axios.put(this.url+'alumniWork/1'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();

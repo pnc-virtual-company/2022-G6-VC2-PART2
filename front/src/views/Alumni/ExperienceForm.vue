@@ -8,23 +8,28 @@
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position">
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
+                <small class="text-red-600" v-if="isNoPostion"> You missed position*</small>
             </div>
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company">
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
+                <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
             </div>
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company_link">
                 <BaseLabel for="floating_address"><fa icon="link" class="text-sky-500" />companylink</BaseLabel>
+                <small class="text-red-600" v-if="isNoLinkCompany"> You missed link company*</small>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
                     <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
+                    <small class="text-red-600" v-if="isNoStartYear"> You missed start years*</small>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
                     <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year">
                     <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
+                    <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
                 </div>
             </div>
             <div class="p-2 text-center">
@@ -58,27 +63,19 @@ export default {
             start_year:'',
             end_year:'',
             company_link:'',
-            currentDate:''
+            isNoPostion:false,
+            isNoCompany: false,
+            isNoStartYear:false,
+            isNoEndYear:false,
+            isNoLinkCompany:false,
+            years:'',
+            month:'',
+            week:'',
+            workduration:null,
         }
     },
     emits: ['hideForm', 'edit', 'addAlumniExperience'],
     methods: {
-        // ===============covert date funtion ===========================
-        convertDate(date){
-            let newDate = new Date(date);
-            let day = newDate.getDate();
-            if (day<10){
-                day = '0'+day;
-            }
-            let month= newDate.getMonth()+1;
-            if (month<10){
-                month = '0'+month;
-            }
-            let year= newDate.getFullYear();
-            let currentDate=year+'-'+month+'-'+day
-            return currentDate
-        },
-
         hideForm() {
             this.$emit('hideForm', false);
         },
@@ -91,9 +88,44 @@ export default {
             console.log('hideForm');
             console.log(this.company);
         },
-        //=================== add new experience emit =================
+        //=================== add new experience emit  and validate create alumni experience=================
         newAlumniExperience(){
-            this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year,this.company_link);
+            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
+                let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
+                if (duration>=365){
+                    this.years=parseInt(duration/365)+'years'
+                    this.workduration=this.years
+                }
+                else if (duration>=30){
+                    this.month=parseInt(duration/30)+'month'
+                    this.workduration=this.month
+                }
+                else{
+                    this.week=parseInt(duration/7)+'week'
+                    this.workduration=this.week
+                }
+              
+                this.hideForm();
+                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.workduration);
+            } 
+            else {
+                if(this.position == ''){
+                    this.isNoPostion = !this.isNoPostion;
+                }
+                if(this.company == ''){
+                    this.isNoCompany = !this.isNoCompany;
+                }
+                if(this.start_year == ''){
+                    this.isNoStartYear = !this.isNoStartYear;
+                }
+                if(this.end_year == ''){
+                    this.isNoEndYear = !this.isNoEndYear;
+                }
+                if(this.company_link == ''){
+                    this.isNoLinkCompany = !this.isNoLinkCompany;
+                }
+            }
+
         },
         //=================== edit experience emit =================
         editExperience(){
@@ -105,11 +137,31 @@ export default {
                 company: this.company,
                 start_year: this.start_year,
                 end_year: this.end_year,
-                company_link: this.company_link
-
+                company_link: this.company_link,
+                workduration: this.workduration,
             }
-            this.$emit('edit', experience);
-            this.hideForm();
+            //////validate edit alumni experience/////
+            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
+                this.hideForm();
+                this.$emit('edit',experience);
+            } 
+            else {
+                if(this.position == ''){
+                    this.isNoPostion = !this.isNoPostion;
+                }
+                if(this.company == ''){
+                    this.isNoCompany = !this.isNoCompany;
+                }
+                if(this.start_year == ''){
+                    this.isNoStartYear = !this.isNoStartYear;
+                }
+                if(this.end_year == ''){
+                    this.isNoEndYear = !this.isNoEndYear;
+                }
+                if(this.company_link == ''){
+                    this.isNoLinkCompany = !this.isNoLinkCompany;
+                }
+            }
         },
     },
     created(){
