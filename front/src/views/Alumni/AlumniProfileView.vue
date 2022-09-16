@@ -33,6 +33,9 @@
         @showForm='showStudyBackgroundForm'
         :alumni_key ="alumniData.id"
         @createStudy='newStudyBackground'
+        :type="studybgType"
+        :studybackground="studybackground"
+        @updateStudyBackground="updateStudyBackground"
       />
     </section>
     <div class="py-5">
@@ -56,6 +59,7 @@
         :studyBackgrounds='studyBackgrounds'
         @showForm="showStudyBackgroundForm"
         @deleteStudyBackground = "removeStudyBackground"
+        @showFormEditstudybackground="EditStudyBackground"
       />
     </div>
   </div>
@@ -93,8 +97,10 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        studybgType: "",
         showSkillForm:false,
         studyBackgrounds:[],
+        studybackground:{},
       }
     },
     emits: ['showExperience', 'deleteExperience'],
@@ -111,8 +117,9 @@
         this.experience = experience;
         this.type = type;
       },
-      showStudyBackgroundForm(status) {
+      showStudyBackgroundForm(status,type) {
         this.showStudyBackground = status;
+        this.studybgType=type
       },
       //=================== add new experience ===================
       newAlumniExperience(newPosition,newCompany,newStart_work,newEnd_work,company_link,duration) {
@@ -220,8 +227,21 @@
         .then(()=>{
           this.getData();
         })
+      },
+      EditStudyBackground(status,type,studyBackground){
+        this.studybgType=type
+        this.showStudyBackground=status
+        this.studybackground=studyBackground
+      },
+      updateStudyBackground(studyBackground,id){
+        axios.put(this.url+'studyBackground/'+id, studyBackground)
+        .then(()=>{
+          this.getData();
+          this.showStudyBackground=false
+        })
       }
     },
+
     created() {
       this.getData();
     },

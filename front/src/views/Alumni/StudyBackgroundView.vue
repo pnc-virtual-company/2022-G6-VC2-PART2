@@ -4,7 +4,7 @@
     <div class="m-auto w-[100%] flex justify-end">
       <!--================== option content create form ============= -->
       <fa icon="plus" class="text-[1.2rem]  text-black bg-[#ddd] p-2 rounded-full cursor-pointer"
-        @click="showStudyBackgroundForm"
+        @click="showStudyBackgroundForm('create')"
       />
     </div>
     <div  class="m-auto w-[100%]" >
@@ -15,7 +15,7 @@
             <a target="_blank">
               <p class="font-medium	text-lg">{{studyBackground.school}}</p>
             </a>
-            <p class="">{{studyBackground.start_year}} | {{studyBackground.end_year}}</p>
+            <p class="">{{studyBackground.start_year}} - {{studyBackground.end_year}}</p>
           </div>
         </div>
         <div>
@@ -25,7 +25,7 @@
         <div>
             <fa icon="trash-alt" @click="deleteStudyBackground(studyBackground.id)" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" />
             <!--==================== Edit alumni experience ================= -->
-            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" />
+            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="showEditStudyBackground('edit',studyBackground)" />
         </div>
       </div>
     </div>
@@ -45,8 +45,8 @@ export default {
   },
   emits: ['showForm'],
   methods:{
-    showStudyBackgroundForm(){
-      this.$emit('showForm', true)
+    showStudyBackgroundForm(type,){
+      this.$emit('showForm', true,type)
     },
     //======================= delete study background =================
     deleteStudyBackground(id){
@@ -63,6 +63,10 @@ export default {
           this.$emit('deleteStudyBackground',id);
         }
       })
+    },
+    //=================== show study background form =================
+    showEditStudyBackground(type,studyBackground){
+      this.$emit('showFormEditstudybackground', true,type,studyBackground)
     }
   },
   }
