@@ -10,7 +10,7 @@ import FormLoginView from '../views/FormLoginView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/profile',
     name: 'home',
     component: HomeView
   },
@@ -21,11 +21,12 @@ const routes = [
     component: () => import('../views/AboutView.vue')
   },
   {
-    path: '/login',
+    path: '/',
     name: 'login',
-    component: FormLoginView
-
-   
+    component: FormLoginView,
+    meta: {
+      showNav: false,
+    }
   },
 ]
 
