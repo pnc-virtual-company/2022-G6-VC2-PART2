@@ -22,7 +22,6 @@ class WorkExperience extends Model
         'created_at',
         'updated_at'
     ];
-
     public function Alumni()
     {
         return $this->belongsTo(Alumni::class);

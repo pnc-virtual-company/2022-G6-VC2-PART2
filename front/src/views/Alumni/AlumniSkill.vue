@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl">
+  <div class="bg-[#fff] mt-3 p-5 rounded-lg shadow-xl">
     <div class="w-[100%] flex m-auto">
         <h1 class="w-[85%] font-bold text-[#0062ff] text-2xl">Skill</h1>
         <div class="w-[12%] flex justify-between">
