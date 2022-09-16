@@ -6,6 +6,7 @@
       :alumniInfo="alumniInfo"
       @uploadImage="uploadImage"
       @showAlumniForm="showForm"
+      :workExperiences="getCurrentWork"
     />
     <section v-if="showFormAlumni || showExperience || showSkillForm || showStudyBackground" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
       <!-- form for alumni general profile -->
@@ -35,30 +36,53 @@
         @createStudy='newStudyBackground'
       />
     </section>
-    <div class="py-5">
-      <!-- skill card -->
-      <AlumniSkill 
-        class=" mb-3"
-        :skills="alumniSkill"
-        @toShowSkillForm="toShowSkillForm"
-        @deleteAlumniSkill = "removeAlumniSkill"
-      />
-      <!-- experience card -->
-      <WorkExperience 
-        :workExperiences="alumniExperiences"
-        @show="showExperiences"
-        @deleteExperience="deleteExperience"
-        @uploadImage="uploadCompanyProfile"
-      />
-      <!-- study background card -->
-      <StudyBackground
-        class=" mt-3"
-        :studyBackgrounds='studyBackgrounds'
-        @showForm="showStudyBackgroundForm"
-        @deleteStudyBackground = "removeStudyBackground"
-      />
+      <div class="w-[80%] flex items-start m-auto">
+        <div class="mr-3 w-[35%]">
+          <!-- GeneralInformationCard -->
+          <GeneralInformationCard :alumniData="alumniData"/>
+          <!-- study background card -->
+          <div class="m-auto w-[100%] bg-[#fff] mt-3 p-3 rounded-md">
+            <div class="flex justify-between">
+              <h1 class="font-bold text-left text-[#0062ff] text-2xl">Study Background</h1>
+              <!--================== option content create form ============= -->
+              <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm"/>
+            </div>
+            <StudyBackground
+              v-for:="studyBackground of studyBackgrounds"
+              :studyBackground="studyBackground"
+              class="mt-3"
+              :studyBackgrounds='studyBackgrounds'
+              @showForm="showStudyBackgroundForm"
+              @deleteStudyBackground = "removeStudyBackground"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col	w-[65%]">
+          <!-- skill card -->
+          <AlumniSkill 
+            class=" mb-3"
+            :skills="alumniSkill"
+            @toShowSkillForm="toShowSkillForm"
+            @deleteAlumniSkill = "removeAlumniSkill"
+          />
+          <div class="bg-[#fff] p-3 rounded-md">
+            <h1 class="font-bold text-left text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
+            <div class="m-auto w-[100%] flex justify-end">
+              <!--================== option content create form ============= -->
+              <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences(true, 'create')"/>
+            </div>
+            <!-- experience card -->
+            <WorkExperience 
+              v-for:="workExperience in alumniExperiences.slice().reverse()" 
+              :workExperience="workExperience"
+              @show="showExperiences"
+              @deleteExperience="deleteExperience"
+              @uploadImage="uploadCompanyProfile"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 <script>
   import axios from "axios"
@@ -70,6 +94,7 @@
   import AlumniSkill from './AlumniSkill.vue';
   import WorkExperience from "./WorkExperience.vue";
   import StudyBackgroundForm from './StudyBackgroundForm.vue'
+  import GeneralInformationCard from './GeneralInformationCard.vue'
   export default {
     components:{
       AlumniProfile,
@@ -79,7 +104,8 @@
       StudyBackground,
       StudyBackgroundForm,
       AlumniSkill,
-      WorkExperience
+      WorkExperience,
+      GeneralInformationCard
     },
     data() {
       return {
@@ -94,7 +120,9 @@
         alumniSkill:{},
         type: "",
         showSkillForm:false,
+        currentWork: [],
         studyBackgrounds:[],
+        alumniExperiences: [],
       }
     },
     emits: ['showExperience', 'deleteExperience'],
@@ -127,7 +155,8 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/1'+data.id, data)
+        console.log(data);
+        axios.put(this.url+'alumniWork/'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -145,10 +174,10 @@
       getData() {
         axios.get(this.url+"alumni/1").then((res) => {
           this.alumniData = res.data;
-          this.alumniInfo=res.data.user
-          this.alumniExperiences=res.data.work_experience
-          this.alumniSkill=res.data.skill
-          this.studyBackgrounds=res.data.study_background
+          this.alumniInfo = res.data.user;
+          this.alumniExperiences = res.data.work_experience;
+          this.alumniSkill = res.data.skill;
+          this.studyBackgrounds = res.data.study_background;
         });
       },
       //=================== update   alumni general information ===================
@@ -220,10 +249,17 @@
         .then(()=>{
           this.getData();
         })
-      }
+      },
     },
     created() {
       this.getData();
     },
+    computed: {
+      // get current work of alumni
+      getCurrentWork() {
+        console.log(this.alumniExperiences.filter(work => (work.end_year == null)));
+        return this.alumniExperiences.filter(work => (work.end_year == null));
+      }
+    }
   }
 </script>
