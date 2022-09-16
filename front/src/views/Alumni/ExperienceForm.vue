@@ -22,15 +22,19 @@
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
+                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoStartYear"> You missed start years*</small>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="date" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year">
-                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
+                    <input type="month" :disabled="!hideEndYear" placeholder=" " class="disabled:text-slate-300 block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year" min="2020-08" >
+                    <BaseLabel for="" class=""><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
                 </div>
+            </div>
+            <div class=" mb-6 w-full group">
+                <input id="default-checkbox" type="checkbox" v-model='hideEndYear' class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+                <label for="default-checkbox" class="disabled ml-2 text-sm cursor-pointer">Already left from this company?</label>
             </div>
             <div class="p-2 text-center">
                 <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
@@ -58,6 +62,7 @@ export default {
     },
     data(){
         return {
+            hideEndYear: true,
             position:'',
             company:'',
             start_year:'',
@@ -66,12 +71,11 @@ export default {
             isNoPostion:false,
             isNoCompany: false,
             isNoStartYear:false,
-            isNoEndYear:false,
             isNoLinkCompany:false,
             years:'',
             month:'',
             week:'',
-            workduration:null,
+            duration:null,
         }
     },
     emits: ['hideForm', 'edit', 'addAlumniExperience'],
@@ -88,25 +92,27 @@ export default {
             console.log('hideForm');
             console.log(this.company);
         },
+        calculateDuration() {
+            let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
+            if (duration>=365){
+                this.years=parseInt(duration/365)+'years'
+                this.duration=this.years
+            }
+            else if (duration>=30){
+                this.month=parseInt(duration/30)+'month'
+                this.duration=this.month
+            }
+            else{
+                this.week=parseInt(duration/7)+'week'
+                this.duration=this.week
+            }
+        },
         //=================== add new experience emit  and validate create alumni experience=================
         newAlumniExperience(){
-            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
-                let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
-                if (duration>=365){
-                    this.years=parseInt(duration/365)+'years'
-                    this.workduration=this.years
-                }
-                else if (duration>=30){
-                    this.month=parseInt(duration/30)+'month'
-                    this.workduration=this.month
-                }
-                else{
-                    this.week=parseInt(duration/7)+'week'
-                    this.workduration=this.week
-                }
-              
+            if (this.position != '' && this.company != '' && this.start_year != '' && this.company_link != '') {              
                 this.hideForm();
-                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.workduration);
+                this.calculateDuration();
+                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.duration);
             } 
             else {
                 if(this.position == ''){
@@ -118,9 +124,6 @@ export default {
                 if(this.start_year == ''){
                     this.isNoStartYear = !this.isNoStartYear;
                 }
-                if(this.end_year == ''){
-                    this.isNoEndYear = !this.isNoEndYear;
-                }
                 if(this.company_link == ''){
                     this.isNoLinkCompany = !this.isNoLinkCompany;
                 }
@@ -129,6 +132,7 @@ export default {
         },
         //=================== edit experience emit =================
         editExperience(){
+            this.calculateDuration();
             let experience =
             {
                 id: this.experience.id, 
@@ -138,7 +142,7 @@ export default {
                 start_year: this.start_year,
                 end_year: this.end_year,
                 company_link: this.company_link,
-                workduration: this.workduration,
+                duration: this.duration,
             }
             //////validate edit alumni experience/////
             if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {

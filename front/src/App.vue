@@ -1,26 +1,13 @@
 <template>
   <div>
-    <nav class="w-full flex justify-between items-center shadow-md bg-white">
-           <div class="w-[11%] ml-[20px]">
+    <nav class="w-full flex justify-between bg-[#fff] fixed top-0 z-50">
+           <div class="w-[8rem] ml-10">
              <img src="@/assets/logo.jpg" alt="" srcset="">
            </div>
-           <div class="w-[35%] flex justify-around">
-              <router-link to="/" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
-                <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                <label class="text-[0.6rem]">PROFILE</label>        
-              </router-link>
-              <router-link  to="/emploment" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
-                <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                <label class="text-[0.6rem]">EMPLOMENT</label>
-              </router-link>
-              <router-link to="/event" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
-                <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                <label class="text-[0.6rem] tex#0062ff">EVENT</label>
-              </router-link>
-              <router-link to="/signout" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
-                <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <label class="text-[0.6rem]">LOGOUT</label>
-              </router-link>
+           <div class="flex justify-around items-center p-0 text-lg mr-10">
+              <router-link to="/" class="cursor-pointer hover:bg-[#0062ff] px-6 py-3 text-[#0062ff] hover:text-[#f8fafc] text-center font-medium"> <fa icon="user" /> Profile</router-link>
+              <router-link to="/event" class="cursor-pointer hover:bg-[#0062ff] p-[10px] font-medium text-[#0062ff] px-6 py-3 hover:text-[#f8fafc] text-center"><fa icon='calendar-alt'/> Event</router-link>
+              <router-link to="/signout" class="font-medium cursor-pointer hover:bg-[#0062ff] p-[10px] text-[#0062ff] px-6 py-3 hover:text-[#f8fafc] text-center "> <fa icon="sign-out-alt" /> Logout</router-link>
           </div>
     </nav>
    <router-view/>
@@ -29,8 +16,9 @@
 
 <style>
 nav a.router-link-exact-active {
-  background: #0062ff;
   color: #fff;
+  background-color: #0062ff;
 }
+
 </style>
 
