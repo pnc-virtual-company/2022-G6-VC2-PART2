@@ -58,7 +58,7 @@ class UserController extends Controller
     // Send mail when admin create student
     public function smsMail(Request $request)
     {
-        // $user = User::findOrFail(1);
+        $user = User::findOrFail(1);
 
         $sms = [
             'title' => 'Dear ',
@@ -66,7 +66,7 @@ class UserController extends Controller
                 Student Management Leave System and password is 12345678',
         ];
          
-        Mail::to('sreyne.ven@student.passerellesnumeriques.org ')->send(new SendMail($sms));
+        Mail::to($user)->send(new SendMail($sms));
            
         return("Email is sent successfully.");
     }
