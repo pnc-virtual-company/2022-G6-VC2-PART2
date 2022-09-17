@@ -76,7 +76,7 @@ methods:{
   }
 },
 created() {
-   this.$cookies.set("userCookies", this.cookie,'7d')
+  //  this.$cookies.set("userCookies", this.cookie,'7d')
 }
 }
 </script>
