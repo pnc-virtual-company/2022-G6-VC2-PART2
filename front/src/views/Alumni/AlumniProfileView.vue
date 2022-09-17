@@ -43,6 +43,9 @@
         @showForm="showStudyBackgroundForm"
         :alumni_key="alumniData.id"
         @createStudy="newStudyBackground"
+        :type="studybgType"
+        :studybackground="studyBackground"
+        @updateStudyBackground="updateStudyBackground"
       />
     </section>
       <div class="w-[80%] flex items-start m-auto">
@@ -54,7 +57,7 @@
             <div class="flex justify-between">
               <h1 class="font-bold text-left text-[#0062ff] text-2xl">Study Background</h1>
               <!--================== option content create form ============= -->
-              <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm"/>
+              <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm(true,'create')"/>
             </div>
             <StudyBackground
               v-for:="studyBackground of studyBackgrounds"
@@ -63,6 +66,8 @@
               :studyBackgrounds='studyBackgrounds'
               @showForm="showStudyBackgroundForm"
               @deleteStudyBackground = "removeStudyBackground"
+              @showFormEditstudybackground="showEditStudyBackgroundForm"
+           
             />
           </div>
         </div>
@@ -78,7 +83,7 @@
             <h1 class="font-bold text-left text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
             <div class="m-auto w-[100%] flex justify-end">
               <!--================== option content create form ============= -->
-              <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences(true, 'create')"/>
+              <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences()"/>
             </div>
             <!-- experience card -->
             <WorkExperience 
@@ -128,27 +133,36 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        studybgType: "",
         showSkillForm:false,
         currentWork: [],
         studyBackgrounds:[],
+        studyBackground:[],
         alumniExperiences: [],
       }
     },
     methods: {
-      showForm(status) {
-        this.showFormAlumni = status;
-      },
       hideForm(status) {
         this.showFormAlumni = status;
         this.showExperience = status;
+      },
+      showForm(status){
+        this.showFormAlumni = status;
       },
       showExperiences(status, type, experience) {
         this.showExperience = status;
         this.experience = experience;
         this.type = type;
       },
-      showStudyBackgroundForm(status) {
+      showStudyBackgroundForm(status,type) {
         this.showStudyBackground = status;
+        this.studybgType=type
+      },
+      showEditStudyBackgroundForm(status,type,studybackground) {
+        console.log(status,type,studybackground)
+        this.showStudyBackground = status;
+        this.studybgType=type
+        this.studyBackground=studybackground
       },
       //=================== add new experience ===================
       newAlumniExperience(
@@ -278,6 +292,14 @@
             this.getData();
           })
       },
+      updateStudyBackground(study_background,id) {
+          axios
+          .put("http://127.0.0.1:8000/api/studyBackground/" + id,study_background)
+          .then(() => {
+            this.showStudyBackground = false;
+            this.getData();
+          })
+      },
     },
     computed: {
       // get current work of alumni
@@ -286,6 +308,7 @@
         return this.alumniExperiences.filter(work => (work.end_year == null));
       }
     },
+
     created() {
       this.getData();
     }

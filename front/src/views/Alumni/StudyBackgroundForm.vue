@@ -1,7 +1,8 @@
 <template>   
     <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white ">
         <template v-slot:header >
-            <span>Add Your Study Background</span>
+            <span v-if="type=='create'">Add Your Study Background</span>
+            <span v-if="type=='edit'">Edit Your Study Background</span>
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
@@ -23,7 +24,8 @@
                 </div>
             </div>        
             <div class="p-3 text-center">
-                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto " @click="sendData">Add</BaseButton>
+                <BaseButton v-if="type=='create'" type="submit" class="bg-[#1da1f2] sm:w-auto " @click="sendData">Add</BaseButton>
+                <BaseButton v-if="type=='edit'" type="submit" class="bg-[#0062ff] sm:w-auto " @click="editStudyBackground(studybackground.id)">Edit</BaseButton>
                 <BaseButton @click="hide" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
             
@@ -41,7 +43,7 @@ export default {
         BaseButton,
         BaseLabel,
     },
-    props:{alumni_key:String},
+    props:{alumni_key:String,type:String,studybackground:Object},
     data(){
         return{
             school:'',
@@ -55,11 +57,33 @@ export default {
         hide(){
             this.$emit('showForm',false)
         },
+        showDataInForm() {
+            this.school = this.studybackground.school;
+            this.major = this.studybackground.major;
+            this.start_year = this.studybackground.start_year;
+            this.end_year = this.studybackground.end_year;
+            this.alumni_id= this.studybackground.alumni_id;
+            console.log('hideForm');
+            console.log(this.company);
+        },
+        //=============================== add study background =================================
         sendData(){
             let study = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
             this.$emit('createStudy',study)
+        },
+        //=============================== update study background =================================
+        editStudyBackground(id){
+           let studyBackground = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
+           this.$emit('updateStudyBackground',studyBackground,id)
         }
     },
-
+    created(){
+        if (this.type   == 'edit'){
+            this.showDataInForm();
+        }
+    },
+    mounted(){
+        console.log(this.type)
+    }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#fff] mx-auto p-5 shadow-lg mt-3 rounded-md">
+    <div class="bg-[#fff] mx-auto p-3 shadow-lg mt-3 rounded-md">
         <h1 class="text-2xl font-bold text-[#0062ff]">General Information</h1>
         <div class="text-left mt-3">
             <p class="mt-2 text-lg"> <fa class="text-[#0062ff] mr-[0.6rem]" icon="graduation-cap" />{{alumniData.batch}} {{alumniData.major}}</p>

@@ -12,7 +12,7 @@
               </label>
           </div>
           <div class="capitalize text-left ml-[12rem] mt-[-6rem]">
-            <fa icon="pencil" class="text-[#0062ff] text-xl float-right bg-[#ddd] p-3 rounded-full cursor-pointer mt-[0.5rem]" @click="showAlumniForm"/>
+            <fa icon="pencil" class="text-[#0062ff] text-xl float-right bg-[#ddd] p-2 rounded-full cursor-pointer mt-[0.5rem]" @click="showAlumniForm"/>
             <h1 class="text-4xl font-bold mt-3 mb-3">{{alumniInfo.firstName}} {{alumniInfo.lastName}}</h1>
             <div v-for:="workExperience in workExperiences">
               <p class="text-lg font-medium">{{workExperience.position}} at {{workExperience.company}}</p>
