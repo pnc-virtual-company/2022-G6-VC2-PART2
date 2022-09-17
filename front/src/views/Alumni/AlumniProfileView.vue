@@ -92,7 +92,14 @@
       },
       //=================== get  alumni experience ===================
       getData() {
-        axios.get(this.url+"alumni/1").then((res) => {
+        console.log(document.cookie.split("=")[2].split(';')[0]);
+        axios.get(
+          this.url+"alumni/"+document.cookie.split("=")[2].split(';')[0], 
+          {headers: {
+            Authorization: 'Bearer ' + document.cookie.split("=")[1].split(';')[0],
+            "Access-Control-Origin": "*"
+        }})
+        .then((res) => {
           this.alumniData = res.data;
           this.alumniInfo=res.data.user
           this.alumniExperiences=res.data.work_experience
