@@ -16,18 +16,17 @@
                 <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company_link">
+                <input type="url" placeholder=" " required class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company_link">
                 <BaseLabel for="floating_address"><fa icon="link" class="text-[#0062ff]" />companylink</BaseLabel>
-                <small class="text-red-600" v-if="isNoLinkCompany"> You missed link company*</small>
             </div>
-            <div class="grid md:grid-cols-2 md:gap-6 ">
+            <div class="grid">
                 <div class="relative z-0 mb-6 w-full group">
                     <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="start_year">
                     <BaseLabel for="floating_first_name"><fa icon="user" class="text-[#0062ff]" /> Start_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoStartYear"> You missed start years*</small>
                 </div>
-                <div class="relative z-0 mb-6 w-full group">
-                    <input type="month" :disabled="!hideEndYear" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" min="2020-08" >
+                <div class="relative z-0 mb-6 w-full group" v-if="!hideEndYear">
+                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" min="2020-08" >
                     <BaseLabel for="" class=""><fa icon="user" class="text-[#0062ff]" /> End_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
                 </div>

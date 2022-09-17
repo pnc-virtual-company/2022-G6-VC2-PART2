@@ -3,7 +3,7 @@
     <div class="w-[100%] flex justify-between">
         <h1 class="w-[85%] font-bold text-[#0062ff] text-2xl ">Skill</h1>
         <div class="w-[15%] flex justify-between ">
-          <fa icon="trash-alt" class="fa fa-trash text-[#e04]  text-[1.2rem] bg-[#ddd] ml-[28px] p-2 rounded-full cursor-pointer" @click="showXmark = ! showXmark" />
+          <fa :icon="!showXmark ? 'trash-alt' : 'check'" class="fa fa-trash text-[1.2rem] bg-[#ddd] ml-[28px] p-2 rounded-full cursor-pointer" :class="showXmark ? 'text-[#0062ff]':'text-[#e04]'" @click="showXmark = ! showXmark" />
           <fa icon="plus" class=" text-[1.2rem]  text-black bg-[#ddd] p-2 rounded-full cursor-pointer ml-[7px]" @click="sendToShowSkillForm" />
         </div>
     </div>

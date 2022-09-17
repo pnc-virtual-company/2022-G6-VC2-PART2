@@ -53,21 +53,20 @@
           <!-- GeneralInformationCard -->
           <GeneralInformationCard :alumniData="alumniData"/>
           <!-- study background card -->
-          <div class="m-auto w-[100%] bg-[#fff] mt-3 p-3 rounded-md">
+          <div class="m-auto w-[100%] bg-[#fff] mt-3 px-3 pt-3 pb-1 mb-3 rounded-md">
             <div class="flex justify-between">
               <h1 class="font-bold text-left text-[#0062ff] text-2xl">Study Background</h1>
               <!--================== option content create form ============= -->
               <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm(true,'create')"/>
             </div>
+            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
             <StudyBackground
               v-for:="studyBackground of studyBackgrounds"
               :studyBackground="studyBackground"
-              class="mt-3"
               :studyBackgrounds='studyBackgrounds'
               @showForm="showStudyBackgroundForm"
               @deleteStudyBackground = "removeStudyBackground"
               @showFormEditstudybackground="showEditStudyBackgroundForm"
-           
             />
           </div>
         </div>
@@ -80,12 +79,13 @@
             @deleteAlumniSkill = "removeAlumniSkill"
           />
           <div class="bg-[#fff] p-3 rounded-md">
-            <h1 class="font-bold text-left text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
+            <h1 class="font-bold text-left text-[#0062ff] text-2xl">Work Experience</h1>
             <div class="m-auto w-[100%] flex justify-end">
               <!--================== option content create form ============= -->
-              <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences()"/>
+              <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences(true, 'create')"/>
             </div>
             <!-- experience card -->
+            <p class="text-[#e04] mt-3" v-if="alumniExperiences.length == 0">No work experience yet. Please add some!</p>
             <WorkExperience 
               v-for:="workExperience in alumniExperiences.slice().reverse()" 
               :workExperience="workExperience"
@@ -150,11 +150,9 @@
         this.showFormAlumni = status;
       },
       showExperiences(status, type, experience) {
-        console.log(status);
-        console.log(type);
-        this.showExperience = true;
+        this.showExperience = status;
         this.experience = experience;
-        this.type = 'create';
+        this.type = type;
       },
       showStudyBackgroundForm(status,type) {
         this.showStudyBackground = status;
