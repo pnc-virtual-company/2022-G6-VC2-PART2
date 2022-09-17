@@ -61,12 +61,11 @@ class UserController extends Controller
         $user = User::findOrFail(1);
 
         $sms = [
-            'title' => 'Dear ',
-            'body' => 'Here is your account of 
-                Student Management Leave System and password is 12345678',
+            'title' =>'Hello '. $user->firstName. ',',
+            'body' => 'Here is your account and your password is 12345678',
         ];
          
-        Mail::to($user)->send(new SendMail($sms));
+        Mail::to($user->email)->send(new SendMail($sms));
            
         return("Email is sent successfully.");
     }
