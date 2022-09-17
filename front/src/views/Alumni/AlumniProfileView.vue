@@ -150,9 +150,11 @@
         this.showFormAlumni = status;
       },
       showExperiences(status, type, experience) {
-        this.showExperience = status;
+        console.log(status);
+        console.log(type);
+        this.showExperience = true;
         this.experience = experience;
-        this.type = type;
+        this.type = 'create';
       },
       showStudyBackgroundForm(status,type) {
         this.showStudyBackground = status;

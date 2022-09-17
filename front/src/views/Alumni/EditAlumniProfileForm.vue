@@ -104,6 +104,26 @@
                     <BaseLabel for="floating_address"><fa icon="paper-plane" class="text-[#0062ff]" /> Telegram</BaseLabel>
                 </div>
             </div >
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 mb-6 w-full group">
+                    <input 
+                        v-model="phone"
+                        type="text" 
+                        placeholder=" " 
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    >
+                    <BaseLabel for="floating_phone"><fa icon="briefcase" class="text-[#0062ff]" /> Current Job</BaseLabel>
+                </div>
+                <div class="relative z-0 mb-6 w-full group">
+                    <input 
+                        v-model="telegram"
+                        type="text" 
+                        placeholder=" " 
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                    >
+                    <BaseLabel for="floating_address"><fa icon="building" class="text-[#0062ff]" />  Current Company</BaseLabel>
+                </div>
+            </div >
             <div class="p-3 text-center">
                 <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto " @click="updateData">Edit</BaseButton>
                 <BaseButton @click="hideForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
