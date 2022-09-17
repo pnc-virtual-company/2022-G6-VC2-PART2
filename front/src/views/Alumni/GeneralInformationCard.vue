@@ -4,8 +4,8 @@
         <div class="text-left mt-3">
             <p class="mt-2 text-lg"> <fa class="text-[#0062ff] mr-[0.6rem]" icon="graduation-cap" />{{alumniData.batch}} {{alumniData.major}}</p>
             <p class="mt-2 text-lg"> <fa class="text-[#0062ff] mr-[0.8rem]" icon="transgender-alt" />{{alumniData.gender}}</p>
-            <p class="mt-2 text-lg"> <fa class="text-[#0062ff] mr-[0.6rem]" icon="home-alt" />{{alumniData.placeOfBirth}}</p>
-            <p class="mt-2 text-lg"> <fa class="text-[#0062ff] ml-1 mr-3" icon="map-marker-alt" />{{alumniData.address}}</p>
+            <p class="mt-2 text-lg"> <fa class="text-[#0062ff] mr-[0.6rem]" icon="home-alt" />From {{alumniData.placeOfBirth}}</p>
+            <p class="mt-2 text-lg"> <fa class="text-[#0062ff] ml-1 mr-3" icon="map-marker-alt" />Live in the{{alumniData.address}}</p>
         </div>
     </div>
 </template>

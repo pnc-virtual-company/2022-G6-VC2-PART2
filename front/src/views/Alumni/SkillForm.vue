@@ -5,11 +5,11 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="skill_title">
-                <BaseLabel for="floating_address"><fa icon="user-cog" class="text-2xl capitalize mr-3 text-[#6d7a83]" /> Skill</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="skill_title">
+                <BaseLabel for="floating_address"><fa icon="user-cog" class="text-2xl capitalize mr-3 text-[#0062ff]" /> Skill</BaseLabel>
             </div>
             <div class="p-2 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
+                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto ">
                     <span @click="addSkill">Add</span>
                 </BaseButton>
                 <BaseButton @click="hidSkillform" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>

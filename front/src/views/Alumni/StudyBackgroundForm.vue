@@ -5,25 +5,25 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="school">
-                <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> School Name</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="school">
+                <BaseLabel for="floating_address"><fa icon="hotel" class="text-[#0062ff]" /> School Name</BaseLabel>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="major">
-                <BaseLabel for="floating_major_name"><fa icon="user-graduate" class="text-sky-500" /> Major</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="major">
+                <BaseLabel for="floating_major_name"><fa icon="user-graduate" class="text-[#0062ff]" /> Major</BaseLabel>
             </div>    
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year" />
-                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_year</BaseLabel>
+                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="start_year" />
+                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-[#0062ff]" /> Start_year</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year" />
-                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_year</BaseLabel>
+                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" />
+                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-[#0062ff]" /> End_year</BaseLabel>
                 </div>
             </div>        
             <div class="p-3 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto " @click="sendData">Add</BaseButton>
+                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto " @click="sendData">Add</BaseButton>
                 <BaseButton @click="hide" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
             

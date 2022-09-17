@@ -135,6 +135,9 @@
       }
     },
     methods: {
+      showForm(status) {
+        this.showFormAlumni = status;
+      },
       hideForm(status) {
         this.showFormAlumni = status;
         this.showExperience = status;

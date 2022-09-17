@@ -6,29 +6,29 @@
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position">
-                <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="position">
+                <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-[#0062ff]" /> Position</BaseLabel>
                 <small class="text-red-600" v-if="isNoPostion"> You missed position*</small>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company">
-                <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company">
+                <BaseLabel for="floating_address"><fa icon="hotel" class="text-[#0062ff]" /> Work Place</BaseLabel>
                 <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company_link">
-                <BaseLabel for="floating_address"><fa icon="link" class="text-sky-500" />companylink</BaseLabel>
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company_link">
+                <BaseLabel for="floating_address"><fa icon="link" class="text-[#0062ff]" />companylink</BaseLabel>
                 <small class="text-red-600" v-if="isNoLinkCompany"> You missed link company*</small>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
-                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_work</BaseLabel>
+                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="start_year">
+                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-[#0062ff]" /> Start_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoStartYear"> You missed start years*</small>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="month" :disabled="!hideEndYear" placeholder=" " class="disabled:text-slate-300 block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year" min="2020-08" >
-                    <BaseLabel for="" class=""><fa icon="user" class="text-sky-500" /> End_work</BaseLabel>
+                    <input type="month" :disabled="!hideEndYear" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" min="2020-08" >
+                    <BaseLabel for="" class=""><fa icon="user" class="text-[#0062ff]" /> End_work</BaseLabel>
                     <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <label for="default-checkbox" class="disabled ml-2 text-sm cursor-pointer">Already left from this company?</label>
             </div>
             <div class="p-2 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
+                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto ">
                     <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
                     <span v-else-if="type=='edit'" @click="editExperience">Edit</span>
                 </BaseButton>
