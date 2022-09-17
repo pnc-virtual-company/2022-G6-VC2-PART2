@@ -19,11 +19,7 @@ class AuthenticationController extends Controller
         }
         $token = $user->createToken('myToken', ['user'])->plainTextToken;
         $user->save();
-        return response()->json(['token'=> $token, 'role'=> $user->role], 202);
+        return response()->json(['token'=> $token, 'user'=> $user], 202);
     }
-    // ===================Log out===============================
-    public function logout(Request $request){
-        auth()->user()->tokens()->delete();
-        return response()->json(['sms'=>'logged out']);
-    }
+
 }

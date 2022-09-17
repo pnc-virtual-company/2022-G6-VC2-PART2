@@ -20,25 +20,34 @@ use App\Http\Controllers\EroController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//================== user api ======================
-Route::apiResource('/user',UserController::class);
 
-//================== alumni api ======================
-Route::apiResource('/alumni',AlumniController::class);
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //================== user api ======================
+    Route::apiResource('/user',UserController::class);
 
-//================== upload profile api ===============
-Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
+    //================== alumni api ======================
+    Route::apiResource('/alumni',AlumniController::class);
 
-//================== work experience api ===============
-Route::apiResource('/alumniWork',WorkExperienceController::class);
-//===================skilll alumni api =================
-Route::apiResource('/alumniSkill',SkillController::class);
+    //================== upload profile api ===============
+    Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
+
+    //================== work experience api ===============
+    Route::apiResource('/alumniWork',WorkExperienceController::class);
+    //===================skilll alumni api =================
+    Route::apiResource('/alumniSkill',SkillController::class);
+    // ==================Log out============================
+    Route::post('/logout',[UserController::class,'logout']);
+});
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+<<<<<<< HEAD
 // ==================Log out============================
 Route::post('/logout',[UserController::class,'logout']);
 //==================Ero==================//
 Route::apiResource('/eros',EroController::class);
+=======
+
+>>>>>>> b26617003554cca9699b2b4e255db88a342f6e79
 
 
 

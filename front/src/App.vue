@@ -1,11 +1,11 @@
 <template>
   <div>
-    <nav class="w-full flex justify-between items-center shadow-md bg-white">
+    <nav class="w-full flex justify-between items-center shadow-md bg-white" v-if='!$route.meta.hide'>
            <div class="w-[11%] ml-[20px]">
              <img src="@/assets/logo.jpg" alt="" srcset="">
            </div>
            <div class="w-[35%] flex justify-around">
-              <router-link to="/" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
+              <router-link to="/profile" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
                 <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 <label class="text-[0.6rem]">PROFILE</label>        
               </router-link>
@@ -17,16 +17,17 @@
                 <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                 <label class="text-[0.6rem] tex#0062ff">EVENT</label>
               </router-link>
-              <router-link to="/signout" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
+              
+              <router-link to="/login" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
                 <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                 <label class="text-[0.6rem]">LOGOUT</label>
               </router-link>
-              <!-- <router-link to="/login" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
-                <svg class="w-7 h-7 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                <label class="text-[0.6rem]">LOGOUT</label>
-              </router-link> -->
           </div>
     </nav>
+    <div>
+      <router-link to="/" class="cursor-pointer hover:bg-[#0062ff] p-[10px] w-[20%] text-[#0062ff] hover:text-[#f8fafc] text-center">
+      </router-link>
+    </div>
    <router-view/>
   </div>
 </template>
