@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios-http";
 import WorkExperience from "./WorkExperience.vue";
 export default {
   components: {
@@ -52,7 +52,6 @@ export default {
   },
   data() {
     return {
-      url: "http://127.0.0.1:8000/api/",
       previewImage:null,  
     };
   },
@@ -65,7 +64,7 @@ export default {
       const AlumniProfile = new FormData();
       AlumniProfile.append('profile', profile)
       AlumniProfile.append('_method', 'PUT');
-        axios.post(this.url+'profile/1', AlumniProfile).then(()=>{
+        axios.post('profile/1', AlumniProfile).then(()=>{
           window.location.reload();
         });
     },
