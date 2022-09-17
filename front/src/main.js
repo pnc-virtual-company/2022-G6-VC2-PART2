@@ -8,11 +8,15 @@ import {fab} from '@fortawesome/free-brands-svg-icons'
 
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueCookies from 'vue-cookies'
+
+
 
 
 
 library.add(fas, fab);
 const app = createApp(App)
+app.use(VueCookies)
 app.use(VueSweetalert2);
 
 
