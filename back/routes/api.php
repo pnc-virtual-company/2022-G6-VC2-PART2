@@ -40,10 +40,15 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+
+// =================Send Email When User Create Account===============
+Route::get('/smsMail',[UserController::class,'smsMail']);
+
 // ==================Log out============================
 Route::post('/logout',[UserController::class,'logout']);
 //==================Ero==================//
 Route::apiResource('/eros',EroController::class);
+
 
 
 
