@@ -15,7 +15,7 @@
           <form>
             <!-- Email input -->
             <div
-              class="mb-10 flex justify-center items-center inline-block py-3 bg-blue-600 text-white font-medium text-lg leading-snug uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-full"
+              class="mb-10 flex justify-center items-center py-3 bg-blue-600 text-white font-medium text-lg leading-snug uppercase rounded shadow-md focus:shadow-lg focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-full"
             >
               LOGIN
             </div>
@@ -49,7 +49,7 @@
             <!-- Submit button -->
             <button
               type="submit"
-              class="bg-blue-600 text-white hover:bg-blue-700 focus:bg-blue-700 form-control block w-[85%] m-auto py-1.5 text-xl border border-solid rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              class="bg-blue-600 text-white hover:bg-blue-700 form-control block w-[85%] m-auto py-1.5 text-xl border border-solid rounded focus:bg-white focus:border-blue-600 focus:outline-none"
               data-mdb-ripple="true"
               data-mdb-ripple-color="light"
             >

@@ -6,6 +6,7 @@ use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\EroController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,8 @@ Route::apiResource('/alumniSkill',SkillController::class);
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 // ==================Log out============================
 Route::post('/logout',[UserController::class,'logout']);
+//==================Ero==================//
+Route::apiResource('/eros',EroController::class);
 
 
 
