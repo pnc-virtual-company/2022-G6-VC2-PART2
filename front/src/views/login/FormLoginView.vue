@@ -4,7 +4,7 @@
 
 
 <script>
-import FormLogin from '@/components/login/FormLogin.vue' 
+import FormLogin from '../login/FormLogin.vue' 
 
 export default{
     components:{

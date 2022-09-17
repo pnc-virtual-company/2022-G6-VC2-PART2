@@ -55,7 +55,6 @@
 
 <script>
 import axios from 'axios'
-import router from '@/router'
 export default {
 data(){
   return{
@@ -69,14 +68,15 @@ methods:{
   login(){
     let user = {email:this.email,password:this.password}
     axios.post(this.url+'loginUser',user).then((res)=>{
-      this.cookie = res.data.token
-      router.push('/profile');
-      console.log(res);
+      this.cookie = res.data.token;
+      document.cookie = "token="+res.data.token;
+      document.cookie = "userId="+res.data.user.id;
+      document.cookie = "role="+res.data.user.role;
+      this.$router.push('/profile');
     })
   }
 },
 created() {
-  //  this.$cookies.set("userCookies", this.cookie,'7d')
 }
 }
 </script>

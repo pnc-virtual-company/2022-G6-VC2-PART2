@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Alumni/AlumniProfileView.vue'
-import FormLoginView from '../views/FormLoginView.vue'
+import FormLoginView from '../views/login/FormLoginView.vue'
 const routes = [
   {
     path: '/profile',

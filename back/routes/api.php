@@ -6,6 +6,7 @@ use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\EroController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,10 +40,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+<<<<<<< HEAD
 
 // =================Send Email When User Create Account===============
 Route::get('/smsMail',[UserController::class,'smsMail']);
 
+=======
+<<<<<<< HEAD
+// ==================Log out============================
+Route::post('/logout',[UserController::class,'logout']);
+//==================Ero==================//
+Route::apiResource('/eros',EroController::class);
+=======
+
+>>>>>>> b26617003554cca9699b2b4e255db88a342f6e79
+>>>>>>> d46d63c315f990b7a973fc1f5ecf366b1bee5cb1
 
 
 
