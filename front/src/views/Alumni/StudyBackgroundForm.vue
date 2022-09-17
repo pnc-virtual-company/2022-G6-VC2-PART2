@@ -1,5 +1,5 @@
 <template>   
-    <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white ">
+    <BaseForm class="relative top-20 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white ">
         <template v-slot:header >
             <span v-if="type=='create'">Add Your Study Background</span>
             <span v-if="type=='edit'">Edit Your Study Background</span>
