@@ -55,22 +55,28 @@
 
 <script>
 import axios from 'axios'
+import router from '@/router'
 export default {
 data(){
   return{
     url: "http://127.0.0.1:8000/api/",
     email:'',
     password:'',
+    cookie:'',
   }
 },
 methods:{
   login(){
     let user = {email:this.email,password:this.password}
     axios.post(this.url+'loginUser',user).then((res)=>{
-      console.log('here');
+      this.cookie = res.data.token
+      router.push('/profile');
       console.log(res);
     })
   }
 },
+created() {
+   this.$cookies.set("userCookies", this.cookie,'7d')
+}
 }
 </script>

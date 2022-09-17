@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="w-full flex justify-between items-center shadow-md bg-white" v-if='$route.meta.showNav'>
+    <nav class="w-full flex justify-between items-center shadow-md bg-white" v-if='!$route.meta.hide'>
            <div class="w-[11%] ml-[20px]">
              <img src="@/assets/logo.jpg" alt="" srcset="">
            </div>

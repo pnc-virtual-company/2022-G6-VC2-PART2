@@ -1,13 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Alumni/AlumniProfileView.vue'
 import FormLoginView from '../views/FormLoginView.vue'
-
-
-
-
-
-
-
 const routes = [
   {
     path: '/profile',
@@ -25,7 +18,7 @@ const routes = [
     name: 'login',
     component: FormLoginView,
     meta: {
-      showNav: false,
+      hide: true,
     }
   },
 ]
