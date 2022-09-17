@@ -40,14 +40,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
-<<<<<<< HEAD
-// ==================Log out============================
-Route::post('/logout',[UserController::class,'logout']);
-//==================Ero==================//
-Route::apiResource('/eros',EroController::class);
-=======
 
->>>>>>> b26617003554cca9699b2b4e255db88a342f6e79
+////////////////////////////////ero==========================
+
+Route::apiResource('/ero',EroController::class);
 
 
 
