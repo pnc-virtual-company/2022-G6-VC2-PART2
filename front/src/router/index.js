@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Alumni/AlumniProfileView.vue'
 import FormLoginView from '../views/login/FormLoginView.vue'
+import EroList from '../views/Ero/EroListView.vue'
 import VueCookies from 'vue-cookies'
 import PageNotFound from '@/views/PageNotFound.vue'
 const routes = [
@@ -14,9 +15,13 @@ const routes = [
     },
   },
   {
-    path:'/ero',
-    name:'about',
-    component:()=>import('../views/Ero/EroForm.vue')
+    path: '/ero',
+    name: 'ero',
+    component: EroList,
+    meta:{
+      isAuthentication:true,
+      userRole:'alumni',
+    },
   },
   {
     path: '/',
