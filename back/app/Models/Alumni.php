@@ -37,11 +37,11 @@ class Alumni extends Model
     
     public function AlumniSkills()
     {
-        return $this -> hasOne(AlumniSkills::class);
+        return $this -> hasMany(AlumniSkills::class);
     }
 
-    public function StudyBackground()
+    public function AlumniStudyBackground()
     {
-        return $this -> hasMany(StudyBackground::class);
+        return $this -> hasMany(AlumniStudyBackground::class);
     }
 }

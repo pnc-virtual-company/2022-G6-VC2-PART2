@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class AlumniStudyBackground extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'alumni_id',
-        'title',
-    ];
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
-
-    public function AlumniSkills()
+    public function Alumni()
     {
-        return $this -> hasMany(AlumniSkills::class);
+        return $this->belongsTo(Alumni::class);
+    }
+    public function StudyBackground()
+    {
+        return $this->belongsTo(StudyBackground::class);
     }
 }

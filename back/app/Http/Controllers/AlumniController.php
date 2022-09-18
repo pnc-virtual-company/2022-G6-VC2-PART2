@@ -7,7 +7,7 @@ class AlumniController extends Controller
     //================== show all alumnis ======================
     public function index()
     {
-        return Alumni::with('user','alumniExperience.workExperience', 'alumniSkills.skill','StudyBackground')->get();
+        return Alumni::with('user','alumniExperience.workExperience', 'alumniSkills.skill','alumniStudyBackground.studyBackground')->get();
     }
    //================== add new alumni ======================
     public function store(Request $request)
@@ -29,7 +29,7 @@ class AlumniController extends Controller
    //================== show one alumni ======================
     public function show($id)
     {
-        return Alumni::with('user','alumniExperience.workExperience', 'alumniSkills.skill','StudyBackground')->findOrFail($id);
+        return Alumni::with('user','alumniExperience.workExperience', 'alumniSkills.skill','alumniStudyBackground.studyBackground')->findOrFail($id);
     }
    //================== Alumni update ======================
     public function update(Request $request, $id)
