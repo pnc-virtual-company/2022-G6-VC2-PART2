@@ -45,7 +45,7 @@ Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 Route::get('/smsMail',[UserController::class,'smsMail']);
 
 //==================Ero==================//
-Route::apiResource('/eros',EroController::class);
+Route::apiResource('/ero',EroController::class);
 
 
 
