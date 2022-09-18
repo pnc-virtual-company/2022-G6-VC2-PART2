@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use Mail; 
+use App\Mail\SendMail;
+
 class UserController extends Controller
 {
     //================== show all users ======================
@@ -50,5 +53,20 @@ class UserController extends Controller
         auth()->user()->tokens()->delete();
         return response()->json(['sms'=>'logged out']);
     }
- 
+
+    // ====================Send Email When User Create Account================
+    // Send mail when admin create student
+    public function smsMail(Request $request)
+    {
+        $user = User::findOrFail(1);
+
+        $sms = [
+            'title' =>'Hello '. $user->firstName. ',',
+            'body' => 'Here is your account and your password is 12345678',
+        ];
+         
+        Mail::to($user->email)->send(new SendMail($sms));
+           
+        return("Email is sent successfully.");
+    }
 }

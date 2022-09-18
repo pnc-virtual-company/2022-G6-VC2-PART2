@@ -27,7 +27,8 @@
   </div>
 </template>
 <script>
-  import axios from "axios"
+  import axios from "../../axios-http";
+  import VueCookies from 'vue-cookies'
   import AlumniProfile from "../Alumni/AlumniProfile.vue";
   import EditAlumniProfileForm from '../Alumni/EditAlumniProfileForm.vue';
   import ExperienceForm from '../Alumni/ExperienceForm.vue'
@@ -76,7 +77,7 @@
       },
       //=================== edit alumni experience ===================
       editExperience(data) {
-        axios.put(this.url+'alumniWork/'+data.id, data)
+        axios.put('alumniWork/'+data.id, data)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -84,7 +85,7 @@
       },
       //=================== delete alumni experience ===================
       deleteExperience(id) {
-        axios.delete(this.url+'alumniWork/'+id)
+        axios.delete('alumniWork/'+id)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -92,29 +93,24 @@
       },
       //=================== get  alumni experience ===================
       getData() {
-        console.log(document.cookie.split("=")[2].split(';')[0]);
         axios.get(
-          this.url+"alumni/"+document.cookie.split("=")[2].split(';')[0], 
-          {headers: {
-            Authorization: 'Bearer ' + document.cookie.split("=")[1].split(';')[0],
-            "Access-Control-Origin": "*"
-        }})
-        .then((res) => {
-          this.alumniData = res.data;
-          this.alumniInfo=res.data.user
-          this.alumniExperiences=res.data.work_experience
-          console.log(this.alumniExperiences)
-        });
+          "alumni/"+VueCookies.get('userId'))
+          .then((res) => {
+            this.alumniData = res.data;
+            this.alumniInfo=res.data.user
+            this.alumniExperiences=res.data.work_experience
+            console.log(this.alumniExperiences)
+          });
       },
       //=================== update   alumni general information ===================
       updateDataAlumni(userId,alumniId,user,alumni){
         console.log(alumni)
-        axios.put(this.url+"user/"+userId,user).then(()=>{
+        axios.put("user/"+userId,user).then(()=>{
           this.getData();
         }).catch((err)=>{
           console.log(err)
         })
-        axios.put(this.url+"alumni/"+alumniId,alumni).then(()=>{
+        axios.put("alumni/"+alumniId,alumni).then(()=>{
           this.getData();
         })
         this.isShow = false;

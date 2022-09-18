@@ -12,7 +12,7 @@
                     placeholder=" " 
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                 >
-                    <BaseLabel for="floating_first_name"> First name</BaseLabel>
+                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> First name</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
                 <input 
@@ -21,7 +21,7 @@
                     placeholder=" " 
                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                 >
-                    <BaseLabel for="floating_last_name"> Last name</BaseLabel>
+                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> Last name</BaseLabel>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                         placeholder=" " 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                     >
-                    <BaseLabel for="floating_email">Email</BaseLabel>
+                    <BaseLabel for="floating_email"><fa :icon="['fas', 'envelope']" class="text-sky-500" /> Email</BaseLabel>
                 </div>
             </div>
             <div class="grid md:grid-cols-2 md:gap-6">
@@ -44,7 +44,7 @@
                         placeholder=" " 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                     >
-                    <BaseLabel for="floating_phone"> Phone number</BaseLabel>
+                    <BaseLabel for="floating_phone"><fa :icon="['fas', 'phone']" class="text-sky-500" /> Phone number</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
                     <input 
@@ -53,28 +53,28 @@
                         placeholder=" " 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                     >
-                    <BaseLabel for="floating_address"> Telegram</BaseLabel>
+                    <BaseLabel for="floating_address"><fa icon="paper-plane" class="text-sky-500" /> Telegram</BaseLabel>
                 </div>
             </div >
             <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input 
+                    <select 
                         v-model="gender"
-                        type="text" 
-                        placeholder=" " 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer"
                     >
-                    <BaseLabel for="floating_email">Gender</BaseLabel>
-                </div>
+                    <option value="Gender" disabled>Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>        
+            </div>
             </div>
             <div class="p-3 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">create</BaseButton>
+                <BaseButton @click="addEroTeam" type="submit" class="bg-[#1da1f2] sm:w-auto ">create</BaseButton>
                 <BaseButton type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
         </template>
     </BaseForm>
 </template>
-
 <script>
 import BaseForm from '../../components/widget/BaseForm.vue';
 import BaseButton from '../../components/widget/BaseButton.vue';
@@ -85,6 +85,17 @@ export default {
         BaseButton,
         BaseLabel,
     },
+    data(){
+        return{
+            isSow:false,
+            gender:'Gender'
+        }
+    },
+    methods:{
+        onClick(){
+            this.isSow = true;
+        }
+    }
 }
 </script>
 

@@ -21,9 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('/user',UserController::class);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== user api ======================
-    Route::apiResource('/user',UserController::class);
 
     //================== alumni api ======================
     Route::apiResource('/alumni',AlumniController::class);
@@ -40,6 +40,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+
+// =================Send Email When User Create Account===============
+Route::get('/smsMail',[UserController::class,'smsMail']);
+
 //==================Ero==================//
 Route::apiResource('/eros',EroController::class);
 
