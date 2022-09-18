@@ -13,7 +13,7 @@
           </div>
           <!-- Password input -->
           <div class="mb-6 flex items-center justify-between w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded outline-none">
-            <input :type="showPassword ? 'password' : 'text'" v-model="password" class="outline-none	" placeholder="Password" />
+            <input :type="!showPassword ? 'password' : 'text'" v-model="password" class="outline-none	" placeholder="Password" />
             <fa @click="showPassword = !showPassword" :icon="showPassword ? 'eye' : 'eye-slash'" />
           </div>
           <p v-if="inValid" class="text-[#e04]">Invalid email or password!</p>
