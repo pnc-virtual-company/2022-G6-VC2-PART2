@@ -70,12 +70,7 @@ class WorkExperienceController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\WorkExperience  $workExperience
-     * @return \Illuminate\Http\Response
-     */
+   //========================= delete work experience ==========================
     public function destroy($id)
     {
         $iSDelete = WorkExperience::destroy($id);

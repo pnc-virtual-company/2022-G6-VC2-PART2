@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('eros', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('email');
-            $table->string('password');
-            $table->string('role');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('gender');
+            $table->string('phone');
+            $table->string('telegram');
             $table->timestamps();
         });
     }

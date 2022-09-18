@@ -9,16 +9,19 @@ class Ero extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'username',
-        'email',
-        'password',
-        'role',
-        'verify_code',
+        'user_id',
+        'gender',
+        'phone',
+        'telegram',
     ];
     protected $hidden = [
 
         'created_at',
         'updated_at'
     ];
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
