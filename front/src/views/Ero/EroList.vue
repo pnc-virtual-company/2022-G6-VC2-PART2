@@ -4,7 +4,7 @@
       <div>Name<p class="font-medium text-lg">{{ ero.user.firstName }} {{ ero.user.lastName }}</p></div>
       <div> Email <p class="font-medium text-lg">{{ ero.user.email }}</p></div>
       <div>
-        <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1rem] rounded-full shadow-lg bg-[#ddd]"/>
+        <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1rem] rounded-full shadow-lg bg-[#ddd]" @click="onDelete(ero.user.id,ero.id)"/>
         <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd]"/>
       </div>
     </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   props: {
     ero: Object,
@@ -29,5 +30,21 @@ export default {
       show: false,
     };
   },
+  methods:{
+    onDelete(userId,eroId){
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0062ff',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, sure'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit('deleteEro',userId,eroId)
+        }
+      })
+  }
+  }
 };
 </script>
