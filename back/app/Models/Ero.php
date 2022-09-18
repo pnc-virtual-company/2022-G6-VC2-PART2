@@ -13,6 +13,7 @@ class Ero extends Model
         'email',
         'password',
         'role',
+        'verify_code',
     ];
     protected $hidden = [
 

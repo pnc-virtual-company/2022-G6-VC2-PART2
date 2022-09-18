@@ -7,6 +7,7 @@ use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EroController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,10 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::apiResource('/user',UserController::class);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== user api ======================
-    Route::apiResource('/user',UserController::class);
-
+    
     //================== alumni api ======================
     Route::apiResource('/alumni',AlumniController::class);
 
@@ -42,12 +43,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 
 // =================Send Email When User Create Account===============
-Route::get('/smsMail',[UserController::class,'smsMail']);
+Route::get('/smsMail',[MailController::class,'smsMail']);
 
 // ==================Log out============================
 Route::post('/logout',[UserController::class,'logout']);
 //==================Ero==================//
 Route::apiResource('/eros',EroController::class);
+
+// ==============Forget Password =================
+Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
+Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
+Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
 
 
 
