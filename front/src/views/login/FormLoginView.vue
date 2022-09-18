@@ -75,11 +75,21 @@
         console.log(VueCookies.get('token'));
         console.log(VueCookies.get('userId'));
         console.log(VueCookies.get('role'));
-        this.$router.push('/profile');
+        window.location.reload();
       })
     }
   },
   created() {
+    console.log(this.$route.meta.logout);
+    if (VueCookies.get('token')) {
+      this.$router.push('/profile');
+    }
+    if (this.$route.meta.logout) {
+      VueCookies.remove('token');
+      VueCookies.remove('userId');
+      VueCookies.remove('role');
+      this.$router.push('/');
+    }
   }
   }
   </script>

@@ -21,6 +21,15 @@ const routes = [
       hide: true,
     }
   },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: FormLoginView,
+    meta: {
+      hide: true,
+      logout: true,
+    }
+  },
 ]
 
 const router = createRouter({
