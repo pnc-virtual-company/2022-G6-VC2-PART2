@@ -5,14 +5,16 @@
       <div class="w-full m-auto text-center px-5 py-5 mt-[-15vh]">
         <div>
           <div class="rounded-full w-[25vh] h-[25vh]">
-              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" :src="alumniData.profile"/>    
+              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile != null" :src="alumniData.profile"/>    
+              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Male'" src="@/assets/boy.jpg"/>    
+              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Female'" src="@/assets/girl.webp"/>    
               <input type="file" @change="uploadImage($event.target.files[0])" hidden id="imageFile" accept="image/png, image/gif, image/jpeg">
               <label for="imageFile">
                 <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[1.2rem] mt-[8rem]"/>
               </label>
           </div>
           <div class="capitalize text-left ml-[12rem] mt-[-6rem]">
-            <fa icon="pencil" class="text-[#0062ff] text-xl float-right bg-[#ddd] p-3 rounded-full cursor-pointer mt-[0.5rem]" @click="showAlumniForm"/>
+            <fa icon="pencil" class="text-[#0062ff] text-xl float-right bg-[#ddd] p-2 rounded-full cursor-pointer mt-[0.5rem]" @click="showAlumniForm"/>
             <h1 class="text-4xl font-bold mt-3 mb-3">{{alumniInfo.firstName}} {{alumniInfo.lastName}}</h1>
             <div v-for:="workExperience in workExperiences">
               <p class="text-lg font-medium">{{workExperience.position}} at {{workExperience.company}}</p>

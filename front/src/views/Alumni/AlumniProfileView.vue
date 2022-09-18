@@ -43,7 +43,9 @@
         @showForm="showStudyBackgroundForm"
         :alumni_key="alumniData.id"
         @createStudy="newStudyBackground"
-        
+        :type="studybgType"
+        :studybackground="studyBackground"
+        @updateStudyBackground="updateStudyBackground"
       />
     </section>
       <div class="w-[80%] flex items-start m-auto">
@@ -51,19 +53,20 @@
           <!-- GeneralInformationCard -->
           <GeneralInformationCard :alumniData="alumniData"/>
           <!-- study background card -->
-          <div class="m-auto w-[100%] bg-[#fff] mt-3 p-3 rounded-md">
+          <div class="m-auto w-[100%] bg-[#fff] mt-3 px-3 pt-3 pb-1 mb-3 rounded-md">
             <div class="flex justify-between">
               <h1 class="font-bold text-left text-[#0062ff] text-2xl">Study Background</h1>
               <!--================== option content create form ============= -->
-              <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm"/>
+              <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm(true,'create')"/>
             </div>
+            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
             <StudyBackground
               v-for:="studyBackground of studyBackgrounds"
               :studyBackground="studyBackground"
-              class="mt-3"
               :studyBackgrounds='studyBackgrounds'
               @showForm="showStudyBackgroundForm"
               @deleteStudyBackground = "removeStudyBackground"
+              @showFormEditstudybackground="showEditStudyBackgroundForm"
             />
           </div>
         </div>
@@ -76,12 +79,13 @@
             @deleteAlumniSkill = "removeAlumniSkill"
           />
           <div class="bg-[#fff] p-3 rounded-md">
-            <h1 class="font-bold text-left text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
+            <h1 class="font-bold text-left text-[#0062ff] text-2xl">Work Experience</h1>
             <div class="m-auto w-[100%] flex justify-end">
               <!--================== option content create form ============= -->
               <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showExperiences(true, 'create')"/>
             </div>
             <!-- experience card -->
+            <p class="text-[#e04] mt-3" v-if="alumniExperiences.length == 0">No work experience yet. Please add some!</p>
             <WorkExperience 
               v-for:="workExperience in alumniExperiences.slice().reverse()" 
               :workExperience="workExperience"
@@ -129,9 +133,11 @@
         alumniInfo: {}, 
         alumniSkill:{},
         type: "",
+        studybgType: "",
         showSkillForm:false,
         currentWork: [],
         studyBackgrounds:[],
+        studyBackground:[],
         alumniExperiences: [],
       }
     },
@@ -140,7 +146,7 @@
         this.showFormAlumni = status;
         this.showExperience = status;
       },
-      showForm(status) {
+      showForm(status){
         this.showFormAlumni = status;
       },
       showExperiences(status, type, experience) {
@@ -148,8 +154,15 @@
         this.experience = experience;
         this.type = type;
       },
-      showStudyBackgroundForm(status) {
+      showStudyBackgroundForm(status,type) {
         this.showStudyBackground = status;
+        this.studybgType=type
+      },
+      showEditStudyBackgroundForm(status,type,studybackground) {
+        console.log(status,type,studybackground)
+        this.showStudyBackground = status;
+        this.studybgType=type
+        this.studyBackground=studybackground
       },
       //=================== add new experience ===================
       newAlumniExperience(
@@ -279,6 +292,14 @@
             this.getData();
           })
       },
+      updateStudyBackground(study_background,id) {
+          axios
+          .put("http://127.0.0.1:8000/api/studyBackground/" + id,study_background)
+          .then(() => {
+            this.showStudyBackground = false;
+            this.getData();
+          })
+      },
     },
     computed: {
       // get current work of alumni
@@ -287,6 +308,7 @@
         return this.alumniExperiences.filter(work => (work.end_year == null));
       }
     },
+
     created() {
       this.getData();
     }

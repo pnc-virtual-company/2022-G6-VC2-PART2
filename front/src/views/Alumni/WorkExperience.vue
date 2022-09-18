@@ -1,5 +1,5 @@
 <template>
-      <div class="shadow-md bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between" @mouseover="showAction = true" @mouseleave="showAction = false" v-if="workExperience.end_year != null">
+      <div class="shadow-md bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between" @mouseover="showAction = true" @mouseleave="showAction = false">
         <div class="flex items-center justify-start">
           <div class="rounded-full w-[5rem] h-[5rem]" >
             <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" src="@/assets/pnc-logo.jpg" />    
@@ -8,12 +8,13 @@
             <a :href="workExperience.company_link" target="_blank">
               <p class="font-medium	text-lg">{{workExperience.company}}</p>
             </a>            
-            <p >{{formatYear(workExperience.start_year)}} - {{formatYear(workExperience.end_year)}}</p>
+            <p >{{formatYear(workExperience.start_year)}} <span v-if="workExperience.end_year != null">- {{formatYear(workExperience.end_year)}}</span></p>
           </div>
         </div>
         <div>
           <p class="font-medium	text-lg">{{workExperience.position}}</p>
-          <p>{{workExperience.duration}}</p>
+          <p v-if="workExperience.end_year != null">{{workExperience.duration}}</p>
+          <p v-else>Present</p>
         </div>
         <div v-show="showAction" class="flex justify-end items-center w-[45%] mt-[-5rem] absolute">
             <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
@@ -52,7 +53,7 @@ export default {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#0062ff',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {

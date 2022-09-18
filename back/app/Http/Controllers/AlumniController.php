@@ -38,8 +38,10 @@ class AlumniController extends Controller
         $alumni ->phone = $request ->phone;
         $alumni ->batch = $request ->batch;
         $alumni ->telegram = $request ->telegram;
-        $alumni ->major = $request ->major;       
+        $alumni ->major = $request ->major; 
+        $alumni -> gender = $request->gender;      
         $alumni -> address = $request ->address;
+        $alumni ->placeOfBirth = $request ->placeOfBirth;
         $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }

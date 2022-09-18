@@ -1,7 +1,8 @@
 <template>   
     <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white " @click="stopInput">
         <template v-slot:header >
-            <span>Add Your Study Background</span>
+            <span v-if="type=='create'">Add Your Study Background</span>
+            <span v-if="type=='edit'">Edit Your Study Background</span>
         </template>        
         <template v-slot:form>
             <div class="relative z-0 mb-6 w-full group">
@@ -22,16 +23,17 @@
             </div>    
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year" />
-                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> Start_year</BaseLabel>
+                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="start_year" />
+                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-[#0062ff]" /> Start_year</BaseLabel>
                 </div>
                 <div class="relative z-0 mb-6 w-full group">
-                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="end_year" />
-                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> End_year</BaseLabel>
+                    <input type="number" min="1900" max="2099" step="1" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" />
+                    <BaseLabel for="floating_last_name"><fa icon="user" class="text-[#0062ff]" /> End_year</BaseLabel>
                 </div>
             </div>        
             <div class="p-3 text-center">
-                <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto " @click="sendData">Add</BaseButton>
+                <BaseButton v-if="type=='create'" type="submit" class="bg-[#1da1f2] sm:w-auto " @click="sendData">Add</BaseButton>
+                <BaseButton v-if="type=='edit'" type="submit" class="bg-[#0062ff] sm:w-auto " @click="editStudyBackground(studybackground.id)">Edit</BaseButton>
                 <BaseButton @click="hide" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
             
@@ -50,7 +52,7 @@ export default {
         BaseButton,
         BaseLabel,
     },
-    props:{alumni_key:String},
+    props:{alumni_key:String,type:String,studybackground:Object},
     data(){
         return{
             url: process.env.VUE_APP_API_URL,
@@ -99,14 +101,34 @@ export default {
         hide(){
             this.$emit('showForm',false)
         },
+        showDataInForm() {
+            this.school = this.studybackground.school;
+            this.major = this.studybackground.major;
+            this.start_year = this.studybackground.start_year;
+            this.end_year = this.studybackground.end_year;
+            this.alumni_id= this.studybackground.alumni_id;
+            console.log('hideForm');
+            console.log(this.company);
+        },
+        //=============================== add study background =================================
         sendData(){
             let study = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
             this.$emit('createStudy',study)
+        },
+        //=============================== update study background =================================
+        editStudyBackground(id){
+           let studyBackground = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
+           this.$emit('updateStudyBackground',studyBackground,id)
         }
     },
     mounted(){
         this.getAllStudybackground()
-    }
-
+    },
+    created(){
+        if (this.type   == 'edit'){
+            this.showDataInForm();
+        }
+    },
+  
 }
 </script>
