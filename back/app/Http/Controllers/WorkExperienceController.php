@@ -15,7 +15,6 @@ class WorkExperienceController extends Controller
     public function store(Request $request)
     {
         $work = new WorkExperience();
-        $work -> alumni_id = $request -> alumni_id;
         $work -> company = $request -> company;
         $work -> position = $request -> position;
         $work -> start_year = $request -> start_year;
@@ -35,7 +34,6 @@ class WorkExperienceController extends Controller
     public function update(Request $request, $id)
     {
         $workExperience= WorkExperience::findOrFail($id);
-        $workExperience -> alumni_id = $request->alumni_id;
         $workExperience ->company = $request ->company;
         $workExperience ->position = $request ->position;
         $workExperience ->start_year = $request ->start_year;
