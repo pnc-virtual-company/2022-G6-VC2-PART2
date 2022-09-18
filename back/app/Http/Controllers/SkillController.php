@@ -14,7 +14,7 @@ class SkillController extends Controller
      */
     public function index()
     {
-        return Skill:: with('alumni')->get();
+        return Skill::get();
     }
 
     /**
@@ -26,7 +26,6 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $skill = new Skill();
-        $skill-> alumni_id= $request -> alumni_id;
         $skill-> title = $request ->title;
         $skill->save();
         return response()->json(['sms'=> $skill]);
@@ -53,7 +52,6 @@ class SkillController extends Controller
     public function update(Request $request, $id)
     {
         $skill = Skill::findOrFail($id);
-        $skill-> alumni_id= $request -> alumni_id;
         $skill-> title = $request ->title;
         $skill->save();
         return response()->json(['sms'=> $skill], 200);

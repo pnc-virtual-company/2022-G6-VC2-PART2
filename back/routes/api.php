@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\AlumniSkillsController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\StudyBackgroundController;
@@ -33,7 +34,7 @@ Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 
 //===================skilll alumni api =================
-Route::apiResource('/alumniSkill',SkillController::class);
+Route::apiResource('/skill',SkillController::class);
 
 // ==================company profile=====================
 Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
@@ -43,3 +44,4 @@ Route::apiResource('/studyBackground',StudyBackgroundController::class);
 
 //================== upload profile api ===============
 Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
+Route::apiResource('alumniSkill', AlumniSkillsController::class);

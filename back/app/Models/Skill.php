@@ -17,8 +17,9 @@ class Skill extends Model
         'created_at',
         'updated_at'
     ];
-    public function Alumni()
+
+    public function AlumniSkills()
     {
-        return $this->belongsTo(Alumni::class);
+        return $this -> hasOne(AlumniSkills::class);
     }
 }
