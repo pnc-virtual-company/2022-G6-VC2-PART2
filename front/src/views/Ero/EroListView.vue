@@ -1,8 +1,7 @@
 <template>
   <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl">
-    <div class="flex justify-between font-bold text-center text-[#0062ff] text-2xl">
-      Ero List
-      <fa icon="plus" class="w-[1rem] h-[1rem] text-white bg-[gray] p-2 rounded-full" @click="show = true"/>
+    <div class="flex justify-between font-bold text-center text-[#0062ff] text-2xl"> Ero List
+     <fa icon="plus" class="w-[1rem] h-[1rem] text-white bg-[gray] p-2 rounded-full" @click="show = true"/>
     </div>
     <div class="m-auto w-[100%] flex justify-end"></div>
     <div class="m-auto w-[100%]" >
@@ -39,20 +38,15 @@ export default {
     },
     //====================== add ero ==============================
     addUserEro(firstName,lastName,email,role,gender,phone,telegram){
-            let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678'}
-            console.log(user)
-            axios.post('user',user)
-            .then((res)=> {
-              console.log(res.data.sms.id);
-              let ero = {gender:gender, phone:phone,telegram:telegram,user_id:res.data.sms.id}
-              axios.post('ero',ero) 
-              .then((res)=> {
-                console.log(res.data);
-              })
-                this.getData()
-                this.show=false
+      let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678'}
+      axios.post('user',user)
+      .then((res)=> {
+        console.log(res.data.sms.id);
+        let ero = {gender:gender, phone:phone,telegram:telegram,user_id:res.data.sms.id}
+        axios.post('ero',ero) 
+          this.getData()
+          this.show=false
             })
-            console.log(firstName + lastName + email + role + gender + phone + telegram);
       },
     //=====================getdata  form functions =================
     getData() {
