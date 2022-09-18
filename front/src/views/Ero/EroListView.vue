@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import FormEro from "./EroInformation.vue";
+  import FormEro from "./EroList.vue";
   export default {
     components: {
         FormEro,
