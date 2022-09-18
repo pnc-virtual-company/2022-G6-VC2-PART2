@@ -9,15 +9,16 @@
         <form @submit.prevent="login">           
           <!-- Email input -->
           <div class="mb-6">
-            <input type="email" v-model="email" class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Email address" />
+            <input type="email" v-model="email" class="w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded outline-none" placeholder="Email address" />
           </div>
           <!-- Password input -->
-          <div class="mb-6">
-            <input type="password" v-model="password" class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Password" />
+          <div class="mb-6 flex items-center justify-between w-full px-4 py-2 text-lg font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded outline-none">
+            <input :type="showPassword ? 'password' : 'text'" v-model="password" class="outline-none	" placeholder="Password" />
+            <fa @click="showPassword = !showPassword" :icon="showPassword ? 'eye' : 'eye-slash'" />
           </div>
           <p v-if="inValid" class="text-[#e04]">Invalid email or password!</p>
           <a href="#!" class="text-[#0062ff] hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgot password?</a>
-          <button type="submit" class="w-full py-2 mt-3 bg-[#0062ff] rounded-md text-[#fff]">Login</button>
+          <button type="submit" class="w-full py-2 mt-3 bg-[#0062ff] rounded-md text-[#fff] text-xl font-normal">Login</button>
         </form>
       </div>
     </div>
@@ -34,6 +35,7 @@ export default {
       email: '',
       password: '',
       inValid: false,
+      showPassword: false,
     }
   },
   methods: {
