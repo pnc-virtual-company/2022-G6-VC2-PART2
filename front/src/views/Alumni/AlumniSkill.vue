@@ -1,7 +1,7 @@
 <template>
   <div class="bg-[#fff] mt-3 p-5 rounded-lg shadow-xl">
     <div class="w-[100%] flex m-auto">
-        <h1 class="w-[85%] font-bold text-[#0062ff] text-2xl">Skill</h1>
+        <h1 class="w-[85%] font-bold text-[#0062ff] text-2xl ">Skill</h1>
         <div class="w-[12%] flex justify-between">
           <fa icon="trash-alt" class="fa fa-trash text-[#e04]  text-[1.2rem] bg-[#ddd] ml-[15%] p-2 rounded-full cursor-pointer" @click="showXmark = ! showXmark" />
           <fa icon="plus" class=" text-[1.2rem]  text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="sendToShowSkillForm" />

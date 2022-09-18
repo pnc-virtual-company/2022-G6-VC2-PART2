@@ -1,25 +1,37 @@
 <template>    
-    <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white ">
+    <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white " @click = "turnOffInputOption">
         <template v-slot:header >
             <span v-if="type=='create'">Create Work Experoience</span>
             <span v-else-if="type=='edit'">Edit Work Experoience</span>
         </template>        
-        <template v-slot:form>
+        <template v-slot:form >
+            <!-- POSITION INPUT -->
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position">
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position" @input="filterEperienceOption">
+                <div v-if="filterOption.length==0 && isInputPosition" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this position yet !</div>
+                <ul class="shadow-md" v-if="isInputPosition">
+                    <option v-for="(experience,index) of filterOption" :key="index" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectPositionValue" :value="experience.position">{{experience.position}}</option>
+                </ul>
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
                 <small class="text-red-600" v-if="isNoPostion"> You missed position*</small>
             </div>
+            <!-- COMPANY INPUT -->
             <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company">
+                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company" @input="filterEperienceCompany">
+                <div v-if="filterCompany.length==0 && isInputCompany" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this company yet !</div>
+                <ul class="shadow-md" v-if="isInputCompany">
+                    <option v-for="(experience,index) of filterCompany" :key="index" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectCompanyValue" :value="experience.company">{{experience.company}}</option>
+                </ul>
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
                 <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
             </div>
+            <!-- LINK COMPANY INPUT -->
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company_link">
                 <BaseLabel for="floating_address"><fa icon="link" class="text-sky-500" />companylink</BaseLabel>
                 <small class="text-red-600" v-if="isNoLinkCompany"> You missed link company*</small>
             </div>
+            <!-- START AND END YEAR INPUT -->
             <div class="grid md:grid-cols-2 md:gap-6 ">
                 <div class="relative z-0 mb-6 w-full group">
                     <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="start_year">
@@ -32,10 +44,12 @@
                     <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
                 </div>
             </div>
+            <!-- CHECK IS LEFT COMPANY INPUT -->
             <div class=" mb-6 w-full group">
                 <input id="default-checkbox" type="checkbox" v-model='hideEndYear' class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
                 <label for="default-checkbox" class="disabled ml-2 text-sm cursor-pointer">Already left from this company?</label>
             </div>
+            <!-- BUTTON GROUP INPUT -->
             <div class="p-2 text-center">
                 <BaseButton type="submit" class="bg-[#1da1f2] sm:w-auto ">
                     <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
@@ -47,6 +61,7 @@
     </BaseForm>
 </template>
 <script>
+import axios from "axios"
 import BaseForm from '../../components/widget/BaseForm.vue';
 import BaseButton from '../../components/widget/BaseButton.vue';
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
@@ -58,7 +73,7 @@ export default {
     },
     props: {
         type: String,
-        experience:Object
+        experience:Object,
     },
     data(){
         return {
@@ -76,13 +91,33 @@ export default {
             month:'',
             week:'',
             duration:null,
+            AllalumniExperiences:[],
+            isInputPosition:false,
+            isInputCompany:false,
+            filterOption:[],
+            filterCompany:[]
         }
     },
     emits: ['hideForm', 'edit', 'addAlumniExperience'],
     methods: {
+        turnOffInputOption(){
+            this.isInputPosition=false
+            this.isInputCompany=false
+        },
+        // ================= SELECT VELUE OPTION =================
+        selectPositionValue(e){
+            this.position=e.target.value
+            this.isInputPosition=false
+        },
+        selectCompanyValue(e){
+            this.isInputCompany=false
+            this.company=e.target.value
+        },
+        // ================== HIDE EXPERIENCE FORM =================
         hideForm() {
             this.$emit('hideForm', false);
         },
+        //=================== SET DATA TO FORM INPUT =================
         showDataInForm() {
             this.position = this.experience.position;
             this.company = this.experience.company;
@@ -92,6 +127,19 @@ export default {
             console.log('hideForm');
             console.log(this.company);
         },
+        //=================== FILTER EXPERIAN OPTIONS =================
+        filterEperienceOption(e){
+            this.isInputPosition=true;
+            console.log(this.AllalumniExperiences)
+            this.filterOption=this.AllalumniExperiences.filter(experience=>experience.position.toLowerCase().includes(e.target.value.toLowerCase()))
+        },
+        //=================== FILTER EXPERIAN COMPANY =================
+        filterEperienceCompany(e){
+            this.isInputCompany=true;
+            console.log(this.AllalumniExperiences)
+            this.filterCompany=this.AllalumniExperiences.filter(experience=>experience.company.toLowerCase().includes(e.target.value.toLowerCase()))
+        },
+        //=================== CALCULATE DURATION =================
         calculateDuration() {
             let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
             if (duration>=365){
@@ -130,6 +178,13 @@ export default {
             }
 
         },
+         //=================== get alumni experience ===================
+         getAllData() {
+          axios.get('http://127.0.0.1:8000/api/alumniWork').then((res) => {
+            console.log(res.data)
+            this.AllalumniExperiences = res.data;
+          });
+        },
         //=================== edit experience emit =================
         editExperience(){
             this.calculateDuration();
@@ -167,6 +222,9 @@ export default {
                 }
             }
         },
+    },
+    mounted(){
+        this.getAllData()
     },
     created(){
         if (this.type   == 'edit'){

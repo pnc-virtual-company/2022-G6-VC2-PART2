@@ -43,6 +43,7 @@
         @showForm="showStudyBackgroundForm"
         :alumni_key="alumniData.id"
         @createStudy="newStudyBackground"
+        
       />
     </section>
       <div class="w-[80%] flex items-start m-auto">
@@ -138,6 +139,9 @@
       hideForm(status) {
         this.showFormAlumni = status;
         this.showExperience = status;
+      },
+      showForm(status) {
+        this.showFormAlumni = status;
       },
       showExperiences(status, type, experience) {
         this.showExperience = status;
