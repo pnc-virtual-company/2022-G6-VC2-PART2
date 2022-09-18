@@ -38,14 +38,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ==================Log out============================
     Route::post('/logout',[UserController::class,'logout']);
 });
+//==================Ero==================//
+Route::apiResource('/ero',EroController::class);
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 
 // =================Send Email When User Create Account===============
 Route::get('/smsMail',[UserController::class,'smsMail']);
 
-//==================Ero==================//
-Route::apiResource('/ero',EroController::class);
 
 
 
