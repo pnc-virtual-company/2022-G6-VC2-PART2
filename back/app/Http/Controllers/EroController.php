@@ -14,7 +14,7 @@ class EroController extends Controller
      */
     public function index()
     {
-        return Ero::get();
+        return Ero::with('user')->get();
     }
 
     /**
@@ -26,10 +26,10 @@ class EroController extends Controller
     public function store(Request $request)
     {
         $eros = new Ero();
-        $eros->username = $request->username;
-        $eros->email = $request->email;
-        $eros->password = bcrypt($request->password);
-        $eros->role= $request->role;
+        $eros->user_id = $request->user_id;
+        $eros->gender = $request ->gender;
+        $eros->phone = $request ->phone;
+        $eros->telegram = $request ->telegram;
         $eros->save();
         return response()->json(['sms'=>$eros]);
     }
@@ -55,10 +55,10 @@ class EroController extends Controller
     public function update(Request $request, $id)
     {
         $eros = Ero::findOrFail($id);
-        $eros->username = $request->username;
-        $eros->email = $request->email;
-        $eros->password = bcrypt($request->password);
-        $eros->role= $request->role;
+        $eros->user_id = $request->user_id;
+        $eros->gender = $request ->gender;
+        $eros->phone = $request ->phone;
+        $eros->telegram = $request ->telegram;
         $eros->save();
         return response()->json(['sms'=>$eros]);
     }
