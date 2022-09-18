@@ -65,11 +65,11 @@
                     <option value="Gender" disabled>Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                </select>        
-            </div>
+                    </select>        
+                </div>
             </div>
             <div class="p-3 text-center">
-                <BaseButton @click="addEroTeam" type="submit" class="bg-[#1da1f2] sm:w-auto ">create</BaseButton>
+                <BaseButton @click="addUserEro" type="submit" class="bg-[#1da1f2] sm:w-auto ">create</BaseButton>
                 <BaseButton type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
             </div>
         </template>
@@ -79,6 +79,7 @@
 import BaseForm from '../../components/widget/BaseForm.vue';
 import BaseButton from '../../components/widget/BaseButton.vue';
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
+import axios  from 'axios';
 export default {
     components: {
         BaseForm,
@@ -88,13 +89,25 @@ export default {
     data(){
         return{
             isSow:false,
-            gender:'Gender'
+            firstName: '',
+            lastName: '',
+            email:'',
+            role:'ero',
+            gender:'Gender',
+            phone:'',
+            telegram:'',
+            userId: null,
         }
     },
     methods:{
-        onClick(){
-            this.isSow = true;
-        }
+        addUserEro(){
+            let user = {firstName:this.firstName, lastName:this.lastName, email:this.email, role:this.role,password:'12345678'}
+            axios.post('http://127.0.0.1:8000/api/user',user)
+            .then((res)=> {
+                console.log(res.data.sms.id);
+                let ero = {gender:this.gender, phone:this.phone,telegram:this.telegram,user_id:res.data.sms.id}
+                axios.post('http://127.0.0.1:8000/api/eros',ero)            })
+        },
     }
 }
 </script>
