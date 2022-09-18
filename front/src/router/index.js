@@ -20,7 +20,7 @@ const routes = [
     component: EroList,
     meta:{
       isAuthentication:true,
-      userRole:'alumni',
+      userRole:'ero',
     },
   },
   {

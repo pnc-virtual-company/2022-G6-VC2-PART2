@@ -60,7 +60,11 @@ export default {
   created() {
     console.log(this.$route.meta.logout);
     if (VueCookies.get('token')) {
-      this.$router.push('/profile');
+      if (VueCookies.get('role') == 'alumni') {
+        this.$router.push('/profile');
+      } else if (VueCookies.get('role') == 'ero') {
+        this.$router.push('/ero');
+      }
     }
     if (this.$route.meta.logout) {
       VueCookies.remove('token');
