@@ -17,9 +17,9 @@ class MailController extends Controller
      * @return response()
      */
     // Send mail when admin create student
-    public function smsMail(Request $request)
+    public function smsMail(Request $request,$id)
     {
-        $user = User::findOrFail(1);
+        $user = User::findOrFail($id);
 
         $sms = [
             'title' =>'Hello '. $user->firstName. ',',
