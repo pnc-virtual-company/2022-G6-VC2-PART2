@@ -45,13 +45,7 @@ class WorkExperienceController extends Controller
         $workExperience->save();
         return response()->json(['sms'=> 'AlumniWork Update Successfully!', 'data' => $workExperience], 200);
     }
-<<<<<<< HEAD
-
-
-   //========================= delete work experience ==========================
-=======
     //===================== delete alumni work experience =================
->>>>>>> alumniProfile
     public function destroy($id)
     {
         $iSDelete = WorkExperience::destroy($id);

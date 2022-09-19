@@ -252,10 +252,11 @@ export default {
       axios.get(
         "alumni/" + VueCookies.get('userId'))
         .then((res) => {
-          this.alumniData = res.data;
-          this.alumniInfo = res.data.user
-          this.alumniExperiences = res.data.work_experience
-          console.log(this.alumniExperiences)
+          this.alumniInfo = res.data.user;
+          this.alumniExperiences = res.data.work_experience;
+          this.alumniSkill = res.data.alumni_skills;
+          this.studyBackgrounds = res.data.study_background;
+          console.log(this.alumniData);
         });
     },
     //=================== update   alumni general information ===================
