@@ -5,7 +5,9 @@
     </div>
     <div class="m-auto w-[100%] flex justify-end"></div>
     <div class="m-auto w-[100%]" >
-      <EroList v-for:="ero in eros" :ero="ero" />
+      <EroList v-for:="ero in eros" :ero="ero" 
+       @deleteEro = "deleteEro"
+      />
     </div>
   </div>
   <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
@@ -47,7 +49,16 @@ export default {
           this.getData()
           this.show=false
             })
-      },
+    },
+    //====================== delete ero ==============================
+    deleteEro(userId,eroId){
+      axios.delete('user/'+ userId)
+      .then(()=>{
+        axios.delete('ero/'+ eroId);
+        this.getData()
+      })
+      
+    },
     //=====================getdata  form functions =================
     getData() {
       axios.get("ero").then((res) => {
