@@ -2,5 +2,24 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/tailwind.css'
+import {library} from '@fortawesome/fontawesome-svg-core'
+import {fas} from '@fortawesome/free-solid-svg-icons'
+import {fab} from '@fortawesome/free-brands-svg-icons'
 
-createApp(App).use(router).mount('#app')
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+import VueSweetalert2 from 'vue-sweetalert2';
+import VueCookies from 'vue-cookies'
+
+
+
+
+
+library.add(fas, fab);
+const app = createApp(App)
+app.use(VueCookies)
+app.use(VueSweetalert2);
+
+
+createApp(App).use(router)
+.component('fa', FontAwesomeIcon)
+.mount('#app')
