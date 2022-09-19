@@ -59,7 +59,7 @@
               <!--================== option content create form ============= -->
               <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm(true,'create')"/>
             </div>
-            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p> -->
+            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
             <StudyBackground
               v-for:="studyBackground of studyBackgrounds"
               :studyBackground="studyBackground"
