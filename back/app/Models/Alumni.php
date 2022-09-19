@@ -30,9 +30,9 @@ class Alumni extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function AlumniExperience()
+    public function workExperience()
     {
-        return $this -> hasMany(AlumniExperience::class);
+        return $this -> hasMany(WorkExperience::class);
     }
     
     public function alumniSkills()
@@ -40,8 +40,8 @@ class Alumni extends Model
         return $this -> hasMany(AlumniSkills::class);
     }
 
-    public function AlumniStudyBackground()
+    public function studyBackground()
     {
-        return $this -> hasMany(AlumniStudyBackground::class);
+        return $this -> hasMany(StudyBackground::class);
     }
 }

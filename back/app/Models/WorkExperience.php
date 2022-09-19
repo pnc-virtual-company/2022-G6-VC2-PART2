@@ -9,6 +9,7 @@ class WorkExperience extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'alumni_id',
         'company',
         'position',
         'profile',

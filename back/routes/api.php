@@ -49,5 +49,5 @@ Route::apiResource('/studyBackground',StudyBackgroundController::class);
 //================== upload profile api ===============
 Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
 Route::apiResource('alumniSkill', AlumniSkillsController::class);
-Route::apiResource('alumniExperience', AlumniExperienceController::class);
+Route::apiResource('alumniWork', WorkExperienceController::class);
 Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);
