@@ -40,12 +40,11 @@ export default {
     },
     //====================== add ero ==============================
     addUserEro(firstName,lastName,email,role,gender,phone,telegram){
-      let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678'}
+      let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678',gender:gender, phone:phone,telegram:telegram}
       axios.post('user',user)
       .then((res)=> {
         console.log(res.data.sms.id);
-        let ero = {gender:gender, phone:phone,telegram:telegram,user_id:res.data.sms.id}
-        axios.post('ero',ero) 
+
           this.getData()
           this.show=false
             })
