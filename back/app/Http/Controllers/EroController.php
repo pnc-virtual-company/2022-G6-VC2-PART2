@@ -13,10 +13,10 @@ class EroController extends Controller
         return Ero::with('user')->get();
     }
    //========================= add new Ero ==========================
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $eros = new Ero();
-        $eros->user_id = $request->user_id;
+        $eros->user_id = $id;
         $eros->gender = $request ->gender;
         $eros->phone = $request ->phone;
         $eros->telegram = $request ->telegram;

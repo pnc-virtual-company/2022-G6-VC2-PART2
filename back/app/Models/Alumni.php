@@ -18,9 +18,9 @@ class Alumni extends Model
         'address',
         'dateOfBirth',
         'placeOfBirth',
+        'telegram'
     ];
     protected $hidden = [
-
         'created_at',
         'updated_at'
     ];
@@ -30,12 +30,18 @@ class Alumni extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function WorkExperience()
+    public function workExperience()
     {
         return $this -> hasMany(WorkExperience::class);
     }
-    public function Skill()
+    
+    public function alumniSkills()
     {
-        return $this -> hasMany(Skill::class);
+        return $this -> hasMany(AlumniSkills::class);
+    }
+
+    public function studyBackground()
+    {
+        return $this -> hasMany(StudyBackground::class);
     }
 }

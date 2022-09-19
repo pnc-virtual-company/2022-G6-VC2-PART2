@@ -9,16 +9,15 @@ class Skill extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'alumni_id',
         'title',
     ];
     protected $hidden = [
-
         'created_at',
         'updated_at'
     ];
-    public function Alumni()
+
+    public function AlumniSkills()
     {
-        return $this->belongsTo(Alumni::class);
+        return $this -> hasMany(AlumniSkills::class);
     }
 }

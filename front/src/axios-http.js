@@ -7,5 +7,6 @@ export default axios.create({
   headers: {
     Authorization: 'Bearer ' + VueCookies.get('token'),
     "Content-type": "application/json",
+    'Access-Control-Allow-Origin': '*'
   }
 });

@@ -1,46 +1,46 @@
 <template>
-  <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl">
-    <h1 class="font-bold text-center text-[#0062ff] text-2xl">WORK EXPERIENCE</h1>
-    <div class="m-auto w-[100%] flex justify-end">
-      <!--================== option content create form ============= -->
-      <fa icon="plus" class="w-[1.8rem] h-[1.8rem] text-white bg-[#0062ff] p-2 rounded-full cursor-pointer" @click="showForm('create')"/>
-    </div>
-    <div class="m-auto w-[100%]" v-for:="workExperience in workExperiences">
-      <div class="shadow-xl bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between">
+      <div class="shadow-md bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between" @mouseover="showAction = true" @mouseleave="showAction = false">
         <div class="flex items-center justify-start">
-          <img class="rounded-full w-[5rem] mr-3 border border-[#ddd]" src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/81991fd67e25ba7dbdb6" alt="">
-          <div>
-            <p class="font-medium	text-lg">{{workExperience.company}}</p>
-            <p class="">{{workExperience.start_year}} - {{workExperience.end_year}}</p>
+          <div class="rounded-full w-[5rem] h-[5rem]" >
+            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" src="@/assets/pnc-logo.jpg" />    
+          </div>
+          <div class="ml-3">
+            <a :href="workExperience.company_link" target="_blank">
+              <p class="font-medium	text-lg">{{workExperience.company}}</p>
+            </a>            
+            <p >{{formatYear(workExperience.start_year)}} <span v-if="workExperience.end_year != null">- {{formatYear(workExperience.end_year)}}</span></p>
           </div>
         </div>
         <div>
           <p class="font-medium	text-lg">{{workExperience.position}}</p>
-          <p>4 years</p>
+          <p v-if="workExperience.end_year != null">{{workExperience.duration}}</p>
+          <p v-else>Present</p>
         </div>
-        <div>
-            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-3 text-[1.4rem] rounded-full ml-3 shadow-lg bg-[#ddd]" @click="deleteExperience(workExperience.id)"/>
+        <div v-show="showAction" class="flex justify-end items-center w-[45%] mt-[-5rem] absolute">
+            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
             <!--==================== Edit alumni experience ================= -->
-            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.4rem] p-3 rounded-full ml-3 shadow-lg bg-[#ddd]" @click="showForm('edit', workExperience)" />
+            <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="showForm('edit', workExperience)" />
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
+import moment from 'moment';
 import Swal from 'sweetalert2'
 export default {
   props: {
-    workExperiences: [],
+    workExperience: {},
   },
-  emits: ['show','deleteExperience'],
+  emits: ['show','deleteExperience', 'uploadImage'],
   data() {
     return {
       show: false,
+      durationWork:'',
+      showAction: false,
+      start_year: '',
+      end_year: '',
     };
   },
-
   methods:{
   //===================== show  form functions =================
     showForm(type, experience) {
@@ -53,7 +53,7 @@ export default {
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#0062ff',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
@@ -62,6 +62,13 @@ export default {
         }
       })
     },
+    // ==============Uplaod Profile Company================
+    uplaodImage(profile, id) {
+      this.$emit('uploadImage', profile, id);
+    },
+    formatYear(value) {
+      return moment(String(value)).format('MMMM YYYY')
+    }
   },
-  }
+}
 </script>

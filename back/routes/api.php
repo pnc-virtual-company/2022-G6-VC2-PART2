@@ -3,11 +3,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\AlumniExperienceController;
+use App\Http\Controllers\AlumniSkillsController;
+use App\Http\Controllers\AlumniStudyBackgroundController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EroController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\StudyBackgroundController;
+use App\Http\Controllers\ProfileController;
+use App\Models\AlumniStudyBackground;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,6 +59,20 @@ Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPasswor
 Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
 
 
+//================== work experience api ===============
+Route::apiResource('/alumniWork',WorkExperienceController::class);
 
+//===================skilll alumni api =================
+Route::apiResource('/skill',SkillController::class);
 
+// ==================company profile=====================
+Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
 
+//================== study background api ===============
+Route::apiResource('/studyBackground',StudyBackgroundController::class);
+
+//================== upload profile api ===============
+Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
+Route::apiResource('alumniSkill', AlumniSkillsController::class);
+Route::apiResource('alumniWork', WorkExperienceController::class);
+Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);

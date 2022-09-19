@@ -12,14 +12,16 @@ class WorkExperience extends Model
         'alumni_id',
         'company',
         'position',
+        'profile',
         'start_year',
         'end_year',
+        'company_link',
+        'duration',
     ];
     protected $hidden = [
         'created_at',
         'updated_at'
     ];
-
     public function Alumni()
     {
         return $this->belongsTo(Alumni::class);

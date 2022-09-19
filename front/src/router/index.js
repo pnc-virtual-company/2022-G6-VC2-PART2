@@ -4,6 +4,8 @@ import FormLoginView from '../views/login/FormLoginView.vue'
 import EroList from '../views/Ero/EroListView.vue'
 import VueCookies from 'vue-cookies'
 import PageNotFound from '@/views/PageNotFound.vue'
+// import FormloginView from '../views/FormloginView.vue'
+
 const routes = [
   {
     path: '/profile',
