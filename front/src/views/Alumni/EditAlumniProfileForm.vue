@@ -150,6 +150,7 @@ export default {
             let userData ={firstName:this.firstName,lastName:this.lastName,email:this.email}
             let alumniData ={major:this.major,batch:this.batch,phone:this.phone,address:this.address,telegram:this.telegram,gender:this.gender,placeOfBirth:this.placeOfBirth}
             this.$emit('updateAlumni',this.userId,this.alumniId,userData,alumniData);
+            this.hideForm();
         }
     }
 }
