@@ -38,11 +38,11 @@ nav a.router-link-exact-active {
           {title: 'Logout', icon: 'sign-out-alt', to: '/logout'},
         ],
         eroMenu: [
-          {title: 'Alumni', icon: 'calendar-alt', to: '/event'},
+          {title: 'Alumni', icon: 'users', to: '/event'},
           {title: 'Logout', icon: 'sign-out-alt', to: '/logout'},
         ],
         adminMenu: [
-          {title: 'Ero', icon: 'calendar-alt', to: '/ero'},
+          {title: 'Ero', icon: 'users', to: '/ero'},
           {title: 'Logout', icon: 'sign-out-alt', to: '/logout'},
         ],
         menuItems: [] 
