@@ -10,7 +10,7 @@
               <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Female'" src="@/assets/girl.webp"/>    
               <input type="file" @change="uploadImage($event.target.files[0])" hidden id="imageFile" accept="image/png, image/gif, image/jpeg">
               <label for="imageFile">
-                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[1.2rem] mt-[8rem]"/>
+                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[1.1rem] mt-[7rem]"/>
               </label>
           </div>
           <div class="capitalize text-left ml-[12rem] mt-[-6rem]">

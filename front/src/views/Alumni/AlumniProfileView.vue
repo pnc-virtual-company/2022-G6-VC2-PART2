@@ -214,9 +214,9 @@
             this.alumniData = res.data;
             this.alumniInfo = res.data.user;
             this.alumniExperiences = res.data.work_experience;
-            this.alumniSkill = res.data.skill;
-            this.studyBackgrounds = res.data.study_background;
+            this.alumniSkill = res.data.alumni_skills;
             console.log(this.alumniData);
+            this.studyBackgrounds = res.data.study_background;
           });
         },
         //=================== update   alumni general information ===================
@@ -243,15 +243,38 @@
         toShowSkillForm(value) {
           this.showSkillForm = value;
         },
+        //=================== check existed skill =================
+        isExistedSkill(newSkill,allSkills){
+          let skillId = null;
+            for (let skill of allSkills){
+              if (skill.title.toLowerCase() == newSkill.toLowerCase()){
+                skillId=skill.id
+              }
+            }
+          return skillId;
+        },
+        //=================== add alumni Skill =================
+        addAlumniSkill(newSkill){
+          axios.post(this.url+'alumniSkill',newSkill).then(()=>{
+                  this.formHiden(false);
+                  this.getData();
+                })
+        },
         //=================== add new skill =================
-        newSkill(newSkill) {
-          let alumniSkills = { title: newSkill, alumni_id: 1 };
-          axios
-            .post("http://127.0.0.1:8000/api/alumniSkill", alumniSkills)
-            .then(() => {
-              this.formHiden(false);
-              this.getData();
-            });
+        newSkill(newSkill,allskills) {
+          if (this.isExistedSkill(newSkill,allskills) != null){
+            let skillID=this.isExistedSkill(newSkill,allskills)
+            let allSkill={alumni_id:this.alumniData.id,skill_id:skillID}
+            this.addAlumniSkill(allSkill)
+          }else{
+            let alumniSkills = { title: newSkill.toUpperCase(), alumni_id: 1 };
+            axios.post(this.url+"skill", alumniSkills)
+              .then((res) => {
+                let skillID=res.data.id
+                let allSkill={alumni_id:this.alumniData.id,skill_id:skillID}
+                this.addAlumniSkill(allSkill)
+              });
+          }
         },
         //=================== upload profile for company ============================
         uploadCompanyProfile(profile, id) {
@@ -280,7 +303,8 @@
         },
         //=================== remove alumni skill ====================================
         removeAlumniSkill(id) {
-          axios.delete("http://127.0.0.1:8000/api/alumniSkill/" + id).then(() => {
+          console.log(id);
+          axios.delete(this.url+"alumniSkill/" + id).then(() => {
             this.getData();
           });
         },
@@ -310,6 +334,9 @@
     },
 
     created() {
+      this.getData();
+    },
+    mounted(){
       this.getData();
     }
   }

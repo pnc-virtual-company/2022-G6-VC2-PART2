@@ -10,7 +10,7 @@
     <div class="w-[100%] m-auto">
         <p class="text-red-500" v-if = "skills.length == 0">Don't have skill yet ! </p>
         <div class="w-[90%] flex flex-wrap">
-            <h3 class="bg-[#ddd] rounded-full m-[5px] px-5 py-1 capitalize flex justify-end items-center mt-[15px]" v-for="(skill,index) of skills" :key="index">{{skill.title}} <fa @click="deleteSkill(skill.id)" v-if="showXmark" icon="xmark" class="text-[#7a7979] bg-[#f8f6f6] px-2 py-1 rounded-full ml-[15px] cursor-pointer"/></h3>
+            <h3 class="bg-[#ddd] rounded-full m-[5px] px-5 py-1 capitalize flex justify-end items-center mt-[15px]" v-for="(myskill,index) of skills" :key="index">{{myskill.skill.title}} <fa @click="deleteSkill(myskill.id)" v-if="showXmark" icon="xmark" class="text-[#7a7979] bg-[#f8f6f6] px-2 py-1 rounded-full ml-[15px] cursor-pointer"/></h3>
         </div>
     </div>
   </div>

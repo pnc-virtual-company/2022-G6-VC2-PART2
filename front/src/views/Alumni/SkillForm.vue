@@ -129,14 +129,14 @@ export default {
             this.$emit('hidFormSkill',false)
         },
         addSkill(){
-            this.$emit('addSkill', this.skill_title);
+            this.$emit('addSkill', this.skill_title,this.skills);
         },
         query(event){
             this.skill_title=event.target.value
             return this.filterSkills=this.skills.filter(skill=>skill.title.toLowerCase().includes(event.target.value.toLowerCase()))
         },
         getAllSkill(){
-            axios.get('http://127.0.0.1:8000/api/alumniSkill').then((res)=>{
+            axios.get('http://127.0.0.1:8000/api/skill').then((res)=>{
                 this.skills=res.data
                 console.log( this.skills)
             })
