@@ -24,4 +24,8 @@ class StudyBackground extends Model
     {
         return $this->belongsTo(Alumni::class);
     }
+    public function AlumniStudyBackground()
+    {
+        return $this -> hasMany(StudyBackground::class);
+    }
 }

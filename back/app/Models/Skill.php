@@ -12,7 +12,6 @@ class Skill extends Model
         'title',
     ];
     protected $hidden = [
-
         'created_at',
         'updated_at'
     ];
