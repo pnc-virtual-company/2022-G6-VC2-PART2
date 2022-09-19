@@ -3,7 +3,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
-use App\Http\Controllers\AlumniExperienceController;
 use App\Http\Controllers\AlumniSkillsController;
 use App\Http\Controllers\AlumniStudyBackgroundController;
 use App\Http\Controllers\WorkExperienceController;
@@ -12,8 +11,6 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EroController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\StudyBackgroundController;
-use App\Http\Controllers\ProfileController;
-use App\Models\AlumniStudyBackground;
 
 /*
 |--------------------------------------------------------------------------

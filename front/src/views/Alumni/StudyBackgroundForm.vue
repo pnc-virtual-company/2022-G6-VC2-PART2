@@ -41,6 +41,7 @@
     </BaseForm>
 </template>
 <script>
+import VueCookies from 'vue-cookies';
 import axios from 'axios';
 import BaseForm from '../../components/widget/BaseForm.vue'
 import BaseButton from '../../components/widget/BaseButton.vue'
@@ -112,12 +113,12 @@ export default {
         },
         //=============================== add study background =================================
         sendData(){
-            let study = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
+            let study = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id: VueCookies.get('alumniId')}
             this.$emit('createStudy',study)
         },
         //=============================== update study background =================================
         editStudyBackground(id){
-           let studyBackground = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id:this.alumni_id}
+           let studyBackground = {school:this.school,major:this.major,start_year:this.start_year,end_year:this.end_year,alumni_id: VueCookies.get('alumniId')}
            this.$emit('updateStudyBackground',studyBackground,id)
         }
     },

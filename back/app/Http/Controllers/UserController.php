@@ -35,7 +35,7 @@ class UserController extends Controller
    //================== show one user ======================
     public function show($id)
     {
-        return User::findOrFail($id);
+        return User::with('alumni')->findOrFail($id);
     }
    //================== update user ======================
     public function update(Request $request, $id)

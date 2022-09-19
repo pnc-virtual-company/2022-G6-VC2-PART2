@@ -60,7 +60,7 @@
     </BaseForm>
 </template>
 <script>
-import axios from "axios"
+import axios from "../../axios-http"
 import BaseForm from '../../components/widget/BaseForm.vue';
 import BaseButton from '../../components/widget/BaseButton.vue';
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
@@ -178,7 +178,7 @@ export default {
         },
          //=================== get alumni experience ===================
          getAllData() {
-          axios.get('http://127.0.0.1:8000/api/alumniWork').then((res) => {
+          axios.get('alumniWork').then((res) => {
             this.AllalumniExperiences = res.data;
           });
         },

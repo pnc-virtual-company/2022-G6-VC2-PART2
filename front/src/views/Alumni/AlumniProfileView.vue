@@ -130,20 +130,20 @@ export default {
       newStart_work,
       newEnd_work,
       company_link,
-      duration
+      duration,
     ) {
       let alumniExperience = {
         position: newPosition,
         company: newCompany,
         start_year: newStart_work,
         end_year: newEnd_work,
-        alumni_id: this.alumniData.id,
+        alumni_id: VueCookies.get('alumniId'),
         company_link: company_link,
         duration: duration,
       };
       console.log(alumniExperience);
       axios
-        .post("http://127.0.0.1:8000/api/alumniWork", alumniExperience)
+        .post("/alumniWork", alumniExperience)
         .then((response) => {
           console.log(response.data);
           this.getData();
@@ -212,7 +212,7 @@ export default {
       const AlumniProfile = new FormData();
       AlumniProfile.append("profile", profile);
       AlumniProfile.append("_method", "PUT");
-      axios.post(this.url + "profile/1", AlumniProfile).then(() => {
+      axios.post(this.url + "profile/"+VueCookies.get('alumniId'), AlumniProfile).then(() => {
         this.getData();
       });
     },
@@ -250,13 +250,18 @@ export default {
     //=================== get  alumni experience ===================
     getData() {
       axios.get(
-        "alumni/" + VueCookies.get('userId'))
+        "user/" + VueCookies.get('userId'))
         .then((res) => {
-          this.alumniInfo = res.data.user;
-          this.alumniExperiences = res.data.work_experience;
-          this.alumniSkill = res.data.alumni_skills;
-          this.studyBackgrounds = res.data.study_background;
-          console.log(this.alumniData);
+          VueCookies.set('alumniId', res.data.alumni.id)
+          axios.get('alumni/'+VueCookies.get('alumniId'))
+          .then((res) => {
+            this.alumniInfo = res.data.user;
+            this.alumniData = res.data;
+            this.alumniExperiences = res.data.work_experience;
+            this.alumniSkill = res.data.alumni_skills;
+            this.studyBackgrounds = res.data.study_background;
+            console.log(this.alumniData);
+          })
         });
     },
     //=================== update   alumni general information ===================
@@ -291,8 +296,5 @@ export default {
   created() {
     this.getData();
   },
-  mounted() {
-    this.getData();
-  }
 }
 </script>

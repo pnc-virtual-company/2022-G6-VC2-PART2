@@ -82,7 +82,7 @@ export default {
     if (VueCookies.get('token')) {
       if (VueCookies.get('role') == 'alumni') {
         this.$router.push('/profile');
-      } else if (VueCookies.get('role') == 'ero') {
+      } else if (VueCookies.get('role') == 'admin') {
         this.$router.push('/ero');
       }
     }

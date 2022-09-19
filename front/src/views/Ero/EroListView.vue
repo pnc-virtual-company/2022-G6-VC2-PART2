@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl">
+  <div class="bg-[#fff] w-[60%] m-auto p-5 rounded-lg shadow-xl mt-[3rem]">
     <div class="flex justify-between font-bold text-center text-[#0062ff] text-2xl"> Ero List
      <fa icon="plus" class="w-[1rem] h-[1rem] text-white bg-[gray] p-2 rounded-full" @click="show = true"/>
     </div>
@@ -10,7 +10,7 @@
       />
     </div>
   </div>
-  <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"> 
+  <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
     <EroForm 
       @onClick="hide"
       @addUserEro="addUserEro"

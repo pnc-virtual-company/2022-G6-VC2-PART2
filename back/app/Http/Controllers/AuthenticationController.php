@@ -37,7 +37,6 @@ class AuthenticationController extends Controller
         }else{
             return response()->json(['sms'=> 'invalid email'], 404);
         }
-        return Response()->json($response);
     }
 
     // ===============New password after verify code================
