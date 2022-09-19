@@ -24,6 +24,7 @@ class AuthenticationController extends Controller
     }
 
     // ===============Forget Password============================
+
     public function forgotPassword(Request $request){   
         $user = User::where('email', "=", $request->email)->first();
         if ($user){
@@ -32,28 +33,27 @@ class AuthenticationController extends Controller
                 $user->save();
             }
             (new MailController)-> sendMailResetPassword($request);
-            $response = [
-                'success' => true,
-            ];
+            return Response()->json(['sms'=>'Success'], 202);
         }else{
-            $response = [
-                'success' => false,
-                'message'=> "Email not found"
-            ];
+            return response()->json(['sms'=> 'invalid email'], 404);
         }
         return Response()->json($response);
     }
+
+    // ===============New password after verify code================
+
     public function resetForgotPassword(Request $request,User $user){
-        $user = User::where('email', $request->email)->first();        
+        $user = User::where('email', "=", $request->email)->first();
         if ($user){
             $user->password = Hash::make($request->new_password);
             $user->save();
+            return response()->json(['sms'=> true], 202);
+        } else {
+            return response()->json(['sms'=> false], 404);
         }
-        $response = [
-            'message' => "Reset password success"
-        ];
-        return response()->json($response , 202);
     }
+
+    // ================Get code from gmail===========================
 
     public function getVerifyCode(Request $request){
         $user = User::where('verify_code', '=', $request->verify_code)->first();
@@ -62,19 +62,11 @@ class AuthenticationController extends Controller
                 $user->verify_code = 'Null';
                 $user->save();
             }
-            $response = [
-                'status' => true,
-                'message' => 'Confirmed code'
-            ];
-        } 
-        else {
-            $response = [
-                'status' => false,
-                'message' => 'This code not confirmed'
-            ];
+            return response()->json(['sms'=> true], 202);
         }
-
-        return Response()->json($response);
+        else {
+            return response()->json(['sms'=> false], 404);
+        }
     }
 
 }

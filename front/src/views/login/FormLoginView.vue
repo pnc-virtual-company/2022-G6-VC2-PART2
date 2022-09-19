@@ -17,17 +17,25 @@
             <fa @click="showPassword = !showPassword" :icon="showPassword ? 'eye' : 'eye-slash'" />
           </div>
           <p v-if="inValid" class="text-[#e04]">Invalid email or password!</p>
-          <a href="#!" class="text-[#0062ff] hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgot password?</a>
+          <p @click="showForgetForm = true" class="text-[#0062ff] cursor-pointer hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgoot password?</p>
           <button type="submit" class="w-full py-2 mt-3 bg-[#0062ff] rounded-md text-[#fff] text-xl font-normal">Login</button>
         </form>
       </div>
     </div>
+    <section v-if="showForgetForm || showVerifyForm || showResetForm" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+      <forgetForm @hide="showForgetForm = false" @showVerifyForm="emitEmail" v-if="showForgetForm"/>
+      <verify @hide="showVerifyForm = false" v-if="showVerifyForm" @showResetForm="showResetForm = true"/>
+      <reset @hide="showResetForm = false" v-if="showResetForm" :email="email"/>
+    </section>
   </section>
 </template>
   
 <script>
 import axios from '../../axios-http'
 import VueCookies from 'vue-cookies'
+import forgetForm from './FormForgetPassword.vue';
+import verify from './FormVerifyEmail.vue';
+import reset from './ResetForgotPassword.vue';
 export default {
   data() {
     return {
@@ -36,7 +44,15 @@ export default {
       password: '',
       inValid: false,
       showPassword: false,
+      showForgetForm: false,
+      showVerifyForm: false,
+      showResetForm: false,
     }
+  },
+  components:{
+    forgetForm,
+    verify,
+    reset
   },
   methods: {
     login() {
@@ -55,6 +71,10 @@ export default {
         this.inValid = true;
       })
       console.log('hello world');
+    },
+    emitEmail(status, email) {
+      this.showVerifyForm = status;
+      this.email = email;
     }
   },
   created() {
