@@ -27,7 +27,7 @@ class UserController extends Controller
         $user->role= $request->role;
         $user->save();
         if($user->role=='ero'){
-            (new EroController)->store($request);
+            (new EroController)->store($request,$user->id);
             (new MailController)->smsMail($user->id,$request->password);
         }
         return response()->json(['sms'=>$user]);
