@@ -7,7 +7,7 @@ use Mail;
 use App\Mail\SendMail;
 use App\Models\User;
 use App\Mail\ForgotPasswordInfor;
-
+use Illuminate\Support\Facades\Hash;
   
 class MailController extends Controller
 {
@@ -17,13 +17,13 @@ class MailController extends Controller
      * @return response()
      */
     // Send mail when admin create student
-    public function smsMail(Request $request,$id)
+    public function smsMail($id,$password)
     {
         $user = User::findOrFail($id);
 
         $sms = [
             'title' =>'Hello '. $user->firstName. ',',
-            'body' => 'Here is your account and your password is 12345678',
+            'body' => 'Here is your account'. $user->email.' and your password is: '. $password,
         ];
          
         Mail::to($user->email)->send(new SendMail($sms));

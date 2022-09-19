@@ -43,7 +43,7 @@ Route::apiResource('/ero',EroController::class);
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 
 // =================Send Email When User Create Account===============
-Route::get('/smsMail',[MailController::class,'smsMail']);
+Route::post('/smsMail',[MailController::class,'smsMail']);
 
 
 // ==============Forget Password =================

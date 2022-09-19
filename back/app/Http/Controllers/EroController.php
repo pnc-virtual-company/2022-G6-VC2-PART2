@@ -21,7 +21,6 @@ class EroController extends Controller
         $eros->phone = $request ->phone;
         $eros->telegram = $request ->telegram;
         $eros->save();
-        return response()->json(['sms'=>$eros]);
     }
    //========================= show only one Ero ==========================
     public function show($id)

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\EroController;
 use Mail; 
 use App\Mail\SendMail;
 
@@ -25,6 +26,10 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->role= $request->role;
         $user->save();
+        if($user->role=='ero'){
+            (new EroController)->store($request);
+            (new MailController)->smsMail($user->id,$request->password);
+        }
         return response()->json(['sms'=>$user]);
     }
    //================== show one user ======================
