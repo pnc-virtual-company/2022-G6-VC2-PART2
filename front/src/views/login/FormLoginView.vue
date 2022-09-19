@@ -90,6 +90,9 @@ export default {
       VueCookies.remove('token');
       VueCookies.remove('userId');
       VueCookies.remove('role');
+      if (VueCookies.get('alumniId')) {
+        VueCookies.remove('alumniId');
+      }
       this.$router.push('/');
     }
   }
