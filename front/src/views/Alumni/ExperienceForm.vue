@@ -8,9 +8,9 @@
             <!-- POSITION INPUT -->
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="position" @input="filterEperienceOption">
-                <div v-if="filterOption.length==0 && isInputPosition" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this position yet !</div>
+                <div v-if="filterOption.length==0 && isInputPosition" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this position yet !</div>
                 <ul class="shadow-md" v-if="isInputPosition">
-                    <option v-for="(experience,index) of filterOption" :key="index" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectPositionValue" :value="experience.position">{{experience.position}}</option>
+                    <option v-for="(experience,index) of filterOption" :key="index" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectPositionValue" :value="experience.position">{{experience.position}}</option>
                 </ul>
                 <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-sky-500" /> Position</BaseLabel>
                 <small class="text-red-600" v-if="isNoPostion"> You missed position*</small>
@@ -18,9 +18,9 @@
             <!-- COMPANY INPUT -->
             <div class="relative z-0 mb-6 w-full group">
                 <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" v-model="company" @input="filterEperienceCompany">
-                <div v-if="filterCompany.length==0 && isInputCompany" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this company yet !</div>
+                <div v-if="filterCompany.length==0 && isInputCompany" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this company yet !</div>
                 <ul class="shadow-md" v-if="isInputCompany">
-                    <option v-for="(experience,index) of filterCompany" :key="index" class="hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectCompanyValue" :value="experience.company">{{experience.company}}</option>
+                    <option v-for="(experience,index) of filterCompany" :key="index" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectCompanyValue" :value="experience.company">{{experience.company}}</option>
                 </ul>
                 <BaseLabel for="floating_address"><fa icon="hotel" class="text-sky-500" /> Work Place</BaseLabel>
                 <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
@@ -129,7 +129,6 @@ export default {
         //=================== FILTER EXPERIAN OPTIONS =================
         filterEperienceOption(e){
             this.isInputPosition=true;
-            console.log(this.AllalumniExperiences)
             this.filterOption=this.AllalumniExperiences.filter(experience=>experience.position.toLowerCase().includes(e.target.value.toLowerCase()))
         },
         //=================== FILTER EXPERIAN COMPANY =================
@@ -156,7 +155,7 @@ export default {
         },
         //=================== add new experience emit  and validate create alumni experience=================
         newAlumniExperience(){
-            if (this.position != '' && this.company != '' && this.start_year != '' && this.company_link != '') {              
+            if (this.position != '' && this.company != '' && this.start_year != '') {
                 this.hideForm();
                 this.calculateDuration();
                 this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.duration);
@@ -180,7 +179,6 @@ export default {
          //=================== get alumni experience ===================
          getAllData() {
           axios.get('http://127.0.0.1:8000/api/alumniWork').then((res) => {
-            console.log(res.data)
             this.AllalumniExperiences = res.data;
           });
         },
@@ -199,7 +197,7 @@ export default {
                 duration: this.duration,
             }
             //////validate edit alumni experience/////
-            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '' && this.company_link != '') {
+            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '') {
                 this.hideForm();
                 this.$emit('edit',experience);
             } 

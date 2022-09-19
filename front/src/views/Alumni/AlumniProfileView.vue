@@ -59,7 +59,7 @@
               <!--================== option content create form ============= -->
               <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer" @click="showStudyBackgroundForm(true,'create')"/>
             </div>
-            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
+            <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p> -->
             <StudyBackground
               v-for:="studyBackground of studyBackgrounds"
               :studyBackground="studyBackground"
@@ -178,7 +178,7 @@
           company: newCompany,
           start_year: newStart_work,
           end_year: newEnd_work,
-          alumni_id: 1,
+          alumni_id: this.alumniData.id,
           company_link: company_link,
           duration: duration,
         };
@@ -328,7 +328,6 @@
     computed: {
       // get current work of alumni
       getCurrentWork() {
-        console.log(this.alumniExperiences.filter(work => (work.end_year == null)));
         return this.alumniExperiences.filter(work => (work.end_year == null));
       }
     },
