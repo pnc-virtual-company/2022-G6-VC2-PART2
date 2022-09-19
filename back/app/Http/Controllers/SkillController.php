@@ -28,7 +28,7 @@ class SkillController extends Controller
         $skill = new Skill();
         $skill-> title = $request ->title;
         $skill->save();
-        return response()->json(['sms'=> $skill]);
+        return response()->json($skill);
     }
 
     /**

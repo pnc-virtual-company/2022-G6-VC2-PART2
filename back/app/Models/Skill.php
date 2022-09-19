@@ -9,7 +9,6 @@ class Skill extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'alumni_id',
         'title',
     ];
     protected $hidden = [
@@ -20,6 +19,6 @@ class Skill extends Model
 
     public function AlumniSkills()
     {
-        return $this -> hasOne(AlumniSkills::class);
+        return $this -> hasMany(AlumniSkills::class);
     }
 }

@@ -61,8 +61,9 @@ class AlumniSkillsController extends Controller
      * @param  \App\Models\AlumniSkills  $alumniSkills
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AlumniSkills $alumniSkills)
+    public function destroy($id)
     {
         //
+        AlumniSkills::destroy($id);
     }
 }
