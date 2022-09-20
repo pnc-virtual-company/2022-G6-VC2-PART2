@@ -38,7 +38,7 @@
             </div>
          </div>
         <div class="p-3 text-center">
-            <BaseButton @click="addUserEro" type="submit" class="bg-[#1da1f2] sm:w-auto ">create</BaseButton>
+            <BaseButton @click="addUserEro" type="submit" class="bg-[#1da1f2] sm:w-auto ">Create</BaseButton>
             <BaseButton @click="hidForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
         </div>
     </template>

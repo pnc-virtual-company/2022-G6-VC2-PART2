@@ -42,8 +42,17 @@
                 <h3 class="ml-3">INVITED : 10</h3>
             </div>
             <div>
-                <button type="button" class="focus:outline-none text-white bg-blue-600 hover:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">INVITE</button>
+                <button type="button" class="focus:outline-none text-white bg-blue-600 hover:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5" @click="invite">INVITE</button>
             </div>
         </div>
     </div>
 </template>
+<script>
+    export default {
+        methods:{
+            invite(){
+                this.$emit('invite');
+            }
+        }
+    }
+</script>
