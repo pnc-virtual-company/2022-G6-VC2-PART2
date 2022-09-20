@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('study_backgrounds', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('role');
-            $table->string('verify_code')->nullable();
-            $table->rememberToken();
+            $table->foreignId('alumni_id')->constrained()->onDelete('cascade');
+            $table->string('school');
+            $table->string('school_logo')->nullable();
+            $table->string('major');
+            $table->string('start_year');
+            $table->string('end_year');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('study_backgrounds');
     }
 };
