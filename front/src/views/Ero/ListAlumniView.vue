@@ -1,20 +1,37 @@
 <template>
     <div class="mt-[3.5rem] w-[80%] mx-auto">
-        <filterAlumni/>
+        <filterAlumni
+         @invite = "show = true"
+        />
         <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
             <CardAlumni :alumniData='alumniData'/>
         </div>
-    </div>
+    </div> 
+    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+        <InvitAlumniForm
+            @hideForm="hide"
+            @CreateAndInviteAlumni = "CreateAndInviteAlumni"
+        /> 
+    </section>
+    <section v-if="isSpin" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+        <div class="grid m-auto">
+            <fa icon="spinner" class="text-[5rem] m-auto animate-spin text-[#fff]" /> 
+            <p class="text-[#fff] text-[2rem]">Sending email..</p>
+        </div>
+    </section>
 </template>
 <script>
 import axios from '../../axios-http'
 import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
+import InvitAlumniForm from './InvitAlumniForm.vue'
 export default ({
-    components: {filterAlumni,CardAlumni},
+    components: {filterAlumni,CardAlumni,InvitAlumniForm},
     data(){
         return{
-            alumniData:[]
+            alumniData:[],
+            show: false,
+            isSpin: false,
         }
     },
     methods:{
@@ -23,6 +40,20 @@ export default ({
                 this.alumniData=res.data
             }).catch((error)=>{
                 console.log(error);
+            })
+        },
+
+        hide(value){
+            this.show=value
+        },
+
+        CreateAndInviteAlumni(firstName,lastName,email){
+            this.isSpin= true
+            let user = {firstName:firstName,lastName:lastName,email:email,password:'12345678',role:'alumni'};
+            axios.post('user', user).then(()=>{
+                this.isSpin= false;
+                this.show = false;
+                this.getAlumni();
             })
         }
     },
