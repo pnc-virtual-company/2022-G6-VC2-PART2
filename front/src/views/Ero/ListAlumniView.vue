@@ -49,7 +49,14 @@ export default ({
 
         CreateAndInviteAlumni(firstName,lastName,email){
             this.isSpin= true
-            let user = {firstName:firstName,lastName:lastName,email:email,password:'12345678',role:'alumni'};
+            let passwords = "01234567890123456789012345678901234567890123456789123456789";
+            let password_length = 8;
+            let random_string = ""
+            for (let i = 0; i < password_length; i++) {
+                let rnum = Math.floor(Math.random() * passwords.length);
+                random_string += passwords.substring(rnum, rnum + 1);
+            }
+            let user = {firstName:firstName,lastName:lastName,email:email,password:random_string,role:'alumni'};
             axios.post('user', user).then(()=>{
                 this.isSpin= false;
                 this.show = false;
