@@ -36,7 +36,7 @@
                 </div>
             </div>           
         </div>
-        <div class="flex justify-between  mx-auto mt-3">
+        <div class="flex justify-between mx-auto mt-3">
             <div class="rounded bg-slate-50  w-[30%] p-7 flex">
                 <div class="rounded-full  w-14 h-14 ring-8 ring-gray-300 dark:ring-gray-500 flex justify-center items-center">10</div>
                 <h3 class="ml-3">INVITED : 10</h3>
