@@ -1,15 +1,15 @@
 <template>
-  <section class="h-screen">
-      <div class="flex justify-center items-center p-[3%]">
-        <div class="md:w-8/12 lg:w-6/12 md:mb-0">
+  <section class="mr-[4%]">
+      <div class="flex justify-center items-center">
+        <div class="md:w-8/12 lg:w-6/12 md:mb-0 p-[4%]">
           <img
             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
             class="w-full"
             alt="Phone image"
           />
         </div>
-        <div class="lg:w-4/12 lg:ml-10 p-[1%] mr-[10%] bg-white">
-          <form @submit.prevent="Create" >
+        <div class="lg:mr-[1%] mr-[5%] p-1 w-[35%] bg-white border rounded">
+          <form @submit.prevent="register" >
             <div
               class="w-full mb-10 flex justify-center text-black font-medium"
             >
@@ -123,7 +123,6 @@
               <button
               type="submit"
               class="flex justify-center m-auto bg-blue-500 text-white w-[30%] py-1 border rounded ml-[10%]"
-              @click="Create"
             >
               CREATE
             </button>
@@ -138,11 +137,10 @@
 
 <script>
   import axios from 'axios'
-  // import router from '@/router'
+  import router from '@/router'
   export default {
   data(){
     return{
-      url: "http://127.0.0.1:8000/api/",
       firstName:'',
       lastName:'',
       email:'',
@@ -158,16 +156,15 @@
     }
   },
   methods:{
-    Create(){
-      let newUser = {firstName:this.firstName,lastName:this.lastName,
-          email:this.email,password:this.password}
-      axios.post(this.url+'user',newUser).then((response) =>{
+    register(){
+      let newUser = {firstName:this.firstName,lastName:this.lastName,email:this.email,password:this.password,role:'alumni'}
+      axios.post('user',newUser).then((response) =>{
         console.log(response.data);
       })
-      //   axios.post(this.url+'alumni',newUser).then((res)=>{
-      //   router.push('/profile');
-      //   console.log(res);
-      // })
+        axios.post('alumni',newUser).then((res)=>{
+        router.push('/profile');
+        console.log(res);
+      })
       this.$emit("create-user", newUser);
         this.firstName="";
         this.lastName="";
@@ -192,8 +189,5 @@
         this.$emit('hideRegister',false)
       },
   },
-  created() {
-    this.Create();
-  }
   }
   </script>
