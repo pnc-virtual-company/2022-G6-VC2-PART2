@@ -63,7 +63,6 @@ class AlumniSkillsController extends Controller
      */
     public function destroy($id)
     {
-        //
         AlumniSkills::destroy($id);
     }
 }
