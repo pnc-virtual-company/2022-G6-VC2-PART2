@@ -25,7 +25,8 @@ use App\Http\Controllers\StudyBackgroundController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// ==================Log In=============================
+Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 Route::apiResource('/user',UserController::class);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== user api ======================
@@ -43,9 +44,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 //==================Ero==================//
 Route::apiResource('/ero',EroController::class);
-// ==================Log In=============================
-Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
-
 // =================Send Email When User Create Account===============
 Route::post('/smsMail',[MailController::class,'smsMail']);
 // ==============Forget Password =================
