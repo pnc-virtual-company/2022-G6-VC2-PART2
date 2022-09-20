@@ -14,7 +14,7 @@ class AlumniSkillsController extends Controller
      */
     public function index()
     {
-        return AlumniSkills::with('skill', 'alumni')->get();
+        return AlumniSkills::with('Skill', 'alumni')->get();
     }
 
     /**
