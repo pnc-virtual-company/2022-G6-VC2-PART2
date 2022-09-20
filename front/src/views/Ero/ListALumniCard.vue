@@ -3,7 +3,7 @@
         <h1 class="text-3xl text-gray-900 dark:text-white ml-7" >Alumni List</h1>
         <div class=" flex justify-between items-center w-[95%] mx-auto border-l-4 border-blue-600 rounded-lg p-2.5 shadow-lg bg-slate-200 mt-3" v-for="alumni of alumniData" :key="alumni">
             <div>
-                <img src="@/assets/girl.webp" alt="" class="w-20 h-20 rounded-full">
+                <img :src="alumni.profile" alt="" class="w-20 h-20 rounded-full">
             </div>
             <div>
                 <p>Name</p>

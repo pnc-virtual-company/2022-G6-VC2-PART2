@@ -1,7 +1,5 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -16,11 +14,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user=[
-            'firstName'=>'OUN',
-            'lastName'=>'BAV',
+            'firstName'=>'admin',
+            'lastName'=>'',
             'role'=>'admin',
-            'email'=>'oun.bav@student.passerellesnumeriques.org',
-            'password'=>bcrypt('12345678')];
+            'email'=>'vc2group6.2022@gmail.com',
+            'password'=>bcrypt('admin!@#$')];
         User::create($user);
     }
 }
