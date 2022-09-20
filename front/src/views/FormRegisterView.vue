@@ -1,5 +1,5 @@
 <template>
-    <FormRegister/>
+    <FormRegister @create-user="Create" />
 </template>
 
 

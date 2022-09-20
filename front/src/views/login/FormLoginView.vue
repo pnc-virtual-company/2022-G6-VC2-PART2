@@ -1,5 +1,5 @@
 <template>
-  <section class="h-screen">
+  <section class="h-screen" v-if="!showRegister">
     <div class="flex justify-center items-center flex-wrap h-full g-6 text-white-800">
       <div class="md:w-3/12 lg:w-5/12 mb-12 md:mb-0">
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="w-full"
@@ -19,6 +19,7 @@
           <p v-if="inValid" class="text-[#e04]">Invalid email or password!</p>
           <p @click="showForgetForm = true" class="text-[#0062ff] cursor-pointer hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgoot password?</p>
           <button type="submit" class="w-full py-2 mt-3 bg-[#0062ff] rounded-md text-[#fff] text-xl font-normal">Login</button>
+          <button @click="showRegister = !showRegister" class="w-full bg-green-400 mt-8 text-white p-2 rounded-lg font-semibold text-lg">Create New Account</button>
         </form>
       </div>
     </div>
@@ -28,6 +29,7 @@
       <reset @hide="showResetForm = false" v-if="showResetForm" :email="email"/>
     </section>
   </section>
+  <FormRegister v-if="showRegister" @hideRegister="clostRegisterForm"/>
 </template>
   
 <script>
@@ -36,6 +38,7 @@ import VueCookies from 'vue-cookies'
 import forgetForm from './FormForgetPassword.vue';
 import verify from './FormVerifyEmail.vue';
 import reset from './ResetForgotPassword.vue';
+import FormRegister from '@/components/Register/FormRegister.vue'
 export default {
   data() {
     return {
@@ -47,14 +50,19 @@ export default {
       showForgetForm: false,
       showVerifyForm: false,
       showResetForm: false,
+      showRegister:false,
     }
   },
   components:{
     forgetForm,
     verify,
-    reset
+    reset,
+    FormRegister,
   },
   methods: {
+    clostRegisterForm(value){
+      this.showRegister=value
+    },
     login() {
       let user = { email: this.email, password: this.password }
       axios.post('loginUser', user).then((res) => {

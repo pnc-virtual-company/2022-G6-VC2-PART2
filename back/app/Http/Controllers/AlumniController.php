@@ -19,7 +19,7 @@ class AlumniController extends Controller
         $alumni ->telegram = $request ->telegram;
         $alumni ->batch = $request ->batch;
         $alumni ->major = $request ->major;
-        $alumni -> address = $request ->address;
+        $alumni ->address = $request ->address;
         $alumni ->dateOfBirth = $request ->dateOfBirth;
         $alumni ->placeOfBirth = $request ->placeOfBirth;
         $alumni ->telegram = $request ->telegram;
