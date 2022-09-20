@@ -5,7 +5,7 @@ import FormLoginView from '../views/login/FormLoginView.vue'
 import EroList from '../views/Ero/EroListView.vue'
 import VueCookies from 'vue-cookies'
 import PageNotFound from '@/views/PageNotFound.vue'
-// import FormloginView from '../views/FormloginView.vue'
+import ListAlumniView from '../views/Ero/ListAlumniView.vue'
 
 const routes = [
   {
@@ -38,6 +38,15 @@ const routes = [
     meta: {
       hide: true,
       isAuthentication:false,
+    }
+  },
+  {
+    path: '/listAlumni',
+    name: 'listAlumni',
+    component: ListAlumniView,
+    meta: {
+      isAuthentication:true,
+      userRole:'ero',
     }
   },
   {

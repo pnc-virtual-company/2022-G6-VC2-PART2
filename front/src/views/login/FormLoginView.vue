@@ -92,6 +92,8 @@ export default {
         this.$router.push('/profile');
       } else if (VueCookies.get('role') == 'admin') {
         this.$router.push('/ero');
+      } else if (VueCookies.get('role') == 'ero') {
+        this.$router.push('/listAlumni');
       }
     }
     if (this.$route.meta.logout) {
