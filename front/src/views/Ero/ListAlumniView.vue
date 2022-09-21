@@ -22,14 +22,16 @@
             </div>
         </section>
     </div> 
+    <AlumniDetail/>
 </template>
 <script>
 import axios from '../../axios-http'
 import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
 import InvitAlumniForm from './InvitAlumniForm.vue'
+import AlumniDetail from "./AlumniDetail.vue"
 export default ({
-    components: {filterAlumni,CardAlumni,InvitAlumniForm},
+    components: {filterAlumni,CardAlumni,InvitAlumniForm,AlumniDetail},
     data(){
         return{
             alumniData:[],
