@@ -23,7 +23,7 @@
         </section>
     </div> 
     <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
-        <InvitAlumniForm
+        <InviteAlumniForm
             :isExisted="isexisted"
             @hideForm="hide"
             @CreateAndInviteAlumni = "CreateAndInviteAlumni"
@@ -34,10 +34,10 @@
 import axios from '../../axios-http'
 import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
-import InvitAlumniForm from './InvitAlumniForm.vue'
+import InviteAlumniForm from './InviteAlumniForm.vue'
 import swal from 'sweetalert2';
 export default ({
-    components: {filterAlumni,CardAlumni,InvitAlumniForm},
+    components: {filterAlumni,CardAlumni,InviteAlumniForm},
     data(){
         return{
             alumniData:[],
