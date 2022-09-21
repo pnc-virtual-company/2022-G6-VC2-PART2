@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-[#fff] m-auto w-[80%] shadow-xl rounded-md mt-3 mb-[-6 px]">
-      <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://images.template.net/wp-content/uploads/2014/11/Natural-Facebook-Cover-Photo.jpg" alt="">
+      <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://media-exp1.licdn.com/dms/image/C4E1BAQEL9_UKiZEjcg/company-background_10000/0/1557127841108?e=2147483647&v=beta&t=nf1vDbnDohroYpMcpm-KFnk4TMfjKG28yTNCGNbYMPM" alt="">
       <div class="w-full m-auto text-center px-5 py-5 mt-[-15vh]">
         <div>
           <div class="rounded-full w-[25vh] h-[25vh]">
@@ -10,7 +10,7 @@
               <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Female'" src="@/assets/girl.webp"/>    
               <input type="file" @change="uploadImage($event.target.files[0])" hidden id="imageFile" accept="image/png, image/gif, image/jpeg">
               <label for="imageFile">
-                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[1.1rem] mt-[7rem]"/>
+                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[2.5rem] mt-[8rem]"/>
               </label>
           </div>
           <div class="capitalize text-left ml-[12rem] mt-[-6rem]">
