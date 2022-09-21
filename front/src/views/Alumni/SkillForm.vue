@@ -133,7 +133,7 @@ export default {
         },
         query(event){
             this.skill_title=event.target.value
-            console.log(this.skill_title)
+            console.log(event.target.value)
             return this.filterSkills=this.skills.filter(skill=>skill.title.toLowerCase().includes(event.target.value.toLowerCase()))
         },
         getAllSkill(){

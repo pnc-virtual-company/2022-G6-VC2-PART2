@@ -16,8 +16,8 @@
           <p v-if="workExperience.end_year != null">{{workExperience.duration}}</p>
           <p v-else>Present</p>
         </div>
-        <div v-show="showAction" class="flex justify-end ">
-            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 w-[20px] h-[20px] text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
+        <div v-if="showAction" class="flex justify-end items-center w-[45%] mt-[-5rem] absolute">
+            <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
             <!--==================== Edit alumni experience ================= -->
             <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 w-[20px] h-[20px] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="showForm('edit', workExperience)" />
         </div>

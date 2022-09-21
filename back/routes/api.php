@@ -29,7 +29,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    //================== user api ======================
+    //================== update user status ======================
+    Route::patch('/user/status/{id}',[UserController::class, 'updateStatus']);
     //================== alumni api ======================
     Route::apiResource('/alumni',AlumniController::class);
     //================== upload profile api ===============
