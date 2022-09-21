@@ -2,8 +2,8 @@
 <div>
     <div class="hover:bg-[#dddddd] flex justify-between items-center w-[95%] mx-auto border-l-4 border-blue-600 rounded-lg p-2.5 shadow-lg bg-slate-200 mt-3" @mouseover="isShow=true" @mouseleave="isShow=false">
         <div>
-            <img :src="alumni.profile" alt="" class="w-20 h-20 rounded-full" v-if="alumni.profile !== null">
-            <img  src="@/assets/boy.jpg" alt="" class="w-20 h-20 rounded-full" v-if="alumni.gender=='Male' && alumni.profile == null">
+            <img  @click="onClickProfile" :src="alumni.profile" alt="" class="w-20 h-20 rounded-full cursor-pointer" v-if="alumni.profile !== null">
+            <img @click="onClickProfile" src="@/assets/boy.jpg" alt="" class="w-20 h-20 rounded-full cursor-pointer" v-if="alumni.gender=='Male' && alumni.profile == null">
             <img @click="onClickProfile" src="@/assets/girl.webp" alt="" class="w-20 h-20 rounded-full cursor-pointer" v-if="alumni.gender=='Female' && alumni.profile == null">
         </div>
         <div>
@@ -34,9 +34,10 @@ export default({
             this.$emit('toDeleteAlumni',userId, alumniId)
         },
         onClickProfile(){
-            this.$emit('onClickProfile')
+            this.$emit('onClickProfile',true,this.alumni)
         }
-    }
+    },
+
 })
 
 </script>
