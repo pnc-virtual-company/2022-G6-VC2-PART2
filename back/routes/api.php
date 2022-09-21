@@ -22,12 +22,12 @@ use App\Http\Controllers\StudyBackgroundController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::apiResource('/user',UserController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
-Route::apiResource('/user',UserController::class);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== user api ======================
     //================== alumni api ======================

@@ -1,13 +1,74 @@
 <template>
     <div class="mt-[3.5rem] w-[80%] mx-auto">
-        <filterAlumni
-         @invite = "show = true"
-        />
+        <div>
+            <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center ">              
+                    <select v-model="filterBatch" id="bacthSelection" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none">
+                        <option value="All">Choose a bacth</option>
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+                <div class="flex justify-between items-center ">              
+                    <select v-model="filterCompany" id="majorSelection" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none">
+                        <option value="All">Choose a company</option>
+                        <option value="pnc">PNC</option>
+                        <option value="cam">Cam Solution</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="flex justify-between items-center ">
+                    <select v-model="filterMajor" id="majorSelection" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none">
+                        <option value="All">Choose a Major</option>
+                        <option value="web">Web</option>
+                        <option value="sna">SNA</option>
+                        <option value="other">DMO</option>
+                    </select>
+                </div> 
+                <div class="flex  items-center w-[55%] ">   
+                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+                    <div class="relative w-full">
+                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg aria-hidden="true" class="w-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                       <Search @update-keyword="updateKeyword" />
+                    </div>
+                </div>           
+            </div>
+            <div class="flex justify-between mx-auto mt-3">
+                <div class="rounded bg-slate-50  w-[30%] p-7 flex">
+                    <div class="rounded-full  w-14 h-14 ring-8 ring-gray-300 dark:ring-gray-500 flex justify-center items-center">10</div>
+                    <h3 class="ml-3">INVITED : 10</h3>
+                </div>
+                <div>
+                    <button type="button" class="focus:outline-none text-white bg-blue-600 hover:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5" @click="show = true">INVITE</button>
+                </div>
+            </div>
+        </div>
         <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
             <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
                 <h1 class="text-3xl text-gray-900 dark:text-white ml-7" >Alumni List</h1>
-                <CardAlumni v-for="alumni of alumniData" :key="alumni" :alumni="alumni"/>
+                <CardAlumni v-for="alumni of fitlerAlumni" :key="alumni" :alumni="alumni"/>
             </div>
+            <div v-if="fitlerAlumni.length <= 0" class="flex flex-col items-center mt-8 mb-3">
+                <!-- <img class="w-32" src="./../../../assets/no_requests_found.png" alt="Image not found"> -->
+                <h1 class="text-stone-500">Don't have alumni yet !!</h1>
+        </div>
         </div>
         <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
             <InvitAlumniForm
@@ -25,22 +86,27 @@
 </template>
 <script>
 import axios from '../../axios-http'
-import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
 import InvitAlumniForm from './InvitAlumniForm.vue'
+import Search from '../../components/search/SearchBar.vue'
 export default ({
-    components: {filterAlumni,CardAlumni,InvitAlumniForm},
+    components: {CardAlumni,InvitAlumniForm,Search},
     data(){
         return{
             alumniData:[],
             show: false,
             isSpin: false,
+            filterBatch:'All',
+            filterCompany:'All',
+            filterMajor:"All",
+            keyword:'',
         }
     },
     methods:{
         getAlumni(){
             axios.get('alumni').then((res)=>{
-                this.alumniData=res.data
+                this.alumniData=res.data;
+                console.log(res.data);
             }).catch((error)=>{
                 console.log(error);
             })
@@ -65,10 +131,30 @@ export default ({
                 this.show = false;
                 this.getAlumni();
             })
+        },
+        updateKeyword(keyword) {
+            this.keyword = keyword;
+        },
+        
+    },
+    computed:{
+        fitlerAlumni(){
+            let allAlumni = this.alumniData;
+            if(this.keyword){
+                allAlumni = this.alumniData.filter((alumni)=>(alumni.user.firstName+" "+alumni.user.lastName).toLowerCase().includes(this.keyword.toLowerCase()));
+            }if(this.filterBatch != "All"){
+                allAlumni = allAlumni.filter((alumni)=>alumni.batch.toLowerCase() == this.filterBatch.toLowerCase());
+            }if(this.filterCompany != "All"){
+                allAlumni = allAlumni.filter(alumni => alumni.work_experience.some(work => work.company.toLowerCase() === this.filterCompany.toLowerCase()));
+            }if(this.filterMajor != "All"){
+                allAlumni = allAlumni.filter((alumni)=>alumni.major.toLowerCase() == this.filterMajor.toLowerCase())
+            }
+            return allAlumni;
         }
     },
     created(){
         this.getAlumni()
     }
+
 })
 </script>
