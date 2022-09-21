@@ -6,6 +6,7 @@ import EroList from '../views/Ero/EroListView.vue'
 import VueCookies from 'vue-cookies'
 import PageNotFound from '@/views/PageNotFound.vue'
 import ListAlumniView from '../views/Ero/ListAlumniView.vue'
+import NewRequestView from "../views/Ero/NewRequestView.vue"
 
 const routes = [
   {
@@ -48,6 +49,15 @@ const routes = [
       isAuthentication:true,
       userRole:'ero',
     }
+  },
+  {
+    path: '/newRequest',
+    name: 'newRequest',
+    component: NewRequestView,
+    meta:{
+      isAuthentication:true,
+      userRole:'ero',
+    },
   },
   {
     path: '/logout',

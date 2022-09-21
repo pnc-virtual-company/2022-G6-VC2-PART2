@@ -1,13 +1,14 @@
 <template>
   <div>
-    <nav class="w-full flex justify-between bg-[#fff] fixed top-0 z-10" v-if="!$route.meta.hide">
+    <nav class="w-full flex justify-between bg-[#fff] fixed top-0 z-10 shadow-md" v-if="!$route.meta.hide">
     <div class="w-[8rem] ml-20">
       <img src="@/assets/logo.jpg" alt="" srcset="">
     </div>
     <div class="flex justify-around items-center p-0 text-base mr-10">
       <div v-for:="item in menuItems">
         <router-link :to="item.to" class="cursor-pointer hover:bg-[#0062ff] px-6 py-3 text-[#0062ff] hover:text-[#f8fafc] text-center font-medium flex flex-col">
-          <fa :icon="item.icon" /> 
+          <fa  :icon="item.icon"/>  
+          <span v-if="item.icon=='bell'" class="mt-[-0.5rem] ml-[2rem] absolute text-[10px] flex items-center justify-center w-4 h-4 rounded-full bg-[#e04] text-white">4</span>
           <span>{{item.title}}</span>
         </router-link>
       </div>
@@ -39,6 +40,7 @@ nav a.router-link-exact-active {
         ],
         eroMenu: [
           {title: 'Alumni', icon: 'users', to: '/listAlumni'},
+          {title: 'New request', icon: 'bell', to: '/newRequest'},
           {title: 'Logout', icon: 'sign-out-alt', to: '/logout'},
         ],
         adminMenu: [
