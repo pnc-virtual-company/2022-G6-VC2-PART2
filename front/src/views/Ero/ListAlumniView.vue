@@ -24,7 +24,7 @@
 import axios from '../../axios-http'
 import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
-import InvitAlumniForm from './InvitAlumniForm.vue'
+import InvitAlumniForm from './InviteAlumniForm.vue'
 export default ({
     components: {filterAlumni,CardAlumni,InvitAlumniForm},
     data(){

@@ -1,5 +1,5 @@
 <template>
-      <div class="shadow-md bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-between" @mouseover="showAction = true" @mouseleave="showAction = false">
+      <div class="shadow-md bg-[#eee] mt-5 mb-5 py-5 px-10 rounded-md flex items-center justify-betweenr" @mouseover="showAction = true" @mouseleave="showAction = false">
         <div class="flex items-center justify-start">
           <div class="rounded-full w-[5rem] h-[5rem]" >
             <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" src="@/assets/pnc-logo.jpg" />    
@@ -16,7 +16,7 @@
           <p v-if="workExperience.end_year != null">{{workExperience.duration}}</p>
           <p v-else>Present</p>
         </div>
-        <div v-show="showAction" class="flex justify-end items-center w-[45%] mt-[-5rem] absolute">
+        <div v-if="showAction" class="flex justify-end items-center w-[45%] mt-[-5rem] absolute">
             <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1.2rem] rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="deleteExperience(workExperience.id)"/>
             <!--==================== Edit alumni experience ================= -->
             <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1.2rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd] cursor-pointer" @click="showForm('edit', workExperience)" />
