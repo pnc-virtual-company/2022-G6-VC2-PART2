@@ -1,7 +1,7 @@
 <template>    
-    <BaseForm class="relative top-20 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white">
+    <BaseForm class="relative mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white">
         <template v-slot:header>
-            Edit Profile
+            Edit Information
         </template>        
         <template v-slot:form>
             <div class="grid md:grid-cols-2 md:gap-6 ">
@@ -104,9 +104,9 @@
                     <BaseLabel for="floating_address"><fa icon="paper-plane" class="text-[#0062ff]" /> Telegram</BaseLabel>
                 </div>
             </div>
-            <div class="p-3 text-center">
-                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto " @click="updateData">Edit</BaseButton>
-                <BaseButton @click="hideForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
+            <div class="text-right flex justify-end ">
+                <BaseButton @click="hideForm" type="cancel" class="text-red-500">Cancel</BaseButton>
+                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto" @click="updateData">Change</BaseButton>
             </div>
         </template>
     </BaseForm>

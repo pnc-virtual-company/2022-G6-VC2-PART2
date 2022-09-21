@@ -3,12 +3,14 @@
         <filterAlumni
          @invite = "show = true"
         />
+     
         <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
-            <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
-                <h1 class="text-3xl text-gray-900 dark:text-white ml-7" >Alumni List</h1>
-                <CardAlumni v-for="alumni of alumniData" :key="alumni" :alumni="alumni"/>
-            </div>
+            <h1 class="text-3xl text-gray-900 dark:text-white ml-7" >Alumni List</h1>
+            <CardAlumni v-for="alumni of alumniData" :key="alumni" :alumni="alumni" :alumniData='alumniData' @toDeleteAlumni="removeAlumni"
+            @onClickProfile = "isShowProfile = true"
+            />
         </div>
+        
         <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
             <InvitAlumniForm
                 @hideForm="hide"
@@ -22,14 +24,27 @@
             </div>
         </section>
     </div> 
-    <AlumniDetail/>
+    <section v-if="isShowProfile" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
+        <AlumniDetail
+            @hideAlumniDetail = "isShowProfile = false"
+            :AlumniDetail = "alumniData"
+        />
+    </section>
+    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+        <InvitAlumniForm
+            :isExisted="isexisted"
+            @hideForm="hide"
+            @CreateAndInviteAlumni = "CreateAndInviteAlumni"
+        /> 
+    </section>
 </template>
 <script>
 import axios from '../../axios-http'
 import filterAlumni from "../Ero/FilterAlumni.vue"
 import CardAlumni from "../Ero/ListALumniCard.vue"
 import InvitAlumniForm from './InvitAlumniForm.vue'
-import AlumniDetail from "./AlumniDetail.vue"
+import AlumniDetail from './AlumniDetail.vue'
+import swal from 'sweetalert2';
 export default ({
     components: {filterAlumni,CardAlumni,InvitAlumniForm,AlumniDetail},
     data(){
@@ -37,12 +52,15 @@ export default ({
             alumniData:[],
             show: false,
             isSpin: false,
+            isexisted:false,
+            isShowProfile: false,
         }
     },
     methods:{
         getAlumni(){
             axios.get('alumni').then((res)=>{
                 this.alumniData=res.data
+                console.log(this.alumniData)
             }).catch((error)=>{
                 console.log(error);
             })
@@ -63,11 +81,32 @@ export default ({
             }
             let user = {firstName:firstName,lastName:lastName,email:email,password:random_string,role:'alumni'};
             axios.post('user', user).then(()=>{
-                this.isSpin= false;
                 this.show = false;
+                this.isSpin= false;
                 this.getAlumni();
+            }).catch((error)=>{
+                this.isSpin= false;
+                this.isexisted=true;
+                console.log(error.response.data.message)
             })
-        }
+        },
+        removeAlumni(userId){
+            swal.fire({
+                    title: 'Are you sure to delete?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#0062ff',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {       
+                        axios.delete('user/'+userId).then(()=>{
+                            this.getAlumni();
+                        })
+                    }
+                })
+        }, 
     },
     created(){
         this.getAlumni()

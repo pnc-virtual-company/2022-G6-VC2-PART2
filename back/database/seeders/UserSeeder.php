@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'firstName'=>'admin',
             'lastName'=>'',
             'role'=>'admin',
+            'status'=>'approve',
             'email'=>'vc2group6.2022@gmail.com',
             'password'=>bcrypt('admin!@#$')];
         User::create($user);
