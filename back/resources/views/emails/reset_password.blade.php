@@ -11,9 +11,6 @@
                              <tbody>
                                 <tr style="background-size: cover">
                                    <td style=" width: 60%; text-align: left; border-collapse: collapse; background: #fff; border-radius: 10px 10px 0px 0px; color: white; height: 50px; " > <img src="https://www.passerellesnumeriques.org/misc/logo-en.png" width="120px" class="CToWUd"/> </td>
-                                   <td style=" width: 40%; text-align: right; border-collapse: collapse; background: #fff; border-radius: 10px 10px 0px 0px; color: white; height: 50px; " >
-                                      <div style="color: #828282; font-size: 14px"> {{date("F j, Y, g:i a")}} </div>
-                                   </td>
                                 </tr>
                              </tbody>
                           </table>

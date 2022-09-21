@@ -4,7 +4,7 @@
       @showAlumniForm="showForm" :workExperiences="getCurrentWork" />
     <section v-if="
       showFormAlumni || showExperience || showSkillForm || showStudyBackground
-    " class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    " class="fixed inset-0 z-50 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
       <!-- form for alumni general profile -->
       <EditAlumniProfileForm @hideForm="hideForm" v-if="showFormAlumni" :alumniData="alumniData"
         :alumniInfo="alumniInfo" @showAlumniForm="updateDataAlumni" @updateAlumni="updateDataAlumni" />
@@ -26,10 +26,10 @@
           <div class="flex justify-between">
             <h1 class="font-bold text-left text-[#0062ff] text-2xl">Study Background</h1>
             <!--================== option content create form ============= -->
-            <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer"
+            <fa icon="plus" class="text-[1rem] text-black bg-[#ddd] w-[20px] h-[20px] p-2 rounded-full cursor-pointer"
               @click="showStudyBackgroundForm(true,'create')" />
           </div>
-          <p class="text-[#e04] mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
+          <p class="text-gray-400 mt-3" v-if="studyBackgrounds.length == 0">No study background yet. Please add some!</p>
           <StudyBackground v-for:="studyBackground of studyBackgrounds" :studyBackground="studyBackground"
             :studyBackgrounds='studyBackgrounds' @showForm="showStudyBackgroundForm"
             @deleteStudyBackground="removeStudyBackground" @showFormEditstudybackground="showEditStudyBackgroundForm" />
@@ -43,11 +43,11 @@
           <h1 class="font-bold text-left text-[#0062ff] text-2xl">Work Experience</h1>
           <div class="m-auto w-[100%] flex justify-end">
             <!--================== option content create form ============= -->
-            <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] p-2 rounded-full cursor-pointer"
+            <fa icon="plus" class="text-[1.2rem] mt-[-2.3rem] text-black bg-[#ddd] w-[20px] h-[20px] p-2 rounded-full cursor-pointer"
               @click="showExperiences(true, 'create')" />
           </div>
           <!-- experience card -->
-          <p class="text-[#e04] mt-3" v-if="alumniExperiences.length == 0">No work experience yet. Please add some!</p>
+          <p class="text-gray-400 mt-3" v-if="alumniExperiences.length == 0">No work experience yet. Please add some!</p>
           <WorkExperience v-for:="workExperience in alumniExperiences.slice().reverse()"
             :workExperience="workExperience" @show="showExperiences" @deleteExperience="deleteExperience"
             @uploadImage="uploadCompanyProfile" />
