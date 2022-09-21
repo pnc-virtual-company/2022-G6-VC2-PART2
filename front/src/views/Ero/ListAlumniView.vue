@@ -4,21 +4,24 @@
          @invite = "show = true"
         />
         <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
-            <CardAlumni :alumniData='alumniData'/>
+            <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 ">
+                <h1 class="text-3xl text-gray-900 dark:text-white ml-7" >Alumni List</h1>
+                <CardAlumni v-for="alumni of alumniData" :key="alumni" :alumni="alumni"/>
+            </div>
         </div>
+        <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+            <InvitAlumniForm
+                @hideForm="hide"
+                @CreateAndInviteAlumni = "CreateAndInviteAlumni"
+            /> 
+        </section>
+        <section v-if="isSpin" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+            <div class="grid m-auto">
+                <fa icon="spinner" class="text-[5rem] m-auto animate-spin text-[#fff]" /> 
+                <p class="text-[#fff] text-[2rem]">Sending email..</p>
+            </div>
+        </section>
     </div> 
-    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
-        <InvitAlumniForm
-            @hideForm="hide"
-            @CreateAndInviteAlumni = "CreateAndInviteAlumni"
-        /> 
-    </section>
-    <section v-if="isSpin" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
-        <div class="grid m-auto">
-            <fa icon="spinner" class="text-[5rem] m-auto animate-spin text-[#fff]" /> 
-            <p class="text-[#fff] text-[2rem]">Sending email..</p>
-        </div>
-    </section>
 </template>
 <script>
 import axios from '../../axios-http'
