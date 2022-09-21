@@ -53,6 +53,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        User::findOrFail($id)->delete();
+
     }
     // ===================Log out===============================
     public function logout(Request $request){
