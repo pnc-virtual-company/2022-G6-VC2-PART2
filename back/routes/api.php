@@ -50,8 +50,6 @@ Route::post('/smsMail',[MailController::class,'smsMail']);
 Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
 Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
 Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
-
-
 //================== work experience api ===============
 Route::apiResource('/alumniWork',WorkExperienceController::class);
 
