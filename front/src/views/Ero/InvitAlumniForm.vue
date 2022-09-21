@@ -4,19 +4,23 @@
     <template v-slot:form>
         <div class="grid md:grid-cols-2 md:gap-6 ">
             <div class="relative z-0 mb-6 w-full group">
-                <input v-model="firstName" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input v-model="firstName" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" required>
                 <BaseLabel for="floating_first_name"><fa icon="user" class="text-sky-500" /> First name</BaseLabel>
+                <p class="text-[red] text-[0.7rem]" v-if="firstName=='' && isSubmit">this input field is required</p>
             </div>
             <div class="relative z-0 mb-6 w-full group">
-                <input v-model="lastName" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input v-model="lastName" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" required>
                 <BaseLabel for="floating_last_name"><fa icon="user" class="text-sky-500" /> Last name</BaseLabel>
+                <p class="text-[red] text-[0.7rem]" v-if="lastName=='' && isSubmit" >this input field is required</p>
             </div>
         </div>
         <div class=" md:grid-cols-2 md:gap-6">
             <div class="relative z-0 mb-6 w-full group">
-                <input  v-model="email" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input  v-model="email" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" required>
                 <BaseLabel for="floating_email"><fa :icon="['fas', 'envelope']" class="text-sky-500" /> Email</BaseLabel>
+                <p class="text-[red] text-[0.7rem]" v-if="email=='' && isSubmit">this input field is required</p>
             </div>
+            <p class="text-[red] text-[0.8rem]" v-if="isExisted">this email is already existed !</p>
         </div>
         <div class="p-3 text-center">
             <BaseButton @click="CreateAndInviteAlumni" type="submit" class="bg-[#1da1f2] sm:w-auto ">Create</BaseButton>
@@ -31,6 +35,9 @@ import BaseForm from '../../components/widget/BaseForm.vue';
 import BaseButton from '../../components/widget/BaseButton.vue';
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
 export default {
+    props:{
+        isExisted:Boolean,
+    },
     components: {
         BaseForm,
         BaseButton,
@@ -41,13 +48,16 @@ export default {
             firstName:'',
             lastName:'',
             email:'',
+            isSubmit:false,
         }
     },
     methods:{
         CreateAndInviteAlumni(){
-            this.$emit('CreateAndInviteAlumni',this.firstName,this.lastName,this.email)
+            this.isSubmit=true;
+            if(this.firstName !=='' && this.lastName !=='' && this.email !==''){
+                this.$emit('CreateAndInviteAlumni',this.firstName,this.lastName,this.email)
+            }
         },
-
         hideForm(){
             this.$emit('hideForm', false);
         }
