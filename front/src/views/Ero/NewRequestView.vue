@@ -1,7 +1,7 @@
 <template>
 <div class="mt-[4rem] w-[70%] bg-red-50 mx-auto rounded-xl p-5">
     <p class="text-[32px] font-bold ml-5">Notification</p>
-    <NewRequestCard v-for="newAlumni of alumniRequest" :key="newAlumni" :newAlumni='newAlumni'/>
+    <NewRequestCard v-for="newAlumni of alumniRequest" :key="newAlumni" :newAlumni='newAlumni' @UpdateStatus="updateStatus"/>
 </div>
 </template>
 <script>
@@ -18,8 +18,13 @@ export default({
         getRequest(){
             axios.get('alumni').then((res)=>{
                 this.alumniRequest = res.data.filter(alumniRequest=>alumniRequest.user.status=='padding')
-                console.log('hi');
-                console.log(this.alumniRequest);
+            })
+        },
+        updateStatus(user_id,stat){
+            let alumniStatus ={status:stat}
+            axios.patch('user/status/'+user_id,alumniStatus).then((res)=>{
+                console.log(res.data);
+                location.reload();
             })
         }
     },

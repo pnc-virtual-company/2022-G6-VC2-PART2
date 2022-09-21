@@ -21,14 +21,14 @@
                 <p class="text-[#fff] text-[2rem]">Sending email..</p>
             </div>
         </section>
+        <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
+            <InviteAlumniForm
+                :isExisted="isexisted"
+                @hideForm="hide"
+                @CreateAndInviteAlumni = "CreateAndInviteAlumni"
+            /> 
+        </section>
     </div> 
-    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center"> 
-        <InviteAlumniForm
-            :isExisted="isexisted"
-            @hideForm="hide"
-            @CreateAndInviteAlumni = "CreateAndInviteAlumni"
-        /> 
-    </section>
 </template>
 <script>
 import axios from '../../axios-http'
