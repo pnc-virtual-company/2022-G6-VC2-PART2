@@ -10,10 +10,10 @@ class AlumniController extends Controller
         return Alumni::with('user','workExperience', 'alumniSkills.Skill','studyBackground')->get();
     }
    //================== add new alumni ======================
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $alumni = new Alumni();
-        $alumni -> user_id = $request->user_id;
+        $alumni -> user_id = $id;
         $alumni -> gender = $request->gender;
         $alumni ->phone = $request ->phone;
         $alumni ->telegram = $request ->telegram;

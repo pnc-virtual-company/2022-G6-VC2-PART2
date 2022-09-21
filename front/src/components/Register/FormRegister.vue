@@ -8,10 +8,10 @@
             alt="Phone image"
           />
         </div>
-        <div class="lg:mr-[1%] mr-[5%] p-1 w-[35%] bg-white border rounded">
+        <div class="lg:mr-[1%] mr-[5%] p-1 w-[40%] bg-white border rounded-md mt-[-0.7rem]">
           <form @submit.prevent="register" >
             <div
-              class="w-full mb-10 flex justify-center text-black font-medium"
+              class="w-full mb-5 flex justify-center text-black font-bold text-2xl mt-5"
             >
               Create New Account
             </div>
@@ -115,16 +115,16 @@
             <div class="mb-3 flex justify-between m-auto w-[90%]">
               <button
               type="submit"
-              class="flex justify-center m-auto bg-red-500 w-[30%] text-white py-1 border rounded ml-[10%]"
+              class="flex justify-center m-auto w-[50%] text-blue-500 py-1  ml-[5%]"
               @click="hideRegister"
             >
-              Back
+            Already have an account !
             </button>
               <button
               type="submit"
               class="flex justify-center m-auto bg-blue-500 text-white w-[30%] py-1 border rounded ml-[10%]"
             >
-              CREATE
+              Sign Up
             </button>
             </div>
             
@@ -137,7 +137,6 @@
 
 <script>
   import axios from 'axios'
-  import router from '@/router'
   export default {
   data(){
     return{
@@ -153,19 +152,28 @@
       dateOfBirth: '',
       placeOfBirth: '',
       address: '',
+      url: "http://127.0.0.1:8000/api/"
     }
   },
   methods:{
     register(){
-      let newUser = {firstName:this.firstName,lastName:this.lastName,email:this.email,password:this.password,role:'alumni'}
-      axios.post('user',newUser).then((response) =>{
+      let newUser = {
+        firstName:this.firstName,
+        lastName:this.lastName,
+        email:this.email,
+        password:this.password,
+        gender:this.gender,
+        phone:this.phone,
+        telegram:this.telegram,
+        major:this.major,
+        batch:this.batch,
+        address:this.address,
+        dateOfBirth:this.dateOfBirth,
+        placeOfBirth:this.placeOfBirth,
+        role:'alumni', status:'padding'}
+        axios.post(this.url + 'user',newUser).then((response) =>{
         console.log(response.data);
       })
-        axios.post('alumni',newUser).then((res)=>{
-        router.push('/profile');
-        console.log(res);
-      })
-      this.$emit("create-user", newUser);
         this.firstName="";
         this.lastName="";
         this.password="";
@@ -174,7 +182,7 @@
         this.major="";
         this.batch="";
         this.telegram="";
-        this.deteOfBirth="";
+        this.dateOfBirth="";
         this.placeOfBirth="";
         this.email="";
         this.address=""
@@ -189,5 +197,8 @@
         this.$emit('hideRegister',false)
       },
   },
+  create() {
+    this.register();
+  }
   }
   </script>

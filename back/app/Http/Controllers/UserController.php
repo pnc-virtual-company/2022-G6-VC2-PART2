@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\EroController;
+use App\Http\Controllers\AlumniController;
 use Mail; 
 use App\Mail\SendMail;
 
@@ -25,12 +26,15 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role= $request->role;
+        $user->status= $request->status;
         $user->save();
         if($user->role=='ero'){
             (new EroController)->store($request, $user->id);
             (new MailController)->smsMail($user->id,$request->password);
-        }else if($user->role=='alumni'){
+        }else if($user->role=='alumni' && $request->status == 'approve'){
             (new MailController)->smsMail($user->id,$request->password);
+        } else if($user->role=='alumni' && $request->status == 'padding') {
+            (new AlumniController )->store($request, $user->id);
         }
         return response()->json(['sms'=>$user]);
     }
@@ -46,6 +50,7 @@ class UserController extends Controller
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
         $user->email = $request->email;
+        $user->status= $request->status;
         $user->save();
         return response()->json(['sms'=>$user]);
     }
