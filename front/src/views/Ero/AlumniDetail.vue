@@ -1,18 +1,15 @@
 <template>
-<div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 w-[50%] overflow-y-auto h-[80vh] overflow-x-hidden">
+<div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 w-[50%]">
     <div class=" w-[100%] mx-auto ">
         <div class="ml-[10px] w-[98%] flex justify-between">
-            <div>
-                <img :src="AlumniDetail.profile" alt="" class="w-20 h-20 rounded-full cursor-pointer">
-                <img src="@/assets/boy.jpg" alt="" class="w-20 h-20 rounded-full cursor-pointer" v-if="AlumniDetail.gender=='Male' && AlumniDetail.profile == null">                
-                <img src="@/assets/girl.webp" alt="" class="w-20 h-20 rounded-full cursor-pointer" v-if="AlumniDetail.gender=='Female' && AlumniDetail.profile == null">                
-                <!-- <img :src="AlumniDetail.profile" alt="" class="w-20 h-20 rounded-full cursor-pointer"> -->
+            <div class="w-[13%]">
+                <img src="@/assets/boy.jpg" alt="" class="rounded-full">
             </div>
             <fa :icon="['fas', 'xmark']" class="text-[gray] cursor-pointer" @click="hideAlumniDetail"/>
         </div>
         <div class="w-[30%] ml-[20px] mt-[10px]">
             <h1 class="text-[1.1rem] font-bold">{{AlumniDetail.user.firstName+' '+AlumniDetail.user.lastName}}</h1>
-        </div> 
+        </div>
         <div class="ml-[20px] w-[94%] mt-[10px]">
             <div class="flex justify-between">
                 <div class="w-[70%]">
