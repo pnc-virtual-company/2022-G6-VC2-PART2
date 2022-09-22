@@ -45,7 +45,7 @@ export default {
     },
     methods:{
         CreateAndInviteAlumni(){
-            this.$emit('CreateAndInviteAlumni',this.firstName,this.lastName,this.email)
+            this.$emit('CreateAndInviteAlumni',this.email)
         },
 
         hideForm(){

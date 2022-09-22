@@ -49,9 +49,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
-        $user->email = $request->email;
-        $user->status= $request->status;
         $user->save();
+        if($request->isComplete==true) {
+            (new AlumniController )->store($request, $user->id);
+        }
         return response()->json(['sms'=>$user]);
     }
     //================== delete user ======================
