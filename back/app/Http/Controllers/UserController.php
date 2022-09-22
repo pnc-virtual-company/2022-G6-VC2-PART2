@@ -59,6 +59,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        User::findOrFail($id)->delete();
+
     }
     // ===================Log out===============================
     public function logout(Request $request){
@@ -66,6 +68,11 @@ class UserController extends Controller
         return response()->json(['sms'=>'logged out']);
     }
 
-    // ========Update new password after forget password =================
-
+    // ========Update status =================
+    public function updateStatus(Request $request,$id){
+        $status = User::findOrFail($id);
+        $status->status=$request->status;
+        $status->save();
+        return response()->json(['sms'=>'Status is updated']);
+    }
 }
