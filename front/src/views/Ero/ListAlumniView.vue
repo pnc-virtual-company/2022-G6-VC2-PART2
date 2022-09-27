@@ -126,7 +126,7 @@
       </div>
     </div>
 
-    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50">
+    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-10">
       <InvitAlumniForm
         @hideForm="hide"
         @CreateAndInviteAlumni="CreateAndInviteAlumni"
@@ -141,16 +141,15 @@
         <p class="text-[#fff] text-[2rem]">Sending email..</p>
       </div>
     </section>
-    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
+    <section v-if="showDetail || show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50 pt-[5rem]">
+      <AlumniDetail v-if="showDetail" @hideAlumniDetail="showDetail=false" :AlumniDetail="oneAlunmni" class="mb-3" /> 
       <InviteAlumniForm
+        v-if="show"
         :isExisted="isexisted"
         @hideForm="hide"
         @CreateAndInviteAlumni="CreateAndInviteAlumni"
       />
-    </section>
-    <section v-if="showDetail" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50 pt-[5rem]">
-        <AlumniDetail   @hideAlumniDetail="showDetail=false" :AlumniDetail="oneAlunmni" class="mb-3" /> 
-    </section>
+      </section>
   </div>
 </template>
 <script>
