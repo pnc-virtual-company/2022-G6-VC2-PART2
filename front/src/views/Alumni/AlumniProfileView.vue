@@ -2,9 +2,7 @@
   <div v-if="isInvited">
     <AlumniProfile @edit="showForm" :alumniData="alumniData" :alumniInfo="alumniInfo" @uploadImage="uploadImage"
       @showAlumniForm="showForm" :workExperiences="getCurrentWork" />
-    <section v-if="
-      showFormAlumni || showExperience || showSkillForm || showStudyBackground
-    " class="fixed inset-0 z-50 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
+    <section v-if="showFormAlumni || showExperience || showSkillForm || showStudyBackground" class="fixed inset-0 z-50 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
       <!-- form for alumni general profile -->
       <EditAlumniProfileForm @hideForm="hideForm" v-if="showFormAlumni" :alumniData="alumniData" type="edit"
         :alumniInfo="alumniInfo" @showAlumniForm="updateDataAlumni" @updateAlumni="updateDataAlumni" />
@@ -147,6 +145,7 @@ export default {
       newEnd_work,
       company_link,
       duration,
+      profile
     ) {
       let alumniExperience = {
         position: newPosition,
@@ -156,6 +155,7 @@ export default {
         alumni_id: VueCookies.get('alumniId'),
         company_link: company_link,
         duration: duration,
+        profile: profile
       };
       console.log(alumniExperience);
       axios
@@ -218,7 +218,7 @@ export default {
     },
     //=================== add new study background =================
     newStudyBackground(study) {
-      axios.post(this.url + "studyBackground", study).then(() => {
+      axios.post("studyBackground", study).then(() => {
         this.showStudyBackgroundForm(false);
         this.getData();
       });
@@ -242,13 +242,15 @@ export default {
     //=============================== remove studyBackground  =======================
     removeStudyBackground(id) {
       axios
-        .delete("http://127.0.0.1:8000/api/studyBackground/" + id)
+        .delete("studyBackground/" + id)
         .then(() => {
           this.getData();
         })
     },
     //=================== edit alumni experience ===================
     editExperience(data) {
+      console.log(data);
+      console.log('============================================');
       axios.put('alumniWork/' + data.id, data)
         .then((response) => {
           console.log(response.data);

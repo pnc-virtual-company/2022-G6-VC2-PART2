@@ -119,24 +119,20 @@
                  </div>
             
             <div class="p-2 text-center flex justify-end">
-                <BaseButton @click="hideForm" type="cancel" v-if="type=='edit'" class="bg-red-500 ">Cancel</BaseButton>
-                <BaseButton type="submit" class="bg-[#0062ff]  px-7 ml-2">
-                    <span v-if="type=='create'" @click="create">Add</span>
-                    <span v-else-if="type=='edit'" @click="updateData">Edit</span>
-                </BaseButton>
+                <button @click="hideForm" type="cancel" v-if="type=='edit'" class="text-red-500 font-medium">Cancel</button>
+                <button type="submit" class="text-[#0062ff] font-medium ml-4" v-if="type=='create'" @click="create">Add </button>
+                <button v-else-if="type=='edit'" class="text-[#0062ff] font-medium ml-4" @click="updateData">Edit</button>
             </div>
         </template>
     </BaseForm>
 </template>
 <script>
 import BaseForm from '../../components/widget/BaseForm.vue'
-import BaseButton from '../../components/widget/BaseButton.vue'
 import BaseLabel from '../../components/widget/BaseSpanLabel.vue'
 import VueCookies from 'vue-cookies'
 export default {
     components: {
         BaseForm,
-        BaseButton,
         BaseLabel,
     },
     emits: ['hideForm','updateAlumni', 'Alumni'],

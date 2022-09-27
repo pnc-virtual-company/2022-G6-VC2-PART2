@@ -31,6 +31,8 @@ class StudyBackgroundController extends Controller
         $study -> major = $request -> major;
         $study -> start_year = $request -> start_year;
         $study -> end_year = $request -> end_year;
+        $study -> profile = $request -> profile;
+
         $study->save();
         return response()->json(['sms'=>'Created succefully!']);
     }
@@ -60,6 +62,7 @@ class StudyBackgroundController extends Controller
         $study -> major = $request -> major;
         $study -> start_year = $request -> start_year;
         $study -> end_year = $request -> end_year;
+        $study -> profile = $request -> profile;
         $study->save();
         return response()->json(['sms'=>'Update succefully!']);
     }
