@@ -1,12 +1,12 @@
 <template>
   <div class="mt-[3.5rem] w-[80%] mx-auto">
     <div>
-      <div class="flex justify-between items-center">
-        <div class="flex justify-between items-center">
+      <div class="flex justify-between items-center w-full m-auto">
+        <div class="flex justify-between items-center m-auto w-full">
           <select
             v-model="filterBatch"
             id="bacthSelection"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 m-1 focus:border-blue-500 block p-2.5 w-full outline-none"
           >
             <option value="All">Choose a bacth</option>
             <option value="2007">2007</option>
@@ -28,40 +28,34 @@
             <option value="2023">2023</option>
           </select>
         </div>
-        <div class="flex justify-between items-center">
-          <select
-            v-model="filterCompany"
-            id="majorSelection"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
-          >
-            <option value="All">Choose a company</option>
-            <option value="pnc">PNC</option>
-            <option value="cam">Cam Solution</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="flex justify-between items-center">
+        <select
+          v-model="filterCompany"
+          id="majorSelection"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-full outline-none"
+        >
+          <option value="All">Choose a company</option>
+          <option value="pnc">PNC</option>
+          <option value="cam">Cam Solution</option>
+          <option value="other">Other</option>
+        </select>
           <select
             v-model="filterMajor"
             id="majorSelection"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-full m-1 outline-none"
           >
             <option value="All">Choose a Major</option>
             <option value="web">Web</option>
             <option value="sna">SNA</option>
             <option value="other">DMO</option>
           </select>
-        </div>
-        <div class="flex items-center w-[55%]">
+        <div class="flex items-center w-[55%] m-1">
           <label
             for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
             >Search</label
           >
           <div class="relative w-full">
-            <div
-              class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-            >
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none" >
               <svg
                 aria-hidden="true"
                 class="w-5 text-gray-500 dark:text-gray-400"
@@ -82,14 +76,24 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-between mx-auto mt-3">
-        <div class="rounded bg-slate-50 w-[30%] p-7 flex">
+      <div class="flex justify-between items-end mx-auto mt-3">
+        <div class="rounded bg-slate-50 w-[30%] p-7 flex items-end">
+          <div class="rounded-full w-14 h-14 ring-8 ring-gray-300 dark:ring-gray-500 flex justify-center items-center">
+            {{totalCount}}
+          </div>
+          <h3 class="ml-3">Total</h3>
+        </div>
+        <div class="rounded bg-slate-50 w-[30%] p-7 flex items-end">
           <div
             class="rounded-full w-14 h-14 ring-8 ring-gray-300 dark:ring-gray-500 flex justify-center items-center"
           >
-            10
+          {{paddingCount}}
           </div>
-          <h3 class="ml-3">INVITED : 10</h3>
+          <h3 class="ml-3">Padding</h3>
+        </div>
+        <div class="rounded bg-slate-50 w-[30%] p-7 flex items-end">
+          <div class="rounded-full w-14 h-14 ring-8 ring-gray-300 dark:ring-gray-500 flex justify-center items-center"> {{approveCount}} </div>
+          <h3 class="ml-3">Approved</h3>
         </div>
         <div>
           <button
@@ -122,7 +126,7 @@
       </div>
     </div>
 
-    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
+    <section v-if="show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50">
       <InvitAlumniForm
         @hideForm="hide"
         @CreateAndInviteAlumni="CreateAndInviteAlumni"
@@ -144,13 +148,9 @@
         @CreateAndInviteAlumni="CreateAndInviteAlumni"
       />
     </section>
-    <section v-if="showDetail" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
-        <AlumniDetail  
-            @hideAlumniDetail="showDetail=false"
-            :AlumniDetail="oneAlunmni"
-        /> 
+    <section v-if="showDetail" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50 pt-[5rem]">
+        <AlumniDetail   @hideAlumniDetail="showDetail=false" :AlumniDetail="oneAlunmni" class="mb-3" /> 
     </section>
-   
   </div>
 </template>
 <script>
@@ -174,16 +174,27 @@ export default {
       keyword: "",
       isexisted: false,
       showDetail: false,
-      oneAlunmni:[]
+      oneAlunmni:[],
+      paddingCount: 0,
+      approveCount: 0,
+      totalCount: 0,
     };
   },
   methods: {
+    countUserStatus() {
+      axios.get('user').then((res) => {
+        this.paddingCount = res.data.filter(data=>(data.role == 'alumni' && data.status == 'padding')).length;
+        this.totalCount = res.data.filter(data=>(data.role == 'alumni')).length;
+        this.approveCount = res.data.filter(data=>(data.role == 'alumni' && data.status == 'approve')).length;
+      })
+    },
     getAlumni() {
       axios
         .get("alumni")
         .then((res) => {
           this.alumniData = res.data;
           console.log(this.alumniData);
+          this.countUserStatus();
         })
         .catch((error) => {
           console.log(error);

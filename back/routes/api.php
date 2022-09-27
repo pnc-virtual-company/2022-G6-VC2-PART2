@@ -25,13 +25,11 @@ use App\Http\Controllers\UplaodImageController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResource('/user',UserController::class);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::apiResource('user', UserController::class);
     //================== update user status ======================
     Route::patch('/user/status/{id}',[UserController::class, 'updateStatus']);
     //================== alumni api ======================

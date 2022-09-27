@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="text-right">
-            <button @click="CreateAndInviteAlumni" type="submit" class="text-[#04e] px-5 font-medium">Create</button>
-            <button @click="hideForm" type="cancel" class="text-[#e04] font-medium">Cancel</button>
+            <button @click="hideForm" type="cancel" class="text-[#e04] font-medium mr-4">Cancel</button>
+            <button @click="CreateAndInviteAlumni" type="submit" class="text-[#04e] font-medium">Invite</button>
         </div>
     </template>
 </BaseForm>

@@ -1,7 +1,7 @@
 <template>
 <div class="mt-[20px] flex" v-for="(background,index) of studyBackground" :key="index">
     <div class="w-[10%] ml-[20px]">
-        <img src="@/assets/girl.webp" alt="" class="rounded-full">
+        <img :src="background.profile" alt="" class="rounded-full">
     </div>
     <div class="ml-[20px]">
         <div>

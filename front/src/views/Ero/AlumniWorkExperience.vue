@@ -1,7 +1,7 @@
 <template>
 <div class="mt-[20px] flex" v-for="(work,index) of workExperience" :key="index">
     <div class="w-[10%] ml-[20px]">
-        <img src="@/assets/boy.jpg" alt="" class="rounded-full">
+        <img :src="work.profile" alt="" class="rounded-full">
     </div>
     <div class="ml-[20px]" >
         <div>

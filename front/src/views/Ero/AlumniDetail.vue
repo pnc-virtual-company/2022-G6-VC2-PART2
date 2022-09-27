@@ -1,9 +1,9 @@
 <template>
-<div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5 w-[50%]">
+<div class="mt-4 mx-auto bg-slate-50 rounded-lg p-5 w-[50%]">
     <div class=" w-[100%] mx-auto ">
         <div class="ml-[10px] w-[98%] flex justify-between">
-            <div class="w-[13%]">
-                <img src="@/assets/boy.jpg" alt="" class="rounded-full">
+            <div class="w-[10rem]">
+                <img :src="AlumniDetail.profile" alt="" class="rounded-full">
             </div>
             <fa :icon="['fas', 'xmark']" class="text-[gray] cursor-pointer" @click="hideAlumniDetail"/>
         </div>
@@ -47,8 +47,8 @@
     <div class="w-[100%] mx-auto mt-[10px]">
         <div class="w-[100%] ml-[20px]">
             <div class="w-[50%] flex">
-                <h1 class="w-[50%] font-bold text-[#0062ff] text-[1.1rem] cursor-pointer" @click="isWorkExperience=true" :class="{'underline':isWorkExperience}">Work Experience</h1>
-                <h1 class="w-[50%] font-bold text-[#0062ff] text-[1.1rem] cursor-pointer" @click="isWorkExperience=false" :class="{'underline':!isWorkExperience}">Study Background</h1>
+                <h1 class="w-[50%] font-bold text-[#0062ff] text-[1.1rem] cursor-pointer" @click="isWorkExperience=true" :class="{'underline underline-offset-4 decoration-2':isWorkExperience}">Work Experience</h1>
+                <h1 class="w-[50%] font-bold text-[#0062ff] text-[1.1rem] cursor-pointer" @click="isWorkExperience=false" :class="{'underline underline-offset-4 decoration-2':!isWorkExperience}">Study Background</h1>
             </div>
         </div>
         <WorkExperience v-if="isWorkExperience" :workExperience='AlumniDetail.work_experience'/>
