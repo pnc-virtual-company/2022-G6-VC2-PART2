@@ -4,9 +4,9 @@
     <template v-slot:form>
         <div class=" md:grid-cols-2 md:gap-6">
             <div class="relative z-0 mb-6 mt-[-1rem] w-full group">
-                <input  v-model="email" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">
+                <input  v-model="email" type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                 <p class="text-[0.8rem] text-[#e04]" v-if="isExisted">this email is existed !!</p>
-                <BaseLabel for="floating_email"><fa :icon="['fas', 'envelope']" class="text-sky-500" /> Email</BaseLabel>
+                <BaseLabel for="floating_email"><fa :icon="['fas', 'envelope']" class="text-[#0062ff]" /> Email</BaseLabel>
             </div>
         </div>
         <div class="text-right">

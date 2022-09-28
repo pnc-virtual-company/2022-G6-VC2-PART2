@@ -63,7 +63,7 @@
                         placeholder=" " 
                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                     >
-                    <BaseLabel for="floating_gender"><fa icon="" class="text-[#0062ff]" /> Gender</BaseLabel>
+                    <BaseLabel for="floating_gender"><fa icon="transgender-alt" class="text-[#0062ff]" /> Gender</BaseLabel>
                 </div>
                 
                 </div>

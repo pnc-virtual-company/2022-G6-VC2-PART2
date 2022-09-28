@@ -66,4 +66,24 @@ class AlumniController extends Controller
         $alumni->save();
         return response()->json(['sms' => $alumni]);
     }
+    // ============  Check old Password =====================
+    public function checkPasswordAlumni(Request $request, $id)
+    {
+        $user =  User::findOrFail($id);
+        if (Hash::check($request->password, $user['password'])) {
+            $user->password = $request->new_password;
+            $user->save();
+            return response()->json(['sms' => 'Password updated!'], 201);
+        }
+        return response()->json(['sms' => 'Password incorrect!'], 404);
+    }
+    // ================ Update Password Alumni===============
+
+    public function updatePasswordAlumni(Request $request, $id)
+    {
+        $alumni = Alumni::findOrFail($id);
+        $alumni->password = Alumni::make($request->password);
+        $alumni->save();
+    }
+
 }

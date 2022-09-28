@@ -67,3 +67,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::apiResource('company', CompanyController::class);
     Route::apiResource('school', SchoolController::class);
 });
+
+// ==============Reset Password Alumini ===================
+Route::post('/resetPaswordAlumni/{id}', [AlumniController::class, 'checkPasswordAlumni']);
+Route::put('/resetPaswordAlumni/{id}', [AlumniController::class, 'updatePasswordAlumni']);

@@ -38,12 +38,12 @@ class UserController extends Controller
         }
         return response()->json(['sms'=>$user]);
     }
-   //================== show one user ======================
+   //================== show one user ================
     public function show($id)
     {
         return User::with('alumni')->findOrFail($id);
     }
-   //================== update user ======================
+   //================== update user ===================
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -55,20 +55,20 @@ class UserController extends Controller
         }
         return response()->json(['sms'=>$user]);
     }
-    //================== delete user ======================
+    //================== delete user ==================
     public function destroy($id)
     {
         //
         User::findOrFail($id)->delete();
 
     }
-    // ===================Log out===============================
+    // ===================Log out======================
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
         return response()->json(['sms'=>'logged out']);
     }
 
-    // ========Update status =================
+    // ========Update status =========================
     public function updateStatus(Request $request,$id){
         $status = User::findOrFail($id);
         $status->status=$request->status;

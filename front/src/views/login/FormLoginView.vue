@@ -17,7 +17,7 @@
             <fa @click="showPassword = !showPassword" :icon="showPassword ? 'eye' : 'eye-slash'" />
           </div>
           <p v-if="inValid" class="text-[#e04]">Invalid email or password!</p>
-          <p @click="showForgetForm = true" class="text-[#0062ff] cursor-pointer hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgoot password?</p>
+          <p @click="showForgetForm = true" class="text-[#0062ff] cursor-pointer hover:text-[#0062ff] mb-3 focus:text-[#0062ff] transition duration-200 ease-in-out"> Forgot password?</p>
           <button type="submit" class="w-full py-2 mt-3 bg-[#0062ff] rounded-md text-[#fff] text-xl font-normal">Login</button>
           <button @click="showRegister = !showRegister" class="w-full bg-green-400 mt-8 text-white p-2 rounded-lg font-semibold text-lg">Create New Account</button>
         </form>
