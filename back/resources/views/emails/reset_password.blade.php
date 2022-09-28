@@ -1,24 +1,20 @@
-<body style="font-family: Arial; margin: 0; font-size: 20px">
-  <table style=" background-color: #f3f3f5; padding: 16px 12px; min-height: 50vh; width: 80%; margin: 0 auto; " >
-     <tbody>
-        <tr>
-           <td style="vertical-align: top">
-              <table border="0" width="600" cellpadding="0" cellspacing="0" align="center" style=" width: 600px !important; min-width: 600px !important; max-width: 600px !important; margin: auto; border-spacing: 0; border-collapse: collapse; background: white; border-radius: 8px; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; display: block; " >
-                 <tbody>
-                    <tr>
-                       <td style=" text-align: center; vertical-align: top; border-collapse: collapse; " >
-                          <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#F8F8F8" style="border-spacing: 0; border-collapse: collapse" >
-                             <tbody>
-                                <tr style="background-size: cover">
-                                   <td style=" width: 60%; text-align: left; border-collapse: collapse; background: #fff; border-radius: 10px 10px 0px 0px; color: white; height: 50px; " > <img src="https://www.passerellesnumeriques.org/misc/logo-en.png" width="120px" class="CToWUd"/> </td>
-                                </tr>
-                             </tbody>
-                          </table>
-                       </td>
-                    </tr>
-                    <tr>
-                       <td style="vertical-align: top; border-collapse: collapse">
-                          <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#F8F8F8" style="border-spacing: 0; border-collapse: collapse" >
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Verify Code</title>
+</head>
+   <body style="font-family: Arial; margin: 0; font-size: 22px">
+      <table style=" background-color: #F4F9F9; padding: 16px 16px; min-height: 50vh; width: 80%; margin: 0 auto;" >
+               <td style="vertical-align: top">
+                  <table border="0" width="600" cellpadding="0" cellspacing="0" align="center" style="margin: auto; border-spacing: 0; border-collapse: collapse; background: white; border-radius: 8px; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px; display: block;" >
+                     <tbody>        
+                        <tr style="background-size: cover">
+                           <td style=" width: 70%; text-align: left; border-collapse: collapse; background: #fff; border-radius: 10px 10px 0px 0px; color: white; height: 50px; " > 
+                              <img src="https://o.remove.bg/downloads/7437d945-6fab-4b80-af39-443bbcf68862/unnamed-removebg-preview.png" width="120px" class="CToWUd"/> 
+                           </td>
+                        </tr>
+                        <td style="vertical-align: top; border-collapse: collapse">
+                           <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#F8F8F8" style="border-spacing: 0; border-collapse: collapse" >
                              <tbody style="font-size: 14px;">
                                 <tr>
                                    <td style=" padding-top: 30px; padding-bottom: 5px; background-color: white; " ><span style="color: #363636" >Dear <b>User,</b></span > </td>
@@ -31,35 +27,24 @@
                                         Use your secret code!
                                         <br>
                                         <br>
-                                        <span style="font-weight: bold; font-size: 18px;">{{$details['verify_code']}}</span>
+                                        <span style="font-weight: bold; font-size: 22px; color: #0062ff;">{{$details['verify_code']}}</span>
                                         <br>
                                         <br>
                                         Copy this code above 👆 and enter the verify code on app.
-                                        
-                                        If you did not forget your password, you can ignore this email.
                                     </span > 
                                    </td>
                                 </tr>
-
                                 <tr>
-                                   <td style="background: #ffffff; height: 20px">
-                                    Thank you 🙏
-                                  </td>
+                                    <td style="background: #ffffff; height: 20px">
+                                       Thank you 🙏
+                                    </td>
                                 </tr>
-                                <tr>
-                                   <td style="background: #ffffff; height: 20px"></td>
-                                </tr>
-                                <tr>
-                                   <td bgcolor="#F8F8F8" style=" border-radius: 8px !important; border-collapse: collapse; " ></td>
-                                </tr>
-                             </tbody>
-                          </table>
-                       </td>
-                    </tr>
-                 </tbody>
-              </table>
-           </td>
-        </tr>
-     </tbody>
-  </table>
- </body>
+                              </tbody>
+                           </table>
+                        </td>
+                     </tbody>
+                  </table>
+               </td>
+          </table>
+      </body>
+   <html>

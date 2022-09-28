@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AlumniSkills;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class AlumniSkillsController extends Controller
+class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class AlumniSkillsController extends Controller
      */
     public function index()
     {
-        return AlumniSkills::with('Skill', 'alumni')->get();
+        return Company::get();
     }
 
     /**
@@ -25,32 +25,35 @@ class AlumniSkillsController extends Controller
      */
     public function store(Request $request)
     {
-        $alumniSkill = new AlumniSkills();
-        $alumniSkill -> alumni_id = $request -> alumni_id;
-        $alumniSkill -> skill_id = $request -> skill_id;
-        $alumniSkill -> save();
-        return response()->json(['sms'=>$alumniSkill]);
+        $company = new Company();
+        $company -> company = $request -> company;
+        $company -> address = $request -> address;
+        $company -> position = $request -> position;
+        $company -> company_link = $request -> company_link;
+        $company -> profile = $request -> profile;
+        $company -> save();
+        return $company;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AlumniSkills  $alumniSkills
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function show(AlumniSkills $alumniSkills)
+    public function show($id)
     {
-        //
+        return Company::findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AlumniSkills  $alumniSkills
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AlumniSkills $alumniSkills)
+    public function update(Request $request, Company $company)
     {
         //
     }
@@ -58,11 +61,11 @@ class AlumniSkillsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AlumniSkills  $alumniSkills
+     * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Company $company)
     {
-        AlumniSkills::destroy($id);
+        //
     }
 }

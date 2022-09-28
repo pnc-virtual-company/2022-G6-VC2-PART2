@@ -1,20 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/Alumni/AlumniProfileView.vue'
+import FormRegisterView from '../views/login/FormRegisterView.vue'
+import ProfileView from '../views/Alumni/AlumniProfileView.vue'
 import FormLoginView from '../views/login/FormLoginView.vue'
 import EroList from '../views/Ero/EroListView.vue'
 import VueCookies from 'vue-cookies'
 import PageNotFound from '@/views/PageNotFound.vue'
-// import FormloginView from '../views/FormloginView.vue'
+import ListAlumniView from '../views/Ero/ListAlumniView.vue'
+import NewRequestView from "../views/Ero/NewRequestView.vue"
 
 const routes = [
   {
     path: '/profile',
     name: 'home',
-    component: HomeView,
+    component: ProfileView,
     meta:{
       isAuthentication:true,
       userRole:'alumni',
     },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: FormRegisterView
   },
   {
     path: '/ero',
@@ -33,6 +40,24 @@ const routes = [
       hide: true,
       isAuthentication:false,
     }
+  },
+  {
+    path: '/listAlumni',
+    name: 'listAlumni',
+    component: ListAlumniView,
+    meta: {
+      isAuthentication:true,
+      userRole:'ero',
+    }
+  },
+  {
+    path: '/newRequest',
+    name: 'newRequest',
+    component: NewRequestView,
+    meta:{
+      isAuthentication:true,
+      userRole:'ero',
+    },
   },
   {
     path: '/logout',

@@ -1,7 +1,5 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -19,6 +17,7 @@ class UserSeeder extends Seeder
             'firstName'=>'admin',
             'lastName'=>'',
             'role'=>'admin',
+            'status'=>'approve',
             'email'=>'vc2group6.2022@gmail.com',
             'password'=>bcrypt('admin!@#$')];
         User::create($user);

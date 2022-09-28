@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('alumni_id')->constrained()->onDelete('cascade');
             $table->string('school');
-            $table->string('school_logo')->nullable();
+            $table->string('profile')->nullable();
             $table->string('major');
             $table->string('start_year');
             $table->string('end_year');

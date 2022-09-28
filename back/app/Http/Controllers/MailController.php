@@ -8,7 +8,8 @@ use App\Mail\SendMail;
 use App\Models\User;
 use App\Mail\ForgotPasswordInfor;
 use Illuminate\Support\Facades\Hash;
-  
+use Illuminate\Support\Facades\Mail as FacadesMail;
+
 class MailController extends Controller
 {
     /**
@@ -16,14 +17,13 @@ class MailController extends Controller
      *
      * @return response()
      */
-    // Send mail when admin create student
+    //===================== Send mail when admin create student ========================
     public function smsMail($id,$password)
     {
         $user = User::findOrFail($id);
-
         $sms = [
             'title' =>'Hello '. $user->firstName. ',',
-            'body' => 'Here is your account'. $user->email.' and your password is: '. $password,
+            'body' => 'Here is your account '. $user->email.' and your password is: '. $password,
         ];
          
         Mail::to($user->email)->send(new SendMail($sms));
@@ -32,7 +32,6 @@ class MailController extends Controller
     } 
     // ============Send Email When User Forget Password===========
     public function sendMailResetPassword($details){
-
         Mail::to($details->email)->send(new ForgotPasswordInfor($details));
    
         if (Mail::flushMacros()) {
@@ -40,5 +39,5 @@ class MailController extends Controller
         }else{
              return response()->json(['success', 'Great! Successfully send in your mail'], 201);
         }
-   }
+    }   
 }

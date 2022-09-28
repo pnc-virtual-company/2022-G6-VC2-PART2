@@ -1,229 +1,271 @@
-<template>    
-    <BaseForm class="relative top-10 mx-auto p-0 border w-90 shadow-lg rounded-lg bg-white " @click = "turnOffInputOption">
-        <template v-slot:header >
-            <span v-if="type=='create'">Create Work Experoience</span>
-            <span v-else-if="type=='edit'">Edit Work Experoience</span>
-        </template>        
-        <template v-slot:form >
-            <!-- POSITION INPUT -->
-            <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="position" @input="filterEperienceOption">
-                <div v-if="filterOption.length==0 && isInputPosition" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this position yet !</div>
-                <ul class="shadow-md" v-if="isInputPosition">
-                    <option v-for="(experience,index) of filterOption" :key="index" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectPositionValue" :value="experience.position">{{experience.position}}</option>
-                </ul>
-                <BaseLabel for="floating_address"><fa icon="chalkboard-teacher" class="text-[#0062ff]" /> Position</BaseLabel>
-                <small class="text-red-600" v-if="isNoPostion"> You missed position*</small>
-            </div>
-            <!-- COMPANY INPUT -->
-            <div class="relative z-0 mb-6 w-full group">
-                <input type="text" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company" @input="filterEperienceCompany">
-                <div v-if="filterCompany.length==0 && isInputCompany" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer">Don't have this company yet !</div>
-                <ul class="shadow-md" v-if="isInputCompany">
-                    <option v-for="(experience,index) of filterCompany" :key="index" class="absolute bg-[#fff] hover:bg-[#1da1f2] hover:text-[#fff] cursor-pointer block py-2.5 px-3 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-sky-500 focus:outline-none focus:ring-0 focus:border-sky-600 peer" @click="selectCompanyValue" :value="experience.company">{{experience.company}}</option>
-                </ul>
-                <BaseLabel for="floating_address"><fa icon="hotel" class="text-[#0062ff]" /> Work Place</BaseLabel>
-                <small class="text-red-600" v-if="isNoCompany"> You missed company*</small>
-            </div>
-            <!-- LINK COMPANY INPUT -->
-            <div class="relative z-0 mb-6 w-full group">
-                <input type="url" placeholder=" " required class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="company_link">
-                <BaseLabel for="floating_address"><fa icon="link" class="text-[#0062ff]" />companylink</BaseLabel>
-            </div>
-            <!-- START AND END YEAR INPUT -->
-            <div class="grid md:grid-cols-2 md:gap-6 ">
-                <div class="relative z-0 mb-6 w-full group">
-                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="start_year">
-                    <BaseLabel for="floating_first_name"><fa icon="user" class="text-[#0062ff]" /> Start_work</BaseLabel>
-                    <small class="text-red-600" v-if="isNoStartYear"> You missed start years*</small>
+<template>
+    <BaseForm class="w-full bg-white ">
+        <template v-slot:header>
+            <span v-if="showCompanyForm">Create New Company</span>
+            <span v-else-if="type == 'edit'">Edit Experience</span>
+            <span v-else>Add New Work Experience</span>
+        </template>
+        <template v-slot:form>
+            <!-- select company -->
+            <div class="font-medium" v-if="!showCompanyForm">
+                <div class="w-full bg-white font-medium">
+                    <span class="bg-white">Company:</span>
+                    <div class="w-full flex items-center border-2 rounded-md">
+                        <div class="flex justify-end items-center ml-3 bg-[#e2e2e2] h-[75%] rounded-2xl px-3" v-if="selectedCompany != null">
+                            <span class="font-normal">{{ selectedCompany.company }}</span>
+                            <fa icon="xmark" class="cursor-pointer p-2 text-[#e04]" @click="company = null; selectedCompany = null" />
+                        </div>
+                        <input 
+                            @focus="isFocusCompany = true; isShowCompanies = true" @blur="isFocusCompany = false;"
+                            v-model="company" type="text" :placeholder="[[ placeholder ]]"
+                            class="pl-3 font-normal text-base  block flex-1 min-w-0 w-full rounded-md p-2 outline-none">
+                    </div>
+                    <div v-if="isShowCompanies" class="w-full items-center border-2 rounded-md max-h-40	bg-white overflow-auto">
+                        <div @click="isShowCompanies = false; showCompanyForm = true" class="flex items-center py-2 pl-6 hover:bg-[#d9eafd]">
+                            <fa icon="plus" class="text-[#0062ff] p-1 w-[15px] mr-3 h-[15px] rounded-full border border-[#0062ff]"/>
+                            <p class="text-[blue]">Add new company</p>
+                        </div>
+                        <div v-for:="eachCompany of filterCompany" @click="selectedCompany = eachCompany; company = null; companyId = eachCompany.id; isShowCompanies = false; getSelectedPosition();" class="flex items-center py-2 pl-4 hover:bg-[#d9eafd]">
+                            <img v-if="eachCompany.profile" :src="eachCompany.profile" class="w-10 h-10 rounded-full mr-[10px]">
+                            <div class="flex flex-col">
+                                <p class="font-medium">{{ eachCompany.company }}</p>
+                                <span class="text-[0.80rem]">{{ eachCompany.address }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-red-600" v-if="selectedCompany == null">Company is required!*</small>
                 </div>
-                <div class="relative z-0 mb-6 w-full group" v-if="hideEndYear">
-                    <input type="month" placeholder=" " class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black dark:border-blue-1000 dark:focus:border-blue-1000 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="end_year" min="2020-08" >
-                    <BaseLabel for="" class=""><fa icon="user" class="text-[#0062ff]" /> End_work</BaseLabel>
-                    <small class="text-red-600" v-if="isNoEndYear"> You missed end years*</small>
+                <!-- select position -->
+                <div class="w-full bg-white font-medium" v-if="selectedCompany">
+                    <span class="bg-white">Position:</span>
+                    <div class="w-full flex items-center border-2 rounded-md">
+                        <div class="flex justify-end items-center ml-3 bg-[#e2e2e2] h-[75%] rounded-2xl px-3" v-if="selectedPosition != null">
+                            <span class="font-normal">{{ selectedPosition }}</span>
+                            <fa icon="xmark" class="cursor-pointer p-2 text-[#e04]" @click="selectedPosition = null" />
+                        </div>
+                        <input
+                            @focus="isFocusPosition = true; isShowPosition = true" @blur="isFocusPosition = false;"
+                            v-model="position" type="text" :placeholder="[[ placeholder ]]"
+                            class="pl-3 font-normal text-base  block flex-1 min-w-0 w-full rounded-md p-2 outline-none">
+                    </div>
+                    <div v-if="isShowPosition" class="w-full items-center border-2 rounded-md max-h-40	bg-white overflow-auto">
+                        <div v-for:="position of filterPosition"
+                            @click="selectedPosition = position; isShowPosition = false;"
+                            class="flex items-center py-2 pl-4 hover:bg-[#d9eafd]">
+                            <div class="flex flex-col">
+                                <p class="font-medium">{{ position }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-red-600" v-if="selectedPosition == null">Position is required!*</small>
+                </div>
+                <div class="w-full font-medium mt-5">
+                    <!-- START AND END YEAR INPUT -->
+                    <div class="relative z-0 mb-6 w-full group">
+                        <label for="">Start Year</label>
+                        <input type="month" placeholder=" "
+                            class="border-2 outline-none p-2 rounded-md w-full border-gray-300" v-model="start_year"
+                            min="2005-08">
+                        <small class="text-red-600" v-if="start_year == ''">Start year is required!*</small>
+                    </div>
+                    <div class="relative z-0 mb-6 w-full group" v-if="hideEndYear">
+                        <label for="">End Year</label>
+                        <input type="month" placeholder=" "
+                            class="border-2 outline-none p-2 rounded-md w-full border-gray-300" v-model="end_year"
+                            min="2005-08">
+                    </div>
+                </div>
+                <!-- CHECK IS LEFT COMPANY INPUT -->
+                <div class=" mb-6 w-full group">
+                    <input id="default-checkbox" type="checkbox" v-model='hideEndYear'
+                        class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
+                    <label for="default-checkbox" class="disabled ml-2 text-sm cursor-pointer">Already left from this company?</label>
                 </div>
             </div>
-            <!-- CHECK IS LEFT COMPANY INPUT -->
-            <div class=" mb-6 w-full group">
-                <input id="default-checkbox" type="checkbox" v-model='hideEndYear' class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300">
-                <label for="default-checkbox" class="disabled ml-2 text-sm cursor-pointer">Already left from this company?</label>
+            <div v-else>
+                <div class="w-[10rem] h-[10rem] m-auto">
+                    <div class="border border-gray-300 w-[10rem] h-[10rem] rounded-full m-auto mb-5" >
+                        <img v-show="imageURL != '' " :src="imageURL" alt="" class="w-full rounded-full w-[10rem] h-[10rem]">
+                    </div>
+                    <input type="file" id="companyProfile" @change="showProfile($event.target.files[0])" hidden>
+                    <label for="companyProfile"><fa icon='camera-alt' class="float-right cursor-pointer mt-[-3rem]" /></label>
+                </div>
+                <input type="text" class="border border-gray-300 pl-3 font-normal text-base min-w-0 w-full rounded-md p-2 outline-none" placeholder="Company name" v-model="newCompany" required>
+                <select name="" id="" multiple class="mt-3 border border-gray-300 pl-3 font-normal text-base min-w-0 w-full rounded-md p-2 outline-none" v-model="selectPositions">
+                    <option :value="position" v-for:="position in positions">{{position}}</option>
+                </select>
+                <input type="text" class="mt-3 border border-gray-300 pl-3 font-normal text-base min-w-0 w-full rounded-md p-2 outline-none" placeholder="Company Address" v-model="newAddress" required>
+                <input type="url" class="mt-3 border border-gray-300 pl-3 font-normal text-base min-w-0 w-full rounded-md p-2 outline-none" placeholder="Company URL" v-model="newCompany_link" required>
             </div>
-            <!-- BUTTON GROUP INPUT -->
             <div class="p-2 flex justify-end">
-                <BaseButton @click="hideForm" type="cancel" class="text-red-500 mr-2">Cancel</BaseButton>
-                <BaseButton type="submit" class="bg-[#0062ff] sm:w-auto ">
-                    <span v-if="type=='create'" @click="newAlumniExperience">Add</span>
-                    <span v-else-if="type=='edit'" @click="editExperience">Edit</span>
-                </BaseButton>
+                <BaseButton @click="hideForm" type="cancel" class="text-red-500 mr-2 cursor-pointer font-medium">Cancel</BaseButton>
+                <BaseButton v-if="!showCompanyForm && type != 'edit'" type="submit" class="text-[#0062ff] sm:w-auto ml-2 cursor-pointer font-medium" @click="newAlumniExperience(selectedCompany)">Add</BaseButton>
+                <BaseButton class="text-[#0062ff] sm:w-auto ml-2 cursor-pointer font-medium" v-else-if="type=='edit'" @click="editExperience">Edit</BaseButton>
+                <BaseButton v-else type="submit" class="text-[#0062ff] ml-2 cursor-pointer font-medium" @click="addCompany">Create</BaseButton>
             </div>
         </template>
     </BaseForm>
 </template>
+
 <script>
-import axios from "../../axios-http"
-import BaseForm from '../../components/widget/BaseForm.vue';
-import BaseButton from '../../components/widget/BaseButton.vue';
-import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
+import axios from '../../axios-http'
+import BaseForm from '../../components/widget/BaseForm.vue'
 export default {
     components: {
         BaseForm,
-        BaseButton,
-        BaseLabel,
     },
     props: {
-        type: String,
-        experience:Object,
-    },
-    data(){
+        experience: Object,
+        type: String
+    },  
+    data() {
         return {
-            hideEndYear: true,
-            position:'',
-            company:'',
-            start_year:'',
-            end_year:'',
-            company_link:'',
-            isNoPostion:false,
+            companies: [],
+            selectedPositionCompany: [],
+            positions: ['frontend developer', 'backend developer', 'laravel developer', 'Mobile application', 'IT support', 'Devops', 'Business Analysis'],
+            duration: '',
+            start_year: '',
+            end_year: '',
+            isCompanyNull: false,
+            isShowCompanies: false,
+            isFocusCompany: false,
+            hideEndYear: false,
+            selectedCompany: null,
+            isNoPostion: false,
             isNoCompany: false,
-            isNoStartYear:false,
-            isNoLinkCompany:false,
-            years:'',
-            month:'',
-            week:'',
-            duration:null,
-            AllalumniExperiences:[],
-            isInputPosition:false,
-            isInputCompany:false,
-            filterOption:[],
-            filterCompany:[]
+            inValidDate: false,
+            isNoStartYear: false,
+            selectedPosition: null,
+            isFocusPosition: false,
+            isShowPosition: false,
+            position: null,
+            company: null,
+            showCompanyForm: false,
+            imageURL: '',
+            newCompany: '',
+            newAddress: '',
+            newCompany_link: ''
         }
     },
-    emits: ['hideForm', 'edit', 'addAlumniExperience'],
     methods: {
-        turnOffInputOption(){
-            this.isInputPosition=false
-            this.isInputCompany=false
+        getCompany() {
+            axios.get('company')
+            .then((response) =>{
+                this.companies = response.data;
+            })
         },
-        // ================= SELECT VELUE OPTION =================
-        selectPositionValue(e){
-            this.position=e.target.value
-            this.isInputPosition=false
+        getSelectedPosition() {
+            this.selectedPositionCompany = (this.selectedCompany.position).split(',');
+        },  
+        showProfile(profile) {
+            const AlumniProfile = new FormData();
+            AlumniProfile.append("profile", profile);
+            axios.post('profile/', AlumniProfile)
+            .then((res)=>{
+                this.imageURL = res.data;
+            })        
         },
-        selectCompanyValue(e){
-            this.isInputCompany=false
-            this.company=e.target.value
+        addCompany() {
+            if (this.imageURL != '' && this.newCompany_link != '' && this.selectedPositionCompany != null && this.newCompany != '' && this.newAddress != '' ) {
+                axios.post('company', {
+                    profile: this.imageURL,
+                    company_link: this.newCompany_link,
+                    position: this.selectPositions.toString(),
+                    company: this.newCompany,
+                    address: this.newAddress
+                })
+                .then((res)=>{
+                    console.log(res.data);
+                });
+                this.hideForm();
+            }
         },
-        // ================== HIDE EXPERIENCE FORM =================
         hideForm() {
-            this.$emit('hideForm', false);
-        },
-        //=================== SET DATA TO FORM INPUT =================
-        showDataInForm() {
-            this.position = this.experience.position;
-            this.company = this.experience.company;
-            this.start_year = this.experience.start_year;
-            this.end_year = this.experience.end_year;
-            this.company_link= this.experience.company_link;
-            console.log('hideForm');
-            console.log(this.company);
-        },
-        //=================== FILTER EXPERIAN OPTIONS =================
-        filterEperienceOption(e){
-            this.isInputPosition=true;
-            this.filterOption=this.AllalumniExperiences.filter(experience=>experience.position.toLowerCase().includes(e.target.value.toLowerCase()))
-        },
-        //=================== FILTER EXPERIAN COMPANY =================
-        filterEperienceCompany(e){
-            this.isInputCompany=true;
-            console.log(this.AllalumniExperiences)
-            this.filterCompany=this.AllalumniExperiences.filter(experience=>experience.company.toLowerCase().includes(e.target.value.toLowerCase()))
+            this.$emit('hideForm', false)
         },
         //=================== CALCULATE DURATION =================
         calculateDuration() {
-            let duration=parseInt(new Date(this.end_year) - new Date(this.start_year))/(1000*60*60*24);
-            if (duration>=365){
-                this.years=parseInt(duration/365)+'years'
-                this.duration=this.years
-            }
-            else if (duration>=30){
-                this.month=parseInt(duration/30)+'month'
-                this.duration=this.month
-            }
-            else{
-                this.week=parseInt(duration/7)+'week'
-                this.duration=this.week
+            if (this.end_year != '') {
+                let duration = parseInt(new Date(this.end_year) - new Date(this.start_year)) / (1000 * 60 * 60 * 24);
+                if (duration >= 365) {
+                    this.years = parseInt(duration / 365) + 'years'
+                    this.duration = this.years
+                }
+                else if (duration >= 30) {
+                    this.month = parseInt(duration / 30) + 'month'
+                    this.duration = this.month
+                }
             }
         },
         //=================== add new experience emit  and validate create alumni experience=================
-        newAlumniExperience(){
-            if (this.position != '' && this.company != '' && this.start_year != '') {
-                this.hideForm();
+        newAlumniExperience(data) {
+            if (this.selectedPosition != null && data.company != '' && data.start_year != '') {
+                console.log('i am working--------------');
+                console.log(parseInt(new Date(this.end_year) - new Date(this.start_year)) / (1000 * 60 * 60 * 24) > 0);
                 this.calculateDuration();
-                this.$emit('addAlumniExperience',this.position,this.company,this.start_year,this.end_year, this.company_link,this.duration);
-            } 
-            else {
-                if(this.position == ''){
-                    this.isNoPostion = !this.isNoPostion;
-                }
-                if(this.company == ''){
-                    this.isNoCompany = !this.isNoCompany;
-                }
-                if(this.start_year == ''){
-                    this.isNoStartYear = !this.isNoStartYear;
-                }
-                if(this.company_link == ''){
-                    this.isNoLinkCompany = !this.isNoLinkCompany;
+                if (this.end_year) {
+                    if (parseInt(new Date(this.end_year) - new Date(this.start_year)) / (1000 * 60 * 60 * 24) > 0) {
+                        this.$emit('addAlumniExperience', this.selectedPosition, data.company, this.start_year, this.end_year, data.company_link, this.duration, data.profile);
+                        this.hideForm();
+                    }
+                } else { 
+                    this.$emit('addAlumniExperience', this.selectedPosition, data.company, this.start_year, this.end_year, data.company_link, this.duration, data.profile);
+                    this.hideForm();
                 }
             }
 
         },
-         //=================== get alumni experience ===================
-         getAllData() {
-          axios.get('alumniWork').then((res) => {
-            this.AllalumniExperiences = res.data;
-          });
+        //=================== SET DATA TO FORM INPUT =================
+        showDataInForm() {
+            this.selectedPosition = this.experience.position;
+            this.selectedCompany = this.experience;
+            this.start_year = this.experience.start_year;
+            this.end_year = this.experience.end_year;
+            this.company_link = this.experience.company_link;
+            console.log('hideForm');
+            console.log('----------================================')
+            console.log(this.selectedCompany.company);
         },
-        //=================== edit experience emit =================
+        // emit data to edit experience
         editExperience(){
             this.calculateDuration();
             let experience =
             {
                 id: this.experience.id, 
-                alumni_id: this.experience.alumni_id,
-                position: this.position,
-                company: this.company,
+                position: this.selectedPosition,
+                company: this.selectedCompany.company,
                 start_year: this.start_year,
                 end_year: this.end_year,
-                company_link: this.company_link,
+                company_link: this.selectedCompany.company_link,
                 duration: this.duration,
+                profile: this.selectedCompany.profile,
             }
             //////validate edit alumni experience/////
-            if (this.position != '' && this.company != '' && this.start_year != '' && this.end_year != '') {
+            if (this.selectedPosition != '' && this.selectedCompany != '' && this.start_year != '') {
                 this.hideForm();
                 this.$emit('edit',experience);
             } 
-            else {
-                if(this.position == ''){
-                    this.isNoPostion = !this.isNoPostion;
-                }
-                if(this.company == ''){
-                    this.isNoCompany = !this.isNoCompany;
-                }
-                if(this.start_year == ''){
-                    this.isNoStartYear = !this.isNoStartYear;
-                }
-                if(this.end_year == ''){
-                    this.isNoEndYear = !this.isNoEndYear;
-                }
-                if(this.company_link == ''){
-                    this.isNoLinkCompany = !this.isNoLinkCompany;
-                }
-            }
+            console.log(experience)
         },
     },
-    mounted(){
-        this.getAllData()
+    computed: {
+        filterCompany() {
+            let data = this.companies;
+            if (this.company != null) {
+                data = this.companies.filter(company => (company.company.toLowerCase().includes(this.company)));
+            }
+            return data;
+        },
+        filterPosition() {
+            let data = this.selectedPositionCompany;
+            if (this.position != null) {
+                data = this.selectedPositionCompany.filter(position => (position.includes(this.position)));
+            } 
+            return data;
+        },
     },
-    created(){
+    created() {
+        this.getCompany();
         if (this.type   == 'edit'){
             this.showDataInForm();
         }
