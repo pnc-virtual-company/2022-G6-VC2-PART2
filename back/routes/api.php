@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\AlumniSkillsController;
-use App\Http\Controllers\AlumniStudyBackgroundController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\SchoolController;
@@ -28,13 +27,19 @@ use App\Http\Controllers\UplaodImageController;
 
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+
+// user crud route
 Route::apiResource('user', UserController::class);
+
 // =================Send Email When User Create Account===============
 Route::post('/smsMail',[MailController::class,'smsMail']);
+
 // ==============Forget Password =================
 Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
 Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
 Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
+
+// route need to login 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== update user status ======================
     Route::patch('/user/status/{id}',[UserController::class, 'updateStatus']);
@@ -55,16 +60,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // ==================company profile=====================
     Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
     
-    //================== study background api ===============
+    //================== study background route ===============
     Route::apiResource('/studyBackground',StudyBackgroundController::class);
-    //================== upload profile api ===============
+    // study background route
     Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
+    // alumni skill route
     Route::apiResource('alumniSkill', AlumniSkillsController::class);
+    // work experience route
     Route::apiResource('alumniWork', WorkExperienceController::class);
-    Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);
-
+    // upload profile
     Route::post('profile', [UplaodImageController::class, 'uploadProfile']);
+    // company route
     Route::apiResource('company', CompanyController::class);
+    // school route
     Route::apiResource('school', SchoolController::class);
 });
 
