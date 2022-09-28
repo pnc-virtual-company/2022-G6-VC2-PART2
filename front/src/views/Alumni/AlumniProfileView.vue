@@ -289,12 +289,12 @@ export default {
     //=================== update   alumni general information ===================
     updateDataAlumni(userId, alumniId, user, alumni) {
       // console.log(alumni)
-      axios.put("user" + userId, user).then(() => {
+      axios.put("user/" + userId, user).then(() => {
         this.getData();
       }).catch((err) => {
         console.log(err)
       })
-      axios.put("alumni" + alumniId, alumni).then(() => {
+      axios.put("alumni/" + alumniId, alumni).then(() => {
         this.getData();
       })
       this.isShow = false;

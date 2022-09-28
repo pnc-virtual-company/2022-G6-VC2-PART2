@@ -28,8 +28,14 @@ use App\Http\Controllers\UplaodImageController;
 
 // ==================Log In=============================
 Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+Route::apiResource('user', UserController::class);
+// =================Send Email When User Create Account===============
+Route::post('/smsMail',[MailController::class,'smsMail']);
+// ==============Forget Password =================
+Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
+Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
+Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::apiResource('user', UserController::class);
     //================== update user status ======================
     Route::patch('/user/status/{id}',[UserController::class, 'updateStatus']);
     //================== alumni api ======================
@@ -45,12 +51,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout',[UserController::class,'logout']);
     //==================Ero==================//
     Route::apiResource('/ero',EroController::class);
-    // =================Send Email When User Create Account===============
-    Route::post('/smsMail',[MailController::class,'smsMail']);
-    // ==============Forget Password =================
-    Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
-    Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
-    Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
     
     // ==================company profile=====================
     Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
