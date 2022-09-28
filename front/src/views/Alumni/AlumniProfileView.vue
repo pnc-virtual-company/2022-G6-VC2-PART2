@@ -1,12 +1,10 @@
 <template>
-  <div>
+  <div v-if="isInvited">
     <AlumniProfile @edit="showForm" :alumniData="alumniData" :alumniInfo="alumniInfo" @uploadImage="uploadImage"
       @showAlumniForm="showForm" :workExperiences="getCurrentWork" />
-    <section v-if="
-      showFormAlumni || showExperience || showSkillForm || showStudyBackground
-    " class="fixed inset-0 z-50 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full flex items-center">
+    <section v-if="showFormAlumni || showExperience || showSkillForm || showStudyBackground" class="fixed inset-0 z-50 bg-slate-900 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
       <!-- form for alumni general profile -->
-      <EditAlumniProfileForm @hideForm="hideForm" v-if="showFormAlumni" :alumniData="alumniData"
+      <EditAlumniProfileForm @hideForm="hideForm" v-if="showFormAlumni" :alumniData="alumniData" type="edit"
         :alumniInfo="alumniInfo" @showAlumniForm="updateDataAlumni" @updateAlumni="updateDataAlumni" />
       <!-- form for experience alumni profile -->
       <ExperienceForm :experience="experience" v-if="showExperience" :type="type" @hideForm="hideForm"
@@ -55,6 +53,11 @@
       </div>
     </div>
   </div>
+  <div v-else class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+    <!-- form for alumni general profile -->
+    <EditAlumniProfileForm @hideForm="hideForm" :alumniData="alumniData" type="create" @Alumni="createAlumni"
+      :alumniInfo="alumniInfo" @showAlumniForm="updateDataAlumni" @updateAlumni="updateDataAlumni" />
+  </div>
 </template>
 <script>
 import axios from "../../axios-http";
@@ -66,8 +69,8 @@ import SkillForm from "./SkillForm.vue";
 import StudyBackground from "./StudyBackgroundView.vue";
 import AlumniSkill from './AlumniSkill.vue';
 import WorkExperience from "./WorkExperience.vue";
-import StudyBackgroundForm from './StudyBackgroundForm.vue'
-import GeneralInformationCard from './GeneralInformationCard.vue'
+import StudyBackgroundForm from './StudyBackgroundForm.vue';
+import GeneralInformationCard from './GeneralInformationCard.vue';
 export default {
   components: {
     AlumniProfile,
@@ -98,6 +101,17 @@ export default {
       studyBackgrounds: [],
       studyBackground: [],
       alumniExperiences: [],
+      isInvited: null,
+      firstName:"",
+      lastName:"",
+      gender: "",
+      phone: "",
+      major: "",
+      batch: "",
+      telegram: "",
+      dateOfBirth: "",
+      placeOfBirth: "",
+      address: "",
     }
   },
   methods: {
@@ -131,6 +145,7 @@ export default {
       newEnd_work,
       company_link,
       duration,
+      profile
     ) {
       let alumniExperience = {
         position: newPosition,
@@ -140,6 +155,7 @@ export default {
         alumni_id: VueCookies.get('alumniId'),
         company_link: company_link,
         duration: duration,
+        profile: profile
       };
       console.log(alumniExperience);
       axios
@@ -202,7 +218,7 @@ export default {
     },
     //=================== add new study background =================
     newStudyBackground(study) {
-      axios.post(this.url + "studyBackground", study).then(() => {
+      axios.post("studyBackground", study).then(() => {
         this.showStudyBackgroundForm(false);
         this.getData();
       });
@@ -226,13 +242,15 @@ export default {
     //=============================== remove studyBackground  =======================
     removeStudyBackground(id) {
       axios
-        .delete("http://127.0.0.1:8000/api/studyBackground/" + id)
+        .delete("studyBackground/" + id)
         .then(() => {
           this.getData();
         })
     },
     //=================== edit alumni experience ===================
     editExperience(data) {
+      console.log(data);
+      console.log('============================================');
       axios.put('alumniWork/' + data.id, data)
         .then((response) => {
           console.log(response.data);
@@ -252,27 +270,31 @@ export default {
       axios.get(
         "user/" + VueCookies.get('userId'))
         .then((res) => {
-          VueCookies.set('alumniId', res.data.alumni.id)
-          axios.get('alumni/'+VueCookies.get('alumniId'))
-          .then((res) => {
-            this.alumniInfo = res.data.user;
-            this.alumniData = res.data;
-            this.alumniExperiences = res.data.work_experience;
-            this.alumniSkill = res.data.alumni_skills;
-            this.studyBackgrounds = res.data.study_background;
-            console.log(this.alumniData);
-          })
+          console.log(res.data.alumni);
+          if (res.data.alumni) {
+            this.isInvited = true;
+            VueCookies.set('alumniId', res.data.alumni.id)
+            axios.get('alumni/'+res.data.alumni.id)
+            .then((res) => {
+              this.alumniInfo = res.data.user;
+              this.alumniData = res.data;
+              this.alumniExperiences = res.data.work_experience;
+              this.alumniSkill = res.data.alumni_skills;
+              this.studyBackgrounds = res.data.study_background;
+              console.log(this.alumniData);
+            })
+          }
         });
     },
     //=================== update   alumni general information ===================
     updateDataAlumni(userId, alumniId, user, alumni) {
-      console.log(alumni)
-      axios.put("user/" + userId, user).then(() => {
+      // console.log(alumni)
+      axios.put("user" + userId, user).then(() => {
         this.getData();
       }).catch((err) => {
         console.log(err)
       })
-      axios.put("alumni/" + alumniId, alumni).then(() => {
+      axios.put("alumni" + alumniId, alumni).then(() => {
         this.getData();
       })
       this.isShow = false;
@@ -283,6 +305,13 @@ export default {
         .then(() => {
           this.showStudyBackground = false;
           this.getData();
+        })
+    },
+    createAlumni(newAlumni){
+      // console.log(newAlumni);
+            axios.put('user/' + VueCookies.get('userId'), newAlumni).then((response) =>{
+            console.log(response.data);
+            window.location.reload();
         })
     },
   },

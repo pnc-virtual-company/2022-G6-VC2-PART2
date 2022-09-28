@@ -38,7 +38,7 @@ import VueCookies from 'vue-cookies'
 import forgetForm from './FormForgetPassword.vue';
 import verify from './FormVerifyEmail.vue';
 import reset from './ResetForgotPassword.vue';
-import FormRegister from '@/components/Register/FormRegister.vue'
+import FormRegister from './FormRegisterView.vue'
 export default {
   data() {
     return {
@@ -66,13 +66,14 @@ export default {
     login() {
       let user = { email: this.email, password: this.password }
       axios.post('loginUser', user).then((res) => {
-        VueCookies.set('token', res.data.token, "1h");
-        VueCookies.set('userId', res.data.user.id, "1h");
-        VueCookies.set('role', res.data.user.role, "1h");
-        console.log(VueCookies.get('token'));
-        console.log(VueCookies.get('userId'));
-        console.log(VueCookies.get('role'));
-        window.location.reload();
+        if (res.data.user.status == 'approve') {
+          VueCookies.set('token', res.data.token, "1h");
+          VueCookies.set('userId', res.data.user.id, "1h");
+          VueCookies.set('role', res.data.user.role, "1h");
+          window.location.reload();
+        } else {
+          this.inValid = true;
+        }
       })
       .catch((error) => {
         console.log(error);

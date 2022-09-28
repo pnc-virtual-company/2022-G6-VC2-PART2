@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FormRegisterView from '../views/FormRegisterView.vue'
+import FormRegisterView from '../views/login/FormRegisterView.vue'
 import ProfileView from '../views/Alumni/AlumniProfileView.vue'
 import FormLoginView from '../views/login/FormLoginView.vue'
 import EroList from '../views/Ero/EroListView.vue'

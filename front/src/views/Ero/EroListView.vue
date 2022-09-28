@@ -40,14 +40,14 @@ export default {
     },
     //====================== add ero ==============================
     addUserEro(firstName,lastName,email,role,gender,phone,telegram){
-      let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678',gender:gender, phone:phone,telegram:telegram}
+      let user = {firstName:firstName, lastName:lastName, email:email, role:role,password:'12345678',gender:gender, phone:phone,telegram:telegram, status: 'approve'}
+      console.log(user);
       axios.post('user',user)
       .then((res)=> {
-        console.log(res.data.sms.id);
-
+          console.log(res.data);
           this.getData()
           this.show=false
-            })
+        })
     },
     //====================== delete ero ==============================
     deleteEro(userId,eroId){

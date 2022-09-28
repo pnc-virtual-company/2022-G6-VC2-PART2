@@ -7,10 +7,13 @@ use App\Http\Controllers\AlumniSkillsController;
 use App\Http\Controllers\AlumniStudyBackgroundController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\SkillController;
+use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EroController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\StudyBackgroundController;
+use App\Http\Controllers\UplaodImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,31 +42,30 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //================== work experience api ===============
     Route::apiResource('/alumniWork',WorkExperienceController::class);
     //===================skilll alumni api =================
-    Route::apiResource('/alumniSkill',SkillController::class);
+    Route::apiResource('/skill',SkillController::class);
     // ==================Log out============================
     Route::post('/logout',[UserController::class,'logout']);
+    //==================Ero==================//
+    Route::apiResource('/ero',EroController::class);
+    // =================Send Email When User Create Account===============
+    Route::post('/smsMail',[MailController::class,'smsMail']);
+    // ==============Forget Password =================
+    Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
+    Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
+    Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
+    
+    // ==================company profile=====================
+    Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
+    
+    //================== study background api ===============
+    Route::apiResource('/studyBackground',StudyBackgroundController::class);
+    //================== upload profile api ===============
+    Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
+    Route::apiResource('alumniSkill', AlumniSkillsController::class);
+    Route::apiResource('alumniWork', WorkExperienceController::class);
+    Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);
+
+    Route::post('profile', [UplaodImageController::class, 'uploadProfile']);
+    Route::apiResource('company', CompanyController::class);
+    Route::apiResource('school', SchoolController::class);
 });
-//==================Ero==================//
-Route::apiResource('/ero',EroController::class);
-// =================Send Email When User Create Account===============
-Route::post('/smsMail',[MailController::class,'smsMail']);
-// ==============Forget Password =================
-Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
-Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
-Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
-//================== work experience api ===============
-Route::apiResource('/alumniWork',WorkExperienceController::class);
-
-//===================skilll alumni api =================
-Route::apiResource('/skill',SkillController::class);
-
-// ==================company profile=====================
-Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
-
-//================== study background api ===============
-Route::apiResource('/studyBackground',StudyBackgroundController::class);
-//================== upload profile api ===============
-Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
-Route::apiResource('alumniSkill', AlumniSkillsController::class);
-Route::apiResource('alumniWork', WorkExperienceController::class);
-Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);

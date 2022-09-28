@@ -2,7 +2,7 @@
       <div class="shadow-sm bg-[#eee] mt-6 mb-5 py-5 px-10 rounded-md flex items-center justify-between" @mouseover="showAction = true" @mouseleave="showAction = false">
         <div class="flex items-center justify-start ">
           <div class="rounded-full w-[5rem] h-[5rem]" >
-            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" src="@/assets/pnc-logo.jpg" />    
+            <img class="rounded-full border border-gray-100 shadow-sm  w-[5rem] h-[5rem] mr-3" :src="workExperience.profile" />    
           </div>
           <div class="ml-3">
             <a :href="workExperience.company_link" target="_blank">
