@@ -21,7 +21,6 @@ class Alumni extends Model
         'telegram'
     ];
     protected $hidden = [
-        'created_at',
         'updated_at'
     ];
 

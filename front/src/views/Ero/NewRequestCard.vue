@@ -3,7 +3,7 @@
         <div>
             <h5>{{newAlumni.user.firstName}} {{newAlumni.user.lastName}}</h5>
             <h5> {{newAlumni.user.email}}</h5>
-            <p class="text-[#0062FF]">7 Hours ago</p>
+            <p class="text-[#0062FF]">Requested {{dateTime(newAlumni.created_at)}}</p>
         </div>
         <div class="flex justify-evenly ">
             <button type="submit" class="bg-[#e04] rounded-[30px]  text-white mr-3 px-5 py-1" @click="updateStatus(newAlumni.user.id,'reject')">Reject</button>
@@ -12,13 +12,17 @@
     </div>
 </template>
 <script>
+import moment from 'moment';
 export default ({
     props:{newAlumni:Object},
     emits:['UpdateStatus'],
     methods:{
         updateStatus(user_id,status){
             this.$emit('UpdateStatus',user_id,status)
-        }
+        },
+        dateTime(value) {
+            return moment(moment(value).format('MMMM Do YYYY'), 'MMMM Do YYYY').fromNow();
+        },
     }
 })
 </script>
