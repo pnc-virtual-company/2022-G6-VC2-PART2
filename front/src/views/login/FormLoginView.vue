@@ -42,7 +42,6 @@ import FormRegister from './FormRegisterView.vue'
 export default {
   data() {
     return {
-      url: "http://127.0.0.1:8000/api/",
       email: '',
       password: '',
       inValid: false,

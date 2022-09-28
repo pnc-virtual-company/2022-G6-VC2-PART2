@@ -5,7 +5,6 @@
       <div> Email <p class="font-medium text-lg">{{ ero.user.email }}</p></div>
       <div>
         <fa icon="trash-alt" class="fa fa-trash text-[#e04] p-2 text-[1rem] rounded-full shadow-lg bg-[#ddd]" @click="onDelete(ero.user.id,ero.id)"/>
-        <fa icon="pencil" class="fa fa-pencil text-[#0062ff] text-[1rem] p-2 rounded-full ml-3 shadow-lg bg-[#ddd]"/>
       </div>
     </div>
     <div class="flex justify-end">

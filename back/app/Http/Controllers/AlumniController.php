@@ -35,15 +35,14 @@ class AlumniController extends Controller
     public function update(Request $request, $id)
     {
         $alumni= Alumni::findOrFail($id);
-        $alumni ->user_id = $request->user_id; 
-        $alumni ->phone = $request ->phone;
-        $alumni ->batch = $request ->batch;
-        $alumni ->telegram = $request ->telegram;
-        $alumni ->major = $request ->major; 
-        $alumni -> gender = $request->gender;      
-        $alumni -> address = $request ->address;
-        $alumni ->dateOfBirth = $request ->dateOfBirth;
-        $alumni ->placeOfBirth = $request ->placeOfBirth;
+        $alumni -> phone = $request -> phone;
+        $alumni -> batch = $request -> batch;
+        $alumni -> telegram = $request -> telegram;
+        $alumni -> major = $request -> major; 
+        $alumni -> gender = $request-> gender;      
+        $alumni -> address = $request -> address;
+        $alumni -> dateOfBirth = $request -> dateOfBirth;
+        $alumni -> placeOfBirth = $request -> placeOfBirth;
         $alumni->save();
         return response()->json(['sms'=>$alumni]);
     }

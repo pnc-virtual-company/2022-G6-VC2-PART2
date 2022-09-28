@@ -32,6 +32,7 @@ class MailController extends Controller
     } 
     // ============Send Email When User Forget Password===========
     public function sendMailResetPassword($details){
+        
         Mail::to($details->email)->send(new ForgotPasswordInfor($details));
    
         if (Mail::flushMacros()) {

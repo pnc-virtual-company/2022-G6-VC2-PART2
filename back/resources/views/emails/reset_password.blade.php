@@ -10,7 +10,7 @@
                      <tbody>        
                         <tr style="background-size: cover">
                            <td style=" width: 70%; text-align: left; border-collapse: collapse; background: #fff; border-radius: 10px 10px 0px 0px; color: white; height: 50px; " > 
-                              <img src="https://o.remove.bg/downloads/7437d945-6fab-4b80-af39-443bbcf68862/unnamed-removebg-preview.png" width="120px" class="CToWUd"/> 
+                              <img src="https://www.passerellesnumeriques.org/misc/logo-en.png" width="120px" class="CToWUd"/> 
                            </td>
                         </tr>
                         <td style="vertical-align: top; border-collapse: collapse">

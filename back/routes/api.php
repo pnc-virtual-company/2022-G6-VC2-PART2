@@ -26,53 +26,47 @@ use App\Http\Controllers\UplaodImageController;
 |
 */
 
-
+// ==================Log In=============================
+Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
+Route::apiResource('user', UserController::class);
+// =================Send Email When User Create Account===============
+Route::post('/smsMail',[MailController::class,'smsMail']);
+// ==============Forget Password =================
+Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
+Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
+Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::apiResource('user', UserController::class);
-    //================== update user status ==============
+    //================== update user status ======================
     Route::patch('/user/status/{id}',[UserController::class, 'updateStatus']);
     //================== alumni api ======================
     Route::apiResource('/alumni',AlumniController::class);
-    //================== upload profile api ==============
+    //================== upload profile api ===============
     Route::put('/profile/{id}',[AlumniController::class, 'uploadProfile']);
 
-    //================== work experience api =============
+    //================== work experience api ===============
     Route::apiResource('/alumniWork',WorkExperienceController::class);
-    //===================skilll alumni api ===============
+    //===================skilll alumni api =================
     Route::apiResource('/skill',SkillController::class);
-    // ==================Log out==========================
+    // ==================Log out============================
     Route::post('/logout',[UserController::class,'logout']);
-    //================== work experience api =============
-    Route::apiResource('/alumniWork',WorkExperienceController::class);
+    //==================Ero==================//
+    Route::apiResource('/ero',EroController::class);
     
-    //===================skilll alumni api ===============
-    Route::apiResource('/skill',SkillController::class);
-    
-    // ==================company profile==================
+    // ==================company profile=====================
     Route::put('/companyProfile/{id}',[WorkExperienceController::class, 'uploadCompanyProfile']);
     
-    //================== study background api ============
+    //================== study background api ===============
     Route::apiResource('/studyBackground',StudyBackgroundController::class);
-    
-    //================== upload profile api ==============
+    //================== upload profile api ===============
     Route::post('/studyBackground/{id}',[StudyBackgroundController::class, 'uploadLogo']);
     Route::apiResource('alumniSkill', AlumniSkillsController::class);
     Route::apiResource('alumniWork', WorkExperienceController::class);
     Route::apiResource('alumniStudyBackground', AlumniStudyBackgroundController::class);
-    //==================Ero===============================
-    Route::apiResource('/ero',EroController::class);
+
+    Route::post('profile', [UplaodImageController::class, 'uploadProfile']);
+    Route::apiResource('company', CompanyController::class);
+    Route::apiResource('school', SchoolController::class);
 });
-// ==================Log In===============================
-Route::post('/loginUser',[AuthenticationController::class,'userLogin']);
-
-// =================Send Email When User Create Account===
-Route::post('/smsMail',[MailController::class,'smsMail']);
-
-
-// ==============Forget Password =========================
-Route::post('/forgot',[AuthenticationController::class, 'forgotPassword']); 
-Route::post('/resetForgot',[AuthenticationController::class, 'resetForgotPassword']);
-Route::post('/verifyCode', [AuthenticationController::class, 'getVerifyCode']); 
 
 // ==============Reset Password Alumini ===================
 Route::post('/resetPaswordAlumni/{id}', [AlumniController::class, 'checkPasswordAlumni']);

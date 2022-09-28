@@ -2,15 +2,15 @@
   <div>
     <div class="bg-[#fff] m-auto w-[80%] shadow-xl rounded-md mt-3 mb-[-6 px]">
       <img class="m-auto w-full h-[40vh] rounded-t-md" src="https://media-exp1.licdn.com/dms/image/C4E1BAQEL9_UKiZEjcg/company-background_10000/0/1557127841108?e=2147483647&v=beta&t=nf1vDbnDohroYpMcpm-KFnk4TMfjKG28yTNCGNbYMPM" alt="">
-      <div class="w-full m-auto text-center px-5 py-5 mt-[-15vh]">
+      <div class="w-full m-auto text-center px-8 py-8 mt-[-15vh] ml-5">
         <div>
-          <div class="rounded-full w-[25vh] h-[25vh]">
-              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile != null" :src="alumniData.profile"/>    
-              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Male'" src="@/assets/boy.jpg"/>    
-              <img class="absolute rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Female'" src="@/assets/girl.webp"/>    
+          <div class="rounded-full w-[25vh] h-[25vh] flex items-end">
+              <img class="rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile != null" :src="alumniData.profile"/>    
+              <img class="rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Male'" src="@/assets/boy.jpg"/>    
+              <img class="rounded-full w-[23vh] h-[23vh] border-2 border-[#0062ff]" v-if="alumniData.profile == null && alumniData.gender=='Female'" src="@/assets/girl.webp"/>    
               <input type="file" @change="uploadImage($event.target.files[0])" hidden id="imageFile" accept="image/png, image/gif, image/jpeg">
               <label for="imageFile">
-                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer absolute text-xl p-2 rounded-full ml-[2.5rem] mt-[8rem]"/>
+                <fa icon="camera-alt" class="bg-[#fff] text-[#0062ff] cursor-pointer text-xl p-2 rounded-full ml-[-3rem]"/>
               </label>
           </div>
           <div class="capitalize text-left ml-[12rem] mt-[-6rem]">

@@ -155,7 +155,6 @@ export default {
             userId:this.alumniInfo.id,
             alumniId:this.alumniData.id,
             telegram:this.alumniData.telegram,
-            
         }
     },
     methods: {
