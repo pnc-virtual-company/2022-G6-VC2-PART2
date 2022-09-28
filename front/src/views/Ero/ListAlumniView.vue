@@ -108,7 +108,7 @@
     </div>
     <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5">
       <div class="mt-4 mx-auto bg-slate-50 rounded-lg p-2.5">
-        <h1 class="text-3xl text-gray-900 dark:text-white ml-7">Alumni List</h1>
+        <h1 class="text-2xl font-medium ml-7">Alumni List</h1>
         <CardAlumni
           v-for="alumni of fitlerAlumni"
           :key="alumni"

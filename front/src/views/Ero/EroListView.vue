@@ -50,10 +50,9 @@ export default {
         })
     },
     //====================== delete ero ==============================
-    deleteEro(userId,eroId){
+    deleteEro(userId){
       axios.delete('user/'+ userId)
       .then(()=>{
-        axios.delete('ero/'+ eroId);
         this.getData()
       })
       

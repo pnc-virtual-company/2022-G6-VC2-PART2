@@ -37,21 +37,19 @@
                 </select>        
             </div>
          </div>
-        <div class="p-3 text-center">
-            <BaseButton @click="hidForm" type="cancel" class="bg-red-500 mr-2 mb-2 m-4">Cancel</BaseButton>
-            <BaseButton @click="addUserEro" type="submit" class="bg-[#1da1f2] sm:w-auto ">Create</BaseButton>
+        <div class="text-end">
+            <button @click="hidForm" type="cancel" class="text-[#e04] px-4 font-medium">Cancel</button>
+            <button @click="addUserEro" type="submit" class="text-[#0062ff] font-medium">Create</button>
         </div>
     </template>
 </BaseForm>
 </template>
 <script>
     import BaseForm from '../../components/widget/BaseForm.vue';
-    import BaseButton from '../../components/widget/BaseButton.vue';
     import BaseLabel from '../../components/widget/BaseSpanLabel.vue';
     export default {
         components: {
             BaseForm,
-            BaseButton,
             BaseLabel,
         },
         data(){

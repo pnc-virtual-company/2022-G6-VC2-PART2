@@ -1,6 +1,6 @@
 <template>
 <div class="mt-[4rem] w-[70%] bg-red-50 mx-auto rounded-xl p-5">
-    <p class="text-[32px] font-bold ml-5">Notification</p>
+    <p class="text-2xl font-medium ml-6">Notification</p>
     <NewRequestCard v-for="newAlumni of alumniRequest" :key="newAlumni" :newAlumni='newAlumni' @UpdateStatus="updateStatus"/>
 </div>
 </template>
