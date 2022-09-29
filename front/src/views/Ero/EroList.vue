@@ -10,10 +10,10 @@
     <div class="flex justify-end">
       <fa class="cursor-pointer" @click="show = !show" :icon="!show ? 'angle-down' : 'angle-up'" />
     </div>
-    <div v-show="show" class="flex justify-between">
-      <div> Gender <p class="font-medium text-lg">{{ ero.gender }}</p></div>
-      <div>Phone <p class="font-medium text-lg">{{ ero.phone }}</p> </div>
-      <div> Telegram<p class="font-medium text-lg">{{ ero.telegram }}</p></div>
+    <div v-show="show" class="flex justify-between mt-5">
+      <div class='text-sm'> Gender <p class="text-md">{{ ero.gender }}</p></div>
+      <div class="text-sm">Phone <p class="text-md">{{ ero.phone }}</p> </div>
+      <div class="text-sm"> Telegram<p class="text-md">{{ ero.telegram }}</p></div>
     </div>
   </div>
 </template>

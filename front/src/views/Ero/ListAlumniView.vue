@@ -121,7 +121,6 @@
         v-if="fitlerAlumni.length <= 0"
         class="flex flex-col items-center mt-8 mb-3"
       >
-        <!-- <img class="w-32" src="./../../../assets/no_requests_found.png" alt="Image not found"> -->
         <h1 class="text-stone-500">Don't have alumni yet !!</h1>
       </div>
     </div>
@@ -132,7 +131,7 @@
         @CreateAndInviteAlumni="CreateAndInviteAlumni"
       />
     </section>
-    <section v-if="isSpin" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-10">
+    <section v-if="isSpin" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50">
       <div class="grid m-auto">
         <fa
           icon="spinner"
@@ -141,7 +140,7 @@
         <p class="text-[#fff] text-[2rem]">Sending email..</p>
       </div>
     </section>
-    <section v-if="showDetail || show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-50 pt-[5rem]">
+    <section v-if="showDetail || show" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center z-40 pt-[5rem]">
       <AlumniDetail v-if="showDetail" @hideAlumniDetail="showDetail=false" :AlumniDetail="oneAlunmni" class="mb-3" /> 
       <InviteAlumniForm
         v-if="show"

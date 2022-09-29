@@ -3,7 +3,7 @@
     <div class=" w-[100%] mx-auto ">
         <div class="ml-[10px] w-[98%] flex justify-between">
             <div class="w-[10rem]">
-                <img :src="AlumniDetail.profile" alt="" class="rounded-full">
+                <img :src="AlumniDetail.profile" alt="" class="rounded-full w-[20vh] h-[20vh] border-2 border-[#0062ff]">
             </div>
             <fa :icon="['fas', 'xmark']" class="text-[gray] cursor-pointer" @click="hideAlumniDetail"/>
         </div>
